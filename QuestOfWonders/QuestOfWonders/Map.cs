@@ -18,24 +18,40 @@ namespace QuestOfWonders
         Color PLAYER_COLOR = Color.FromArgb(0, 0, 255);
         Color ORB_COLOR = Color.FromArgb(255, 255, 0);
         Color ENEMY_COLOR = Color.FromArgb(100, 100, 100);
+        Color LSHOOTER_COLOR = Color.FromArgb(255, 0, 255);
+        Color RSHOOTER_COLOR = Color.FromArgb(50, 100, 50);
+        Color USHOOTER_COLOR = Color.FromArgb(100, 255, 200);
+        Color DSHOOTER_COLOR = Color.FromArgb(255, 200, 150);
 
         Brush tmpGrass = new SolidBrush(Color.DarkGreen);
         Brush tmpDirt = new SolidBrush(Color.Brown);
         Brush tmpSpike = new SolidBrush(Color.Red);
+        Brush tmpShooter = new SolidBrush(Color.Firebrick);
 
         Bitmap grassImg = null;
         Bitmap dirtImg = null;
         Bitmap spikeImg = null;
+        Bitmap shooterImg = null;
 
         public static int NOTHING_INT = 0;
         public static int DIRT_INT = 1;
         public static int GRASS_INT = 2;
         public static int SPIKE_INT = 3;
-        public static int ORB_INT = 4;
+        public static int LSHOOTER_INT = 4;
+        public static int RSHOOTER_INT = 5;
+        public static int USHOOTER_INT = 6;
+        public static int DSHOOTER_INT = 7;
+
+        public static float shooterVel = 100.0f;
 
         int[,] map;
         public int widthInTiles;
         public int heightInTiles;
+
+        public int bulletW = 10;
+        public int bulletH = 10;
+        public int shooterXOffset = TILE_SIZE / 3;
+        public int shooterYOffset = TILE_SIZE / 3;
 
         public Map(string imgFileLoc)
         {
@@ -97,6 +113,30 @@ namespace QuestOfWonders
                     {
                         Point playerPoint = ArrayToScreenLocation(x, y - 1);
                         frmMain.CreatePlayer(playerPoint.X, playerPoint.Y);
+                    }
+                    else if (col == LSHOOTER_COLOR)
+                    {
+                        map[x, y] = LSHOOTER_INT;
+                        Point shooterPoint = ArrayToScreenLocation(x, y);
+                        frmMain.AddShooter(new Point(shooterPoint.X - shooterXOffset, shooterPoint.Y + TILE_SIZE/2 - bulletH/2), new PointF(-shooterVel, 0.0f));
+                    }
+                    else if (col == RSHOOTER_COLOR)
+                    {
+                        map[x, y] = RSHOOTER_INT;
+                        Point shooterPoint = ArrayToScreenLocation(x, y);
+                        frmMain.AddShooter(new Point(shooterPoint.X + TILE_SIZE + shooterXOffset, shooterPoint.Y + TILE_SIZE/2 - bulletH/2), new PointF(shooterVel, 0.0f));
+                    }
+                    else if (col == USHOOTER_COLOR)
+                    {
+                        map[x, y] = USHOOTER_INT;
+                        Point shooterPoint = ArrayToScreenLocation(x, y);
+                        frmMain.AddShooter(new Point(shooterPoint.X + TILE_SIZE/2 - bulletW / 2, shooterPoint.Y - shooterYOffset), new PointF(0.0f, -shooterVel));
+                    }
+                    else if (col == DSHOOTER_COLOR)
+                    {
+                        map[x, y] = DSHOOTER_INT;
+                        Point shooterPoint = ArrayToScreenLocation(x, y);
+                        frmMain.AddShooter(new Point(shooterPoint.X + TILE_SIZE / 2 - bulletW / 2, shooterPoint.Y + TILE_SIZE + shooterYOffset), new PointF(0.0f, shooterVel));
                     }
                 }
             }
@@ -176,6 +216,26 @@ namespace QuestOfWonders
                     {
                         drawBrush = tmpSpike;
                         img = spikeImg;
+                    }
+                    else if (map[x, y] == LSHOOTER_INT)
+                    {
+                        drawBrush = tmpShooter;
+                        img = shooterImg;
+                    }
+                    else if (map[x, y] == RSHOOTER_INT)
+                    {
+                        drawBrush = tmpShooter;
+                        img = shooterImg;
+                    }
+                    else if (map[x, y] == USHOOTER_INT)
+                    {
+                        drawBrush = tmpShooter;
+                        img = shooterImg;
+                    }
+                    else if (map[x, y] == DSHOOTER_INT)
+                    {
+                        drawBrush = tmpShooter;
+                        img = shooterImg;
                     }
 
                     if (img != null)

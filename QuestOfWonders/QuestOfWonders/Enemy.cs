@@ -61,7 +61,7 @@ namespace QuestOfWonders
     public class Projectile
     {
         public const int WIDTH = 10;
-        public const int HEIGHT = 5;
+        public const int HEIGHT = 10;
 
         private PointF pos;
         private PointF vel;
@@ -82,7 +82,7 @@ namespace QuestOfWonders
 
         public void Draw(Graphics g)
         {
-            g.FillRectangle(brush, (int)pos.X - frmMain.viewX, (int)pos.Y - frmMain.viewY, WIDTH, HEIGHT);
+            g.FillEllipse(brush, (int)pos.X - frmMain.viewX, (int)pos.Y - frmMain.viewY, WIDTH, HEIGHT);
         }
 
         public Point getPos()

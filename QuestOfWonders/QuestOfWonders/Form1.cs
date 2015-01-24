@@ -34,6 +34,8 @@ namespace QuestOfWonders
         public bool hasDrawnMap = false;
 
         public float timeAccum;
+        public float shooterTimer = 0;
+        public float shooterTime = 1; //Seconds
 
         public static Map currentMap;
         static Player player;
@@ -49,6 +51,7 @@ namespace QuestOfWonders
 
         public static List<Projectile> projectiles = new List<Projectile>();
         public static List<Enemy> enemies = new List<Enemy>();
+        public static Dictionary<Point, PointF> shooters = new Dictionary<Point, PointF>();
 
         public frmMain()
         {
@@ -68,7 +71,7 @@ namespace QuestOfWonders
             panelGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             timeAccum = 0;
 
-            levelMaps = new String[] { "Resources/QuestOfWondersStage1_1.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage4.bmp" };
+            levelMaps = new String[] { "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage4.bmp" };
             currentLevel = 0;
 
             enemies = new List<Enemy>();
@@ -147,6 +150,12 @@ namespace QuestOfWonders
             float deltaTime = (float)(TimeSpan.FromTicks(ticksElapsed).TotalSeconds);
             //float deltaTime = 1;
             timeAccum += deltaTime;
+            shooterTimer += deltaTime;
+            if (shooterTimer > shooterTime)
+            {
+                FireShooters();
+                shooterTimer = 0;
+            }
             while (timeAccum > FRAME_TIME)
             {
                 if (currentMap != null) currentMap.Update(FRAME_TIME);
@@ -181,6 +190,15 @@ namespace QuestOfWonders
                 wonder.Update(deltaTime);
             }
             UpdateView();
+        }
+
+        public void FireShooters()
+        {
+            foreach (Point p in shooters.Keys)
+            {
+                Projectile proj = new Projectile(p, shooters[p]);
+                projectiles.Add(proj);
+            }
         }
 
         public bool CheckPlayerMapCollision()
@@ -291,6 +309,7 @@ namespace QuestOfWonders
 
         public static void Restart()
         {
+            shooters.Clear();
             enemies.Clear();
             projectiles.Clear();
             text = null;
@@ -352,6 +371,13 @@ namespace QuestOfWonders
         public static void SetWonder(Wonder theWonder)
         {
             wonder = theWonder;   
+        }
+        public static void AddShooter(Point location, PointF spawnVel)
+        {
+            if (!shooters.ContainsKey(location))
+            {
+                shooters.Add(location, spawnVel);
+            }
         }
 
         private void btnBegin_Click(object sender, EventArgs e)
