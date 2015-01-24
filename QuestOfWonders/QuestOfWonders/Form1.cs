@@ -61,6 +61,12 @@ namespace QuestOfWonders
         {
             prevTicks = DateTime.Now.Ticks;
             currentMap = new Map("Resources/QuestOfWondersStage1_1.bmp");
+
+
+            pnlMain.Paint += new PaintEventHandler(pnlMain_Paint);
+            pnlMain.Refresh();
+            pnlMain.Update();
+
             while (running)
             {
                 UpdateGame();
@@ -269,7 +275,6 @@ namespace QuestOfWonders
 
         private void pnlMain_Click(object sender, EventArgs e)
         {
-            pnlMain.Paint += new PaintEventHandler(pnlMain_Paint);
         }
     }
 }
