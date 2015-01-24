@@ -67,19 +67,27 @@ namespace QuestOfWonders
 
         public void UpdateGame()
         {
+<<<<<<< HEAD
             if(currentMap != null) currentMap.Update(1);
             if (player != null) player.Update(1);
+=======
+            currentMap.Update(1);
+>>>>>>> 443fb2d58f1f38979909f1c9aa16bd227c3d1390
             DoCollision();
         }
 
         public void DoCollision()
         {
-			
+<<<<<<< HEAD
+
         }
 
         public static void CreatePlayer(int x, int y)
         {
             player = new Player(x, y);
+=======
+			
+>>>>>>> 443fb2d58f1f38979909f1c9aa16bd227c3d1390
         }
 
         private void btnBegin_Click(object sender, EventArgs e)

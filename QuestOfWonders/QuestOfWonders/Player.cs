@@ -15,9 +15,9 @@ namespace QuestOfWonders
 	
     class Player
     {
-		private static int SPEED = 5;
-		private static int JUMPSPEED = 10;
-		private static int GRAVITY = -1;
+		private const int SPEED = 5;
+		private const int JUMPSPEED = 10;
+		private const int GRAVITY = -1;
 
 		private Point pos;
 		private PointF vel;
@@ -41,7 +41,7 @@ namespace QuestOfWonders
 			Pen p = new Pen(Color.Blue);
 			int x = pos.X - frmMain.viewX;
 			int y = pos.Y - frmMain.viewY;
-			g.DrawRectangle(p, x, y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
+			g.DrawRectangle(p, pos.X, pos.Y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
         }
 
         public void Update(float time)
@@ -60,25 +60,20 @@ namespace QuestOfWonders
 			}
 		}
 
-        public Rectangle GetCollisionBox()
-        {
-            return new Rectangle(pos, new Size(Map.TILE_SIZE, 2 * Map.TILE_SIZE));
-        }
-
 		public void OnCollide(Direction dir)
 		{
 			switch (dir)
 			{
-				case Direction.Left:
-					vel.X = Math.Max(0, vel.X);
+				case Left:
+					//vel.X = Math.Max(0, vel.X);
 					break;
-				case Direction.Right:
-					vel.X = Math.Min(0, vel.X);
+				case Right:
+					//vel.X = Math.Min(0, vel.X);
 					break;
-				case Direction.Up:
+				case Up:
 					vel.Y = Math.Max(0, vel.Y);
 					break;
-				case Direction.Down:
+				case Down:
 					vel.Y = Math.Min(0, vel.Y);
 					onGround = true;
 					break;
@@ -92,28 +87,33 @@ namespace QuestOfWonders
 
         public void OnKeyDown(Keys key)
         {
-            if (key == leftKey) {
-                vel.X = -SPEED;
-            }
-            else if (key == rightKey) {
-                vel.X = SPEED;
-            }
-            else if (key == jumpKey) {
-                Jump();
-            }
-
+			switch (key)
+			{
+				case leftKey:
+					vel.X = -SPEED;
+					break;
+				case rightKey:
+					vel.X = SPEED
+					break;
+				case jumpKey:
+					Jump();
+					break;
+			}
         }
 
         public void OnKeyUp(Keys key)
         {
-            if (key == leftKey)
-            {
-                vel.X = 0;
-            }
-            else if (key == rightKey)
-            {
-                vel.X = 0;
-            }
+			switch (key)
+			{
+				case leftKey:
+					vel.X = 0;
+					break;
+				case rightKey:
+					vel.X = 0;
+					break;
+				case jumpKey:
+					break;
+			}
         }
     }
 }
