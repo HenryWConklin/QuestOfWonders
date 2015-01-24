@@ -46,6 +46,9 @@ namespace QuestOfWonders
 
         public static Wonder wonder = null;
 
+        public static List<Projectile> projectiles;
+        public static List<Enemy> enemies;
+
         public frmMain()
         {
             InitializeComponent();
@@ -164,13 +167,35 @@ namespace QuestOfWonders
 
         public void DoCollision()
         {
+            // Player
+
+            //bullets
+            for (int i=0; i<projectiles.Count(); i++)
+            {
+                Projectile proj = projectiles[i];
+                if (player.GetCollisionRectangle().Contains(proj.getPos()))
+                {
+                    player.Kill();
+                    projectiles.RemoveAt(i);
+                    i--;
+                    continue;
+                }
+                if (currentMap.CheckLocation(proj.getPos().X, proj.getPos().Y) != 0)
+                {
+                    projectiles.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            //spikes
             int bl = currentMap.CheckLocation(player.GetPos().X, player.GetPos().Y + 2 * Map.TILE_SIZE);
             int br = currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE, player.GetPos().Y + 2 * Map.TILE_SIZE);
             if (bl == Map.SPIKE_INT || br == Map.SPIKE_INT)
             {
                 player.Kill();
             }
-            
+
+            //walls
             Point startPos = new Point(player.GetPos().X, player.GetPos().Y);
 
             if (CheckPlayerMapCollision())
@@ -202,6 +227,36 @@ namespace QuestOfWonders
             if (currentMap.CheckLocation(player.GetPos().X + 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0 ||
                 currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE - 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0)
                 player.Ground();
+
+            // Enemies
+            Rectangle playerRect = player.GetCollisionRectangle();
+            foreach (Enemy e in enemies)
+            {
+                if (e.GetCollisionBounds().IntersectsWith(playerRect)) 
+                {
+                    player.Kill();
+                }
+
+                int inFront = 0;
+                int belowFront = 0;
+                if (e.GetDir() == Enemy.LEFT)
+                {
+                    inFront = currentMap.CheckLocation(e.GetPos().X - 1, e.GetPos().Y + 2 * Map.TILE_SIZE - 1);
+                    belowFront = currentMap.CheckLocation(e.GetPos().X - 1, e.GetPos().Y + 2 * Map.TILE_SIZE + 1);
+                }
+                else if (e.GetDir() == Enemy.RIGHT)
+                {
+                    inFront = currentMap.CheckLocation(e.GetPos().X + Map.TILE_SIZE + 1, e.GetPos().Y + 2 * Map.TILE_SIZE - 1);
+                    belowFront = currentMap.CheckLocation(e.GetPos().X + Map.TILE_SIZE + 1, e.GetPos().Y + 2 * Map.TILE_SIZE + 1);
+                }
+                if (inFront != 0 || belowFront == 0)
+                {
+                    e.Turn();
+                }
+
+            }
+
+            
         }
 
         public static void Restart()
