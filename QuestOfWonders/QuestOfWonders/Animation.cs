@@ -21,7 +21,7 @@ namespace QuestOfWonders
             frames = new Bitmap[numFrames];
             for (int i = 0; i < frames.Length; i++)
             {
-                frames[i] = new Bitmap(Bitmap.FromFile(name + i));
+                frames[i] = new Bitmap(Bitmap.FromFile("Resources/" + name + i + ".png"));
             }
 
             frame = 0;
@@ -34,6 +34,7 @@ namespace QuestOfWonders
             while (time > FRAME_TIME)
             {
                 frame++;
+                frame %= frames.Length;
                 time -= FRAME_TIME;
             }
         }
