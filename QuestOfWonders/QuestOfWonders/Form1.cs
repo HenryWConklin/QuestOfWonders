@@ -69,7 +69,7 @@ namespace QuestOfWonders
             DoCollision();
         }
 
-        public void DoCollsion()
+        public void DoCollision()
         {
 
         }
