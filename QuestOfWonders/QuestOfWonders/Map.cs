@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace QuestOfWonders
 {
-    class Map
+    public class Map
     {
         public static int TILE_SIZE = 24;
 

@@ -65,6 +65,16 @@ namespace QuestOfWonders
         {
             anims[animIndex].Update(time);
 			pos.X += vel.X * time;
+            if (pos.X < 0)
+            {
+                pos.X = 0;
+                vel.X = 0;
+            }
+            if (pos.X + GetCollisionRectangle().Width > frmMain.currentMap.widthInTiles * Map.TILE_SIZE)
+            {
+                pos.X = frmMain.currentMap.widthInTiles * Map.TILE_SIZE - GetCollisionRectangle().Width;
+                vel.X = 0;
+            }
 			pos.Y += vel.Y * time;
             if (! onGround)
             {

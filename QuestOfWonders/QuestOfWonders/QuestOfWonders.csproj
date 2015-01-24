@@ -58,6 +58,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoundSystem.cs" />
     <Compile Include="Textbox.cs" />
     <Compile Include="Wonder.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -255,6 +256,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\QuestOfWondersStage4.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Quest of Wonders2.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

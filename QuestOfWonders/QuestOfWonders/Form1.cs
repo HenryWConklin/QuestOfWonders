@@ -13,6 +13,7 @@ namespace QuestOfWonders
     public partial class frmMain : Form
     {
         private const float FRAME_TIME = 1f / 60;
+        public static bool soundOn = true;
 
         Bitmap buffer;
         Graphics bufferGraphics;
@@ -34,7 +35,7 @@ namespace QuestOfWonders
 
         public float timeAccum;
 
-        static Map currentMap;
+        public static Map currentMap;
         static Player player;
 
         private static String[] levelMaps;
@@ -194,7 +195,7 @@ namespace QuestOfWonders
             {
                 player.Kill();
             }
-
+            
             //walls
             Point startPos = new Point(player.GetPos().X, player.GetPos().Y);
 
@@ -319,6 +320,7 @@ namespace QuestOfWonders
 
         private void btnBegin_Click(object sender, EventArgs e)
         {
+            SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders2.wav", true);
             running = true;
             btnBegin.Visible = false;
             btnBegin.Enabled = false;
