@@ -38,6 +38,8 @@ namespace QuestOfWonders
 
         long prevTicks;
 
+        public static Textbox text;
+
         public frmMain()
         {
             InitializeComponent();
@@ -97,6 +99,8 @@ namespace QuestOfWonders
 
             if (player != null) player.Draw(bufferGraphics);
 
+            if (text != null) text.Draw(bufferGraphics);
+
             g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
         }
 
@@ -123,6 +127,9 @@ namespace QuestOfWonders
             }
                 timeAccum -= FRAME_TIME;
             }
+
+            if (text != null) text.Update(deltaTime);
+
             UpdateView();
         }
 

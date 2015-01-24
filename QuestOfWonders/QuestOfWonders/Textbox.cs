@@ -9,7 +9,8 @@ namespace QuestOfWonders
 {
     class Textbox
     {
-        string myText;
+        List<string> allText;
+        int curTextNum = 0;
         Rectangle myPos;
         Brush backColor;
         Brush borderColor;
@@ -17,23 +18,25 @@ namespace QuestOfWonders
 
         private Rectangle textRect;
 
+        bool done = false;
+
         int borderSize = 4;
         Font myFont;
 
-        public Textbox(string text, Rectangle rect)
+        public Textbox(List<string> text, Rectangle rect)
         {
             setup(text, rect, Color.DarkSlateGray, Color.Black, Color.White);
         }
 
-        public Textbox(string text, Rectangle rect, Color backCol, Color borderCol, Color textCol)
+        public Textbox(List<string> text, Rectangle rect, Color backCol, Color borderCol, Color textCol)
         {
             setup(text, rect, backCol, borderCol, textCol);
         }
 
-        private void setup(string text, Rectangle rect, Color backCol, Color borderCol, Color textCol)
+        private void setup(List<string> text, Rectangle rect, Color backCol, Color borderCol, Color textCol)
         {
             myFont = SystemFonts.DefaultFont;
-            this.myText = text;
+            this.allText = text;
             this.myPos = rect;
             this.backColor = new SolidBrush(backCol);
             this.borderColor = new SolidBrush(borderCol);
@@ -45,7 +48,19 @@ namespace QuestOfWonders
         {
             g.FillRectangle(borderColor, myPos);
             g.FillRectangle(backColor, textRect);
-            g.DrawString(myText, myFont, textColor, textRect);
+            g.DrawString(allText[curTextNum], myFont, textColor, textRect);
+        }
+
+        public void Advance()
+        {
+            if (curTextNum < allText.Count - 1)
+            {
+                curTextNum++;
+            }
+            else
+            {
+                done = true;
+            }
         }
 
         public void Update(float time)
