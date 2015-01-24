@@ -64,16 +64,16 @@ namespace QuestOfWonders
 		{
 			switch (dir)
 			{
-				case Left:
+				case Direction.Left:
 					//vel.X = Math.Max(0, vel.X);
 					break;
-				case Right:
+				case Direction.Right:
 					//vel.X = Math.Min(0, vel.X);
 					break;
-				case Up:
+				case Direction.Up:
 					vel.Y = Math.Max(0, vel.Y);
 					break;
-				case Down:
+				case Direction.Down:
 					vel.Y = Math.Min(0, vel.Y);
 					onGround = true;
 					break;
@@ -87,33 +87,27 @@ namespace QuestOfWonders
 
         public void OnKeyDown(Keys key)
         {
-			switch (key)
-			{
-				case leftKey:
-					vel.X = -SPEED;
-					break;
-				case rightKey:
-					vel.X = SPEED
-					break;
-				case jumpKey:
-					Jump();
-					break;
-			}
+            if (key == leftKey) {
+                vel.X = -SPEED;
+            }
+            else if (key == rightKey) {
+                vel.X = SPEED;
+            }
+            else if (key == jumpKey) {
+                Jump();
+            }
         }
 
         public void OnKeyUp(Keys key)
         {
-			switch (key)
-			{
-				case leftKey:
-					vel.X = 0;
-					break;
-				case rightKey:
-					vel.X = 0;
-					break;
-				case jumpKey:
-					break;
-			}
+            if (key == leftKey)
+            {
+                vel.X = 0;
+            }
+            else if (key == rightKey)
+            {
+                vel.X = 0;
+            }
         }
     }
 }
