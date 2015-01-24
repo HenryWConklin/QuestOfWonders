@@ -10,7 +10,7 @@ namespace QuestOfWonders
 {
     class Map
     {
-        public static int TILE_SIZE = 16;
+        public static int TILE_SIZE = 24;
 
         Color DIRT_COLOR = Color.FromArgb(0, 0, 0);
         Color GRASS_COLOR = Color.FromArgb(0, 255, 0);
@@ -84,10 +84,10 @@ namespace QuestOfWonders
         //Loads in the tile images
         public void LoadImages()
         {
-            grassImg = (Bitmap)Bitmap.FromFile("Resources/grass.png");
-            dirtImg = (Bitmap)Bitmap.FromFile("Resources/glassed stone.png");
-            spikeImg = (Bitmap)Bitmap.FromFile("Resources/spikes.png");
-            orbImg = (Bitmap)Bitmap.FromFile("Resources/orb of wonder.png");
+            grassImg = new Bitmap(Bitmap.FromFile("Resources/grassBig.png"), TILE_SIZE, TILE_SIZE);
+            dirtImg = new Bitmap(Bitmap.FromFile("Resources/stoneBig.png"), TILE_SIZE, TILE_SIZE);
+            spikeImg = new Bitmap(Bitmap.FromFile("Resources/spikes.png"), TILE_SIZE, TILE_SIZE);
+            orbImg = new Bitmap(Bitmap.FromFile("Resources/orb of wonder.png"), TILE_SIZE, TILE_SIZE);
         }
 
         //Reads in game coords, converts to map coords, and tells you what's there.
