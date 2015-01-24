@@ -14,6 +14,11 @@ namespace QuestOfWonders
         int x, y, width, height;
         public bool hasBeenHit = false;
 
+        List<string> textboxText = new List<String>()
+        {
+
+        };
+
         public void Draw(Graphics g)
         {
             if(!hasBeenHit) g.DrawImage(img, x, y, width, height);

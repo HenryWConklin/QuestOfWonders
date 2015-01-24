@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace QuestOfWonders
 {
-    class Textbox
+    public class Textbox
     {
         List<string> allText;
         int curTextNum = 0;
