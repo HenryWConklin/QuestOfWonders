@@ -36,6 +36,9 @@ namespace QuestOfWonders
         Map currentMap;
         static Player player;
 
+        private String[] levelMaps;
+        private int currentLevel;
+
         long prevTicks;
 
         public frmMain()
@@ -55,12 +58,15 @@ namespace QuestOfWonders
             panelGraphics.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
             panelGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             timeAccum = 0;
+
+            levelMaps = new String[] {"Resources/QuestOfWondersStage1_1.bmp"};
+            currentLevel = 0;
         }
 
         public void Run()
         {
             prevTicks = DateTime.Now.Ticks;
-            currentMap = new Map("Resources/QuestOfWondersStage1_1.bmp");
+            currentMap = new Map(levelMaps[0]);
 
 
             pnlMain.Paint += new PaintEventHandler(pnlMain_Paint);
@@ -102,6 +108,10 @@ namespace QuestOfWonders
 
         public void UpdateGame()
         {
+            if (player.IsDead())
+            {
+                Restart();
+            }
 
             long currentTicks = DateTime.Now.Ticks;
             long ticksElapsed = currentTicks - prevTicks;
@@ -113,14 +123,11 @@ namespace QuestOfWonders
             while (timeAccum > FRAME_TIME)
             {
                 if (currentMap != null) currentMap.Update(FRAME_TIME);
-            if (player != null)
-            {
-                    player.Update(FRAME_TIME);
-                    DoCollision();
-                if (currentMap.CheckLocation(player.GetPos().X + 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0 ||
-                    currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE - 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0)
-                    player.Ground();
-            }
+                if (player != null)
+                {
+                        player.Update(FRAME_TIME);
+                        DoCollision();
+                }
                 timeAccum -= FRAME_TIME;
             }
             UpdateView();
@@ -140,37 +147,49 @@ namespace QuestOfWonders
 
         public void DoCollision()
         {
-            if (player != null)
+            int bl = currentMap.CheckLocation(player.GetPos().X, player.GetPos().Y + 2 * Map.TILE_SIZE);
+            int br = currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE, player.GetPos().Y + 2 * Map.TILE_SIZE);
+            if (bl == Map.SPIKE_INT || br == Map.SPIKE_INT)
             {
-                Point startPos = new Point(player.GetPos().X, player.GetPos().Y);
-
-                if (CheckPlayerMapCollision())
-                {
-                    player.SetPosY((player.GetPos().Y + Map.TILE_SIZE/2) / Map.TILE_SIZE * Map.TILE_SIZE);   
-                }               
-
-                if (CheckPlayerMapCollision())
-                {
-                    player.SetPosY(startPos.Y);
-                    player.SetPosX((player.GetPos().X + Map.TILE_SIZE/2)/ Map.TILE_SIZE * Map.TILE_SIZE);
-                    if (player.GetPos().X < startPos.X)
-                        player.OnCollide(Direction.Right);
-                    else
-                        player.OnCollide(Direction.Left);
-                }
-
-                if (CheckPlayerMapCollision())
-                {
-                    player.SetPosY((player.GetPos().Y + Map.TILE_SIZE / 2) / Map.TILE_SIZE * Map.TILE_SIZE);
-
-                }
-
-                if (player.GetPos().Y < startPos.Y)
-                    player.OnCollide(Direction.Down);
-                else if (player.GetPos().Y > startPos.Y)
-                    player.OnCollide(Direction.Up);
-                
+                player.Kill();
             }
+            
+            Point startPos = new Point(player.GetPos().X, player.GetPos().Y);
+
+            if (CheckPlayerMapCollision())
+            {
+                player.SetPosY((player.GetPos().Y + Map.TILE_SIZE/2) / Map.TILE_SIZE * Map.TILE_SIZE);   
+            }               
+
+            if (CheckPlayerMapCollision())
+            {
+                player.SetPosY(startPos.Y);
+                player.SetPosX((player.GetPos().X + Map.TILE_SIZE/2)/ Map.TILE_SIZE * Map.TILE_SIZE);
+                if (player.GetPos().X < startPos.X)
+                    player.OnCollide(Direction.Right);
+                else
+                    player.OnCollide(Direction.Left);
+            }
+
+            if (CheckPlayerMapCollision())
+            {
+                player.SetPosY((player.GetPos().Y + Map.TILE_SIZE / 2) / Map.TILE_SIZE * Map.TILE_SIZE);
+
+            }
+
+            if (player.GetPos().Y < startPos.Y)
+                player.OnCollide(Direction.Down);
+            else if (player.GetPos().Y > startPos.Y)
+                player.OnCollide(Direction.Up);
+
+            if (currentMap.CheckLocation(player.GetPos().X + 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0 ||
+                currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE - 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0)
+                player.Ground();
+        }
+
+        public void Restart()
+        {
+            currentMap = new Map(levelMaps[currentLevel]);
         }
         
         public void UpdateView()

@@ -23,6 +23,7 @@ namespace QuestOfWonders
         private PointF pos;
 		private PointF vel;
 		private bool onGround;
+        private bool isDead;
 
 		private Keys leftKey = Keys.Left;
 		private Keys rightKey = Keys.Right;
@@ -38,6 +39,7 @@ namespace QuestOfWonders
 			pos = new PointF(x, y);
 			vel = new PointF(0, 0);
 			onGround = true;
+            isDead = false;
             leftPressed = false;
             rightPressed = false;
 		}
@@ -52,7 +54,6 @@ namespace QuestOfWonders
 
         public void Update(float time)
         {
-
 			pos.X += vel.X * time;
 			pos.Y += vel.Y * time;
             if (! onGround)
@@ -118,8 +119,13 @@ namespace QuestOfWonders
 
 		public void Kill()
 		{
-			//do stuff
+            isDead = true;
 		}
+
+        public bool IsDead()
+        {
+            return isDead;
+        }
 
         public void OnKeyDown(Keys key)
         {
