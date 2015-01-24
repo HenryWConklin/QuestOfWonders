@@ -12,7 +12,6 @@ namespace QuestOfWonders
 {
     public partial class frmMain : Form
     {
-
         Bitmap buffer;
         Graphics bufferGraphics;
         Graphics panelGraphics;
@@ -20,10 +19,11 @@ namespace QuestOfWonders
         bool running = false;
 
         Brush skyBrush = new SolidBrush(Color.SkyBlue);
+        
+        public static int viewX = 0;
+        public static int viewY = 0;
 
-        Brush testBrush = new SolidBrush(Color.Black);
-
-        int testX = 0;
+        Map currentMap;
 
         public frmMain()
         {
@@ -41,6 +41,7 @@ namespace QuestOfWonders
 
         public void Run()
         {
+            currentMap = new Map("Resources/QuestOfWondersStage1.bmp");
             while (running)
             {
                 UpdateGame();
@@ -53,14 +54,14 @@ namespace QuestOfWonders
         {
             bufferGraphics.FillRectangle(skyBrush, 0, 0, pnlMain.Width, pnlMain.Height);
 
-            bufferGraphics.FillRectangle(testBrush, testX, 50, 100, 100);
+            currentMap.Draw(bufferGraphics);
 
             panelGraphics.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
         }
 
         public void UpdateGame()
         {
-
+            currentMap.Update(1);
         }
 
         private void btnBegin_Click(object sender, EventArgs e)
