@@ -22,16 +22,30 @@ namespace QuestOfWonders
         Color RSHOOTER_COLOR = Color.FromArgb(50, 100, 50);
         Color USHOOTER_COLOR = Color.FromArgb(100, 255, 200);
         Color DSHOOTER_COLOR = Color.FromArgb(255, 200, 150);
+        Color REDGRASS_COLOR = Color.FromArgb(255, 100, 50);
 
         Brush tmpGrass = new SolidBrush(Color.DarkGreen);
         Brush tmpDirt = new SolidBrush(Color.Brown);
         Brush tmpSpike = new SolidBrush(Color.Red);
         Brush tmpShooter = new SolidBrush(Color.Firebrick);
+        Brush tmpRedGrass = new SolidBrush(Color.OrangeRed);
+        Brush tmpRedDirt = new SolidBrush(Color.Orange);
+        Brush tmpShootDown = new SolidBrush(Color.OliveDrab);
+        Brush tmpShootLeft = new SolidBrush(Color.OliveDrab);
+        Brush tmpShootRight = new SolidBrush(Color.OliveDrab);
+        Brush tmpShootUp = new SolidBrush(Color.OliveDrab);
 
         Bitmap grassImg = null;
         Bitmap dirtImg = null;
         Bitmap spikeImg = null;
         Bitmap shooterImg = null;
+        Bitmap redGrassImg = null;
+        Bitmap redDirtImg = null;
+        Bitmap shootDownImg = null;
+        Bitmap shootLeftImg = null;
+        Bitmap shootRightImg = null;
+        Bitmap shootUpImg = null;
+
 
         public static int NOTHING_INT = 0;
         public static int DIRT_INT = 1;
@@ -53,8 +67,13 @@ namespace QuestOfWonders
         public int shooterXOffset = TILE_SIZE / 3;
         public int shooterYOffset = TILE_SIZE / 3;
 
-        public Map(string imgFileLoc)
+        public static int NORM_GRASS = 0;
+        public static int RED_GRASS = 1;
+        public int GrassType = 0;
+
+        public Map(string imgFileLoc, int grassType)
         {
+            this.GrassType = grassType;
             Bitmap img = (Bitmap)Bitmap.FromFile(imgFileLoc);
 
             map = new int[img.Width, img.Height];
@@ -146,8 +165,15 @@ namespace QuestOfWonders
         public void LoadImages()
         {
             grassImg = new Bitmap(Bitmap.FromFile("Resources/grassBig.png"), TILE_SIZE, TILE_SIZE);
-            dirtImg = new Bitmap(Bitmap.FromFile("Resources/stoneBig.png"), TILE_SIZE, TILE_SIZE);
+            dirtImg = new Bitmap(Bitmap.FromFile("Resources/stone.png"), TILE_SIZE, TILE_SIZE);
             spikeImg = new Bitmap(Bitmap.FromFile("Resources/spikes.png"), TILE_SIZE, TILE_SIZE);
+            redGrassImg = new Bitmap(Bitmap.FromFile("Resources/red grass.png"), TILE_SIZE, TILE_SIZE);
+            redDirtImg = new Bitmap(Bitmap.FromFile("Resources/red stone.png"), TILE_SIZE, TILE_SIZE);
+            shootDownImg = new Bitmap(Bitmap.FromFile("Resources/shooter down.png"), TILE_SIZE, TILE_SIZE);
+            shootLeftImg = new Bitmap(Bitmap.FromFile("Resources/shooter left.png"), TILE_SIZE, TILE_SIZE);
+            shootRightImg = new Bitmap(Bitmap.FromFile("Resources/shooter right.png"), TILE_SIZE, TILE_SIZE);
+            shootUpImg = new Bitmap(Bitmap.FromFile("Resources/shooter up.png"), TILE_SIZE, TILE_SIZE);
+
         }
 
         //Reads in game coords, converts to map coords, and tells you what's there.
@@ -202,15 +228,33 @@ namespace QuestOfWonders
 
                     if (map[x, y] == DIRT_INT)
                     {
-                        g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
-                        drawBrush = tmpDirt;
-                        img = dirtImg;
+                        if (GrassType == RED_GRASS)
+                        {
+                            g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
+                            drawBrush = tmpRedDirt;
+                            img = redDirtImg;
+                        }
+                        else
+                        {
+                            g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
+                            drawBrush = tmpDirt;
+                            img = dirtImg;
+                        }
                     }
                     else if (map[x, y] == GRASS_INT)
                     {
-                        g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
-                        drawBrush = tmpGrass;
-                        img = grassImg;
+                        if (GrassType == RED_GRASS)
+                        {
+                            g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
+                            drawBrush = tmpRedGrass;
+                            img = redGrassImg;
+                        }
+                        else
+                        {
+                            g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
+                            drawBrush = tmpGrass;
+                            img = grassImg;
+                        }
                     }
                     else if (map[x, y] == SPIKE_INT)
                     {
@@ -219,23 +263,23 @@ namespace QuestOfWonders
                     }
                     else if (map[x, y] == LSHOOTER_INT)
                     {
-                        drawBrush = tmpShooter;
-                        img = shooterImg;
+                        drawBrush = tmpShootLeft;
+                        img = shootLeftImg;
                     }
                     else if (map[x, y] == RSHOOTER_INT)
                     {
-                        drawBrush = tmpShooter;
-                        img = shooterImg;
+                        drawBrush = tmpShootRight;
+                        img = shootRightImg;
                     }
                     else if (map[x, y] == USHOOTER_INT)
                     {
-                        drawBrush = tmpShooter;
-                        img = shooterImg;
+                        drawBrush = tmpShootUp;
+                        img = shootUpImg;
                     }
                     else if (map[x, y] == DSHOOTER_INT)
                     {
-                        drawBrush = tmpShooter;
-                        img = shooterImg;
+                        drawBrush = tmpShootDown;
+                        img = shootDownImg;
                     }
 
                     if (img != null)
