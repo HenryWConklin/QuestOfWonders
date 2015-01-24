@@ -33,14 +33,10 @@ namespace QuestOfWonders
 
         public bool hasDrawnMap = false;
 
+
         public float timeAccum;
-<<<<<<< HEAD
-        public float shooterTimer = 0;
-        public float shooterTime = 2.5f; //Seconds
-=======
         public static float shooterTimer = 0;
-        public static float shooterTime = 1; //Seconds
->>>>>>> 7eb752ed1458ccf263ab7a468a39183c79c369c8
+        public float shooterTime = 2.5f; //Seconds
 
         public static Map currentMap;
         static Player player;
@@ -58,6 +54,8 @@ namespace QuestOfWonders
         public static List<Projectile> projectiles = new List<Projectile>();
         public static List<Enemy> enemies = new List<Enemy>();
         public static Dictionary<Point, PointF> shooters = new Dictionary<Point, PointF>();
+        public static List<Switch> switches = new List<Switch>();
+        public static Door door;
 
         public frmMain()
         {
@@ -163,6 +161,24 @@ namespace QuestOfWonders
                 FireShooters();
                 shooterTimer = 0;
             }
+
+            if (door != null)
+            {
+
+                bool openDoor = true;
+                foreach (Switch s in switches)
+                {
+                    if (!s.isOn)
+                    {
+                        openDoor = false;
+                        break;
+                    }
+                }
+                if (openDoor)
+                {
+                    door = null;
+                }
+            }
             while (timeAccum > FRAME_TIME)
             {
                 if (currentMap != null) currentMap.Update(FRAME_TIME);
@@ -252,13 +268,19 @@ namespace QuestOfWonders
             
             //walls
             Point startPos = new Point(player.GetPos().X, player.GetPos().Y);
+            Rectangle playerRect = player.GetCollisionRectangle();
+            Rectangle doorRect = new Rectangle();
+            if (door != null)
+            {
+                doorRect = door.GetCollisionRectangle();
+            }
 
-            if (CheckPlayerMapCollision())
+            if (CheckPlayerMapCollision() || doorRect.IntersectsWith(playerRect))
             {
                 player.SetPosY((player.GetPos().Y + Map.TILE_SIZE/2) / Map.TILE_SIZE * Map.TILE_SIZE);   
             }               
 
-            if (CheckPlayerMapCollision())
+            if (CheckPlayerMapCollision() || doorRect.IntersectsWith(playerRect))
             {
                 player.SetPosY(startPos.Y);
                 player.SetPosX((player.GetPos().X + Map.TILE_SIZE/2)/ Map.TILE_SIZE * Map.TILE_SIZE);
@@ -268,7 +290,7 @@ namespace QuestOfWonders
                     player.OnCollide(Direction.Left);
             }
 
-            if (CheckPlayerMapCollision())
+            if (CheckPlayerMapCollision() || doorRect.IntersectsWith(playerRect))
             {
                 player.SetPosY((player.GetPos().Y + Map.TILE_SIZE / 2) / Map.TILE_SIZE * Map.TILE_SIZE);
 
@@ -284,7 +306,7 @@ namespace QuestOfWonders
                 player.Ground();
 
             // Enemies
-            Rectangle playerRect = player.GetCollisionRectangle();
+            
             foreach (Enemy e in enemies)
             {
                 if (e.GetCollisionBounds().IntersectsWith(playerRect)) 
@@ -311,6 +333,14 @@ namespace QuestOfWonders
 
             }
 
+            //Switches
+            foreach (Switch s in switches)
+            {
+                if (s.GetCollisionRectangle().IntersectsWith(playerRect))
+                {
+                    s.isOn = true;
+                }
+            }
             
         }
 
@@ -322,14 +352,9 @@ namespace QuestOfWonders
             text = null;
             wonder = null;
             player = null;
-<<<<<<< HEAD
             currentMap = new Map(levelMaps[currentLevel], levelGrass[currentLevel]);
             allowPlayerControl = true;
-=======
-            currentMap = new Map(levelMaps[currentLevel]);
-            allowPlayerControl = true;
             shooterTimer = 0;
->>>>>>> 7eb752ed1458ccf263ab7a468a39183c79c369c8
         }
         
         public void UpdateView()

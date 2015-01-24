@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animation.cs" />
+    <Compile Include="Door.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -59,6 +60,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SoundSystem.cs" />
+    <Compile Include="Switch.cs" />
     <Compile Include="Textbox.cs" />
     <Compile Include="Wonder.cs" />
     <EmbeddedResource Include="Form1.resx">
