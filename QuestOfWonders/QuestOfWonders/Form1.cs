@@ -69,6 +69,7 @@ namespace QuestOfWonders
         {
             if(currentMap != null) currentMap.Update(1);
             if (player != null) player.Update(1);
+            UpdateView();
             DoCollision();
         }
 
@@ -77,6 +78,14 @@ namespace QuestOfWonders
             if (player != null)
             {
                 currentMap.CheckLocation(player.pos.X, player.pos.Y);
+            }
+        }
+        
+        public void UpdateView()
+        {
+            if (player != null)
+            {
+
             }
         }
 
