@@ -15,6 +15,7 @@ namespace QuestOfWonders
         Color DIRT_COLOR = Color.FromArgb(0, 0, 0);
         Color GRASS_COLOR = Color.FromArgb(0, 255, 0);
         Color SPIKE_COLOR = Color.FromArgb(255, 0, 0);
+        Color PLAYER_COLOR = Color.FromArgb(255, 255, 0);
 
         Brush tmpGrass = new SolidBrush(Color.DarkGreen);
         Brush tmpDirt = new SolidBrush(Color.Brown);
@@ -56,6 +57,11 @@ namespace QuestOfWonders
                     else if (col == SPIKE_COLOR)
                     {
                         map[x, y] = SPIKE_INT;
+                    }
+                    else if (col == PLAYER_COLOR)
+                    {
+                        Point playerPoint = ArrayToScreenLocation(x, y);
+                        frmMain.CreatePlayer(playerPoint.X, playerPoint.Y);
                     }
                 }
             }
