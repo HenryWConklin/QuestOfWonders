@@ -10,11 +10,83 @@ using System.Windows.Forms;
 
 namespace QuestOfWonders
 {
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {
-        public Form1()
+
+        Bitmap buffer;
+        Graphics bufferGraphics;
+        Graphics panelGraphics;
+
+        bool running = false;
+
+        Brush skyBrush = new SolidBrush(Color.SkyBlue);
+
+        Brush testBrush = new SolidBrush(Color.Black);
+
+        int testX = 0;
+
+        public frmMain()
         {
             InitializeComponent();
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            buffer = new Bitmap(pnlMain.Width, pnlMain.Height);
+            bufferGraphics = Graphics.FromImage(buffer);
+            panelGraphics = pnlMain.CreateGraphics();
+        }
+
+
+
+        public void Run()
+        {
+            while (running)
+            {
+                UpdateGame();
+                Draw();
+                Application.DoEvents();
+            }
+        }
+
+        public void Draw()
+        {
+            bufferGraphics.FillRectangle(skyBrush, 0, 0, pnlMain.Width, pnlMain.Height);
+
+            bufferGraphics.FillRectangle(testBrush, testX, 50, 100, 100);
+
+            panelGraphics.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
+        }
+
+        public void UpdateGame()
+        {
+
+        }
+
+        private void btnBegin_Click(object sender, EventArgs e)
+        {
+            running = true;
+            btnBegin.Visible = false;
+            btnBegin.Enabled = false;
+            Run();
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            running = false;
+        }
+
+        private void frmMain_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void frmMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.D)
+            {
+                testX += 50;
+            }
         }
     }
 }
