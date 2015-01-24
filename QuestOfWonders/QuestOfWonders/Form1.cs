@@ -69,6 +69,7 @@ namespace QuestOfWonders
         {
             if(currentMap != null) currentMap.Update(1);
             if (player != null) player.Update(1);
+            UpdateView();
             DoCollision();
         }
 
@@ -111,7 +112,46 @@ namespace QuestOfWonders
                 }
                 
             }
+        }
+        
+        public void UpdateView()
+        {
+            if (player != null)
+            {
+                int hBuffer = 200;
+                int vBuffer = 100;
 
+                int newX = viewX;
+                int newY = viewY;
+
+                int playerX = player.pos.X;
+                int playerY = player.pos.Y;
+
+                if (playerX < viewX + hBuffer)
+                {
+                    newX = (playerX - hBuffer);
+                }
+                if (playerX > viewX + viewWidth - hBuffer)
+                {
+                    newX = (playerX + hBuffer - viewWidth);
+        }
+
+
+                if (playerY < viewY + vBuffer)
+                {
+                    newY = (playerY - vBuffer);
+                }
+                if (playerY > viewY + viewHeight - vBuffer)
+                {
+                    newY = (playerY + vBuffer - viewHeight);
+                }
+
+                newX = Math.Min(Math.Max(newX, 0), currentMap.widthInTiles * Map.TILE_SIZE - viewWidth);
+                newY = Math.Min(Math.Max(newY, 0), currentMap.heightInTiles * Map.TILE_SIZE - viewHeight);
+
+                viewX = newX;
+                viewY = newY;
+            }
         }
 
         public static void CreatePlayer(int x, int y)
@@ -139,6 +179,11 @@ namespace QuestOfWonders
 
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
         {
+            player.OnKeyDown(e.KeyCode);
+        }
+
+        public void MoveView(KeyEventArgs e)
+        {
             if (e.KeyCode == Keys.D)
             {
                 viewX = Math.Min(viewX + 10, currentMap.widthInTiles * Map.TILE_SIZE - viewWidth);
@@ -155,6 +200,11 @@ namespace QuestOfWonders
             {
                 viewY = Math.Min(viewY + 10, currentMap.heightInTiles * Map.TILE_SIZE - viewHeight);
             }
+        }
+
+        private void frmMain_KeyUp(object sender, KeyEventArgs e)
+        {
+            player.OnKeyUp(e.KeyCode);
 
             if (player != null) player.OnKeyDown(e.KeyCode);
         }

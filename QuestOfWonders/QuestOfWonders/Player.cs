@@ -17,7 +17,8 @@ namespace QuestOfWonders
     {
 		private const int SPEED = 5;
 		private const int JUMPSPEED = 10;
-		private const float GRAVITY = .1f;
+		private const float GRAVITY = .5f;
+        private const float GRAVITY_CAP = 5;
 
         public Point pos;
 		private PointF vel;
@@ -46,10 +47,14 @@ namespace QuestOfWonders
 
         public void Update(float time)
         {
-			onGround = false;
 			pos.X += (int)(vel.X * time);
 			pos.Y += (int)(vel.Y * time);
-			vel.Y += GRAVITY * time;
+            if (! onGround)
+            {
+                vel.Y += GRAVITY * time;
+                vel.Y = Math.Min(vel.Y, GRAVITY_CAP);
+            }
+            onGround = false;
         }
 
 		public void Jump()
@@ -75,7 +80,7 @@ namespace QuestOfWonders
 					break;
 				case Direction.Down:
 					vel.Y = Math.Min(0, vel.Y);
-					onGround = true;
+                    //onGround = true;
 					break;
 			}
 		}
@@ -83,6 +88,11 @@ namespace QuestOfWonders
         public Rectangle GetCollisionRectangle()
         {
             return new Rectangle(pos.X, pos.Y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
+        }
+
+        public void Ground()
+        {
+            onGround = true;
         }
 
 		public void Kill()
