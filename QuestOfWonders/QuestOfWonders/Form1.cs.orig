@@ -47,12 +47,8 @@ namespace QuestOfWonders
 
         public static Wonder wonder = null;
 
-<<<<<<< HEAD
-        public static List<Projectile> projectiles;
-=======
-        public static List<Projectile> projectiles;
->>>>>>> 8c3ec38d98167660500efe72aca8fa919b85a30f
-        public static List<Enemy> enemies;
+        public static List<Projectile> projectiles = new List<Projectile>();
+        public static List<Enemy> enemies = new List<Enemy>();
 
         public frmMain()
         {
@@ -74,6 +70,9 @@ namespace QuestOfWonders
 
             levelMaps = new String[] { "Resources/QuestOfWondersStage1_1.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage4.bmp" };
             currentLevel = 0;
+
+            enemies = new List<Enemy>();
+            projectiles = new List<Projectile>();
         }
 
         public void Run()
@@ -122,11 +121,21 @@ namespace QuestOfWonders
             if (wonder != null) wonder.Draw(bufferGraphics);
 
             g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
+
+            foreach (Enemy e in enemies)
+            {
+                e.Draw(g);
+            }
+
+            foreach (Projectile p in projectiles)
+            {
+                p.Draw(g);
+            }
         }
 
         public void UpdateGame()
         {
-            if (player.IsDead())
+            if (player != null && player.IsDead())
             {
                 Restart();
             }
@@ -141,10 +150,21 @@ namespace QuestOfWonders
             while (timeAccum > FRAME_TIME)
             {
                 if (currentMap != null) currentMap.Update(FRAME_TIME);
+                
+                foreach (Enemy e in enemies)
+                {
+                    e.Update(FRAME_TIME);
+                }
+                
+                foreach (Projectile p in projectiles)
+                {
+                    p.Update(FRAME_TIME);
+                }
+
                 if (player != null)
                 {
-                        player.Update(FRAME_TIME);
-                        DoCollision();
+                    player.Update(FRAME_TIME);
+                    DoCollision();
                 }
                 timeAccum -= FRAME_TIME;
             }
@@ -179,7 +199,6 @@ namespace QuestOfWonders
         {
             // Player
 
-<<<<<<< HEAD
             //bullets
             for (int i=0; i<projectiles.Count(); i++)
             {
@@ -196,24 +215,6 @@ namespace QuestOfWonders
                     projectiles.RemoveAt(i);
                     i--;
                 }
-=======
-            //bullets
-            for (int i=0; i<projectiles.Count(); i++)
-            {
-                Projectile proj = projectiles[i];
-                if (player.GetCollisionRectangle().Contains(proj.getPos()))
-                {
-                    player.Kill();
-                    projectiles.RemoveAt(i);
-                    i--;
-                    continue;
-                }
-                if (currentMap.CheckLocation(proj.getPos().X, proj.getPos().Y) != 0)
-                {
-                    projectiles.RemoveAt(i);
-                    i--;
-                }
->>>>>>> 8c3ec38d98167660500efe72aca8fa919b85a30f
             }
 
             //spikes
@@ -257,7 +258,6 @@ namespace QuestOfWonders
                 currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE - 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0)
                 player.Ground();
 
-<<<<<<< HEAD
             // Enemies
             Rectangle playerRect = player.GetCollisionRectangle();
             foreach (Enemy e in enemies)
@@ -284,34 +284,6 @@ namespace QuestOfWonders
                     e.Turn();
                 }
 
-=======
-            // Enemies
-            Rectangle playerRect = player.GetCollisionRectangle();
-            foreach (Enemy e in enemies)
-            {
-                if (e.GetCollisionBounds().IntersectsWith(playerRect)) 
-                {
-                    player.Kill();
-                }
-
-                int inFront = 0;
-                int belowFront = 0;
-                if (e.GetDir() == Enemy.LEFT)
-                {
-                    inFront = currentMap.CheckLocation(e.GetPos().X - 1, e.GetPos().Y + 2 * Map.TILE_SIZE - 1);
-                    belowFront = currentMap.CheckLocation(e.GetPos().X - 1, e.GetPos().Y + 2 * Map.TILE_SIZE + 1);
-                }
-                else if (e.GetDir() == Enemy.RIGHT)
-                {
-                    inFront = currentMap.CheckLocation(e.GetPos().X + Map.TILE_SIZE + 1, e.GetPos().Y + 2 * Map.TILE_SIZE - 1);
-                    belowFront = currentMap.CheckLocation(e.GetPos().X + Map.TILE_SIZE + 1, e.GetPos().Y + 2 * Map.TILE_SIZE + 1);
-                }
-                if (inFront != 0 || belowFront == 0)
-                {
-                    e.Turn();
-                }
-
->>>>>>> 8c3ec38d98167660500efe72aca8fa919b85a30f
             }
 
             
@@ -370,6 +342,10 @@ namespace QuestOfWonders
         public static void CreatePlayer(int x, int y)
         {
             player = new Player(x, y);
+        }
+        public static void AddEnemy(Enemy e)
+        {
+            enemies.Add(e);
         }
         public static void SetWonder(Wonder theWonder)
         {
