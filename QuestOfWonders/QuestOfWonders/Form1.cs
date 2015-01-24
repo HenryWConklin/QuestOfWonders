@@ -51,10 +51,11 @@ namespace QuestOfWonders
             panelGraphics = pnlMain.CreateGraphics();
             viewWidth = pnlMain.Width;
             viewHeight = pnlMain.Height;
+
+            panelGraphics.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
+            panelGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             timeAccum = 0;
         }
-
-
 
         public void Run()
         {
@@ -63,7 +64,8 @@ namespace QuestOfWonders
             while (running)
             {
                 UpdateGame();
-                Draw();
+                //Draw();
+                pnlMain.Refresh();
                 Application.DoEvents();
             }
         }
@@ -80,6 +82,18 @@ namespace QuestOfWonders
             panelGraphics.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
         }
 
+        public void Draw(Graphics g)
+        {
+            //bufferGraphics.FillRectangle(skyBrush, 0, 0, pnlMain.Width, pnlMain.Height);
+            bufferGraphics.DrawImage(bkgImg, 0, 0, pnlMain.Width, pnlMain.Height);
+
+            if (currentMap != null && !hasDrawnMap) currentMap.Draw(bufferGraphics);
+
+            if (player != null) player.Draw(bufferGraphics);
+
+            g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
+        }
+
         public void UpdateGame()
         {
 
@@ -93,14 +107,14 @@ namespace QuestOfWonders
             while (timeAccum > FRAME_TIME)
             {
                 if (currentMap != null) currentMap.Update(FRAME_TIME);
-                if (player != null)
-                {
+            if (player != null)
+            {
                     player.Update(FRAME_TIME);
                     DoCollision();
-                    if (currentMap.CheckLocation(player.GetPos().X + 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0 ||
-                        currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE - 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0)
-                        player.Ground();
-                }
+                if (currentMap.CheckLocation(player.GetPos().X + 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0 ||
+                    currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE - 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0)
+                    player.Ground();
+            }
                 timeAccum -= FRAME_TIME;
             }
             UpdateView();
@@ -246,6 +260,16 @@ namespace QuestOfWonders
         {
 
             if (player != null) player.OnKeyUp(e.KeyCode);
+        }
+
+        private void pnlMain_Paint(object sender, PaintEventArgs e)
+        {
+            Draw(e.Graphics);
+        }
+
+        private void pnlMain_Click(object sender, EventArgs e)
+        {
+            pnlMain.Paint += new PaintEventHandler(pnlMain_Paint);
         }
     }
 }
