@@ -157,10 +157,15 @@ namespace QuestOfWonders
             int newX = newPnt.X;
             int newY = newPnt.Y;
 
-            if (newX < 0) newX = 0;
-            if (newX > (widthInTiles - 1)) newX = widthInTiles - 1;
-            if (newY < 0) newY = 0;
-            if (newY > (heightInTiles - 1)) newY = heightInTiles - 1;
+            //if (newX < 0) newX = 0;
+            //if (newX > (widthInTiles - 1)) newX = widthInTiles - 1;
+            //if (newY < 0) newY = 0;
+            //if (newY > (heightInTiles - 1)) newY = heightInTiles - 1;
+
+            if (newX < 0) return -1;
+            if (newX > (widthInTiles - 1)) return -1;
+            if (newY < 0) return -1;
+            if (newY > (heightInTiles - 1)) return -1;
 
             return map[newX , newY];
         }

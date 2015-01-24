@@ -34,8 +34,8 @@ namespace QuestOfWonders
         public bool hasDrawnMap = false;
 
         public float timeAccum;
-        public float shooterTimer = 0;
-        public float shooterTime = 1; //Seconds
+        public static float shooterTimer = 0;
+        public static float shooterTime = 1; //Seconds
 
         public static Map currentMap;
         static Player player;
@@ -317,6 +317,7 @@ namespace QuestOfWonders
             player = null;
             currentMap = new Map(levelMaps[currentLevel]);
             allowPlayerControl = true;
+            shooterTimer = 0;
         }
         
         public void UpdateView()
