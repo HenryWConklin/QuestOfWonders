@@ -41,7 +41,7 @@ namespace QuestOfWonders
 			Pen p = new Pen(Color.Blue);
 			int x = pos.X - frmMain.viewX;
 			int y = pos.Y - frmMain.viewY;
-			g.DrawRectangle(p, pos.X, pos.Y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
+			g.DrawRectangle(p, x, y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
         }
 
         public void Update(float time)
@@ -59,6 +59,11 @@ namespace QuestOfWonders
 				vel.Y = -JUMPSPEED;
 			}
 		}
+
+        public Rectangle GetCollisionBox()
+        {
+            return new Rectangle(pos, new Size(Map.TILE_SIZE, 2 * Map.TILE_SIZE));
+        }
 
 		public void OnCollide(Direction dir)
 		{

@@ -66,6 +66,12 @@ namespace QuestOfWonders
         public void UpdateGame()
         {
             currentMap.Update(1);
+            DoCollision();
+        }
+
+        public void DoCollsion()
+        {
+
         }
 
         private void btnBegin_Click(object sender, EventArgs e)
