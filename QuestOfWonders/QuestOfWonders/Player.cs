@@ -38,10 +38,10 @@ namespace QuestOfWonders
 
         public void Draw(Graphics g)
         {
-			Pen p = new Pen(Color.Blue);
+            Brush b = new SolidBrush(Color.Red);
 			int x = pos.X - frmMain.viewX;
 			int y = pos.Y - frmMain.viewY;
-			g.DrawRectangle(p, x, y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
+			g.FillRectangle(b, x, y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
         }
 
         public void Update(float time)
