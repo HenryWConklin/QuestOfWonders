@@ -60,7 +60,21 @@ namespace QuestOfWonders
                     }
                     else if (col == GRASS_COLOR)
                     {
-                        map[x, y] = GRASS_INT;
+                        if (y > 1)
+                        {
+                            if (map[x, y - 1] == GRASS_INT || map[x, y - 1] == DIRT_INT)
+                            {
+                                map[x, y] = DIRT_INT;
+                            }
+                            else
+                            {
+                                map[x, y] = GRASS_INT;
+                            }
+                        }
+                        else
+                        {
+                            map[x, y] = GRASS_INT;
+                        }
                     }
                     else if (col == SPIKE_COLOR)
                     {

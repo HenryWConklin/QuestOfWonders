@@ -64,7 +64,7 @@ namespace QuestOfWonders
             panelGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             timeAccum = 0;
 
-            levelMaps = new String[] { "Resources/QuestOfWondersStage1_1.bmp", "Resources/QuestOfWondersStage2.bmp" };
+            levelMaps = new String[] { "Resources/QuestOfWondersStage1_1.bmp", "Resources/QuestOfWondersStage2.bmp", "Resources/QuestOfWondersStage4.bmp" };
             currentLevel = 0;
         }
 
