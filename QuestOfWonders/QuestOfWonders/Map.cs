@@ -17,6 +17,7 @@ namespace QuestOfWonders
         Color SPIKE_COLOR = Color.FromArgb(255, 0, 0);
         Color PLAYER_COLOR = Color.FromArgb(0, 0, 255);
         Color ORB_COLOR = Color.FromArgb(255, 255, 0);
+        Color ENEMY_COLOR = Color.FromArgb(100, 100, 100);
 
         Brush tmpGrass = new SolidBrush(Color.DarkGreen);
         Brush tmpDirt = new SolidBrush(Color.Brown);
@@ -75,6 +76,12 @@ namespace QuestOfWonders
                         {
                             map[x, y] = GRASS_INT;
                         }
+                    }
+                    else if (col == ENEMY_COLOR)
+                    {
+                        Point enemyPoint = ArrayToScreenLocation(x, y - 1);
+                        Enemy enemy = new Enemy(enemyPoint, Enemy.RIGHT);
+                        frmMain.AddEnemy(enemy);
                     }
                     else if (col == SPIKE_COLOR)
                     {

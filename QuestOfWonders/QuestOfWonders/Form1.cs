@@ -319,6 +319,10 @@ namespace QuestOfWonders
         {
             player = new Player(x, y);
         }
+        public static void AddEnemy(Enemy e)
+        {
+            enemies.Add(e);
+        }
         public static void SetWonder(Wonder theWonder)
         {
             wonder = theWonder;   
