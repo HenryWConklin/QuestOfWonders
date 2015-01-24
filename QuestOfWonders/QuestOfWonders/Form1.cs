@@ -81,22 +81,9 @@ namespace QuestOfWonders
             while (running)
             {
                 UpdateGame();
-                //Draw();
                 pnlMain.Refresh();
                 Application.DoEvents();
             }
-        }
-
-        public void Draw()
-        {
-            //bufferGraphics.FillRectangle(skyBrush, 0, 0, pnlMain.Width, pnlMain.Height);
-            bufferGraphics.DrawImage(bkgImg, 0, 0, pnlMain.Width, pnlMain.Height);
-
-            if (currentMap != null && !hasDrawnMap) currentMap.Draw(bufferGraphics);
-            
-            if (player != null) player.Draw(bufferGraphics);
-            
-            panelGraphics.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
         }
 
         public void Draw(Graphics g)
@@ -141,7 +128,16 @@ namespace QuestOfWonders
             }
 
             if (text != null) text.Update(deltaTime);
-            if (wonder != null) wonder.Update(deltaTime);
+            if (wonder != null)
+            {
+                Rectangle wonderRect = new Rectangle(wonder.getX(), wonder.getY(), wonder.getWidth(), wonder.getHeight());
+                Rectangle playerRect = player.GetCollisionRectangle();
+                if (wonderRect.IntersectsWith(playerRect))
+                {
+                    wonder.LaunchCollisionEvent();
+                }
+                wonder.Update(deltaTime);
+            }
             UpdateView();
         }
 
@@ -280,6 +276,7 @@ namespace QuestOfWonders
             if (e.KeyCode == Keys.P)
             {
                 wonder.LaunchCollisionEvent();
+                Console.WriteLine("Player Location: " + player.GetPos());
             }
         }
 

@@ -19,8 +19,8 @@ namespace QuestOfWonders
         int breakIndex = 3; //Break on text frame 3
         List<int> playerChatTextFrames = new List<int>{6, 8}; //When the player starts
 
-        Color playerCol = Color.Aqua;
-        Color narratorCol = Color.White;
+        Color playerCol = Color.DarkSlateBlue;
+        Color narratorCol = Color.DarkSlateGray;
 
         public OrbOfWonder(int x, int y)
         {
@@ -47,7 +47,7 @@ namespace QuestOfWonders
 
         public void Draw(Graphics g)
         {
-            if(!hasBeenHit) g.DrawImage(img, x, y, width, height);
+            if(!hasBeenHit) g.DrawImage(img, x - frmMain.viewX, y - frmMain.viewY, width, height);
         }
         public void Update(float time)
         {
@@ -69,11 +69,11 @@ namespace QuestOfWonders
                 {
                     if (playerChatTextFrames.Contains(textIndex))
                     {
-                        frmMain.text.textColor = new SolidBrush(playerCol);
+                        frmMain.text.backColor = new SolidBrush(playerCol);
                     }
                     else
                     {
-                        frmMain.text.textColor = new SolidBrush(narratorCol);
+                        frmMain.text.backColor = new SolidBrush(narratorCol);
                     }
                     frmMain.text.Advance();
                 }
@@ -103,5 +103,12 @@ namespace QuestOfWonders
                 frmMain.text = new Textbox(textboxText, new Rectangle(150, 50, frmMain.viewWidth - 300, 100));
             }
         }
+
+        public int getX() { return x; }
+        public int getY() { return y; }
+        public int getWidth() { return width; }
+        public int getHeight() { return height; }
+        
+        
     }
 }
