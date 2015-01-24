@@ -60,7 +60,7 @@ namespace QuestOfWonders
                     }
                     else if (col == PLAYER_COLOR)
                     {
-                        Point playerPoint = ArrayToScreenLocation(x, y);
+                        Point playerPoint = ArrayToScreenLocation(x, y-1);
                         frmMain.CreatePlayer(playerPoint.X, playerPoint.Y);
                     }
                 }
