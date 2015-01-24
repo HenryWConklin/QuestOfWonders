@@ -15,9 +15,9 @@ namespace QuestOfWonders
 	
     class Player
     {
-		private static const int SPEED = 5;
-		private static const int JUMPSPEED = 10;
-		private static const int GRAVITY = -1;
+		private static int SPEED = 5;
+		private static int JUMPSPEED = 10;
+		private static int GRAVITY = -1;
 
 		private Point pos;
 		private PointF vel;
@@ -39,8 +39,8 @@ namespace QuestOfWonders
         public void Draw(Graphics g)
         {
 			Pen p = new Pen(Color.Blue);
-			int x = pos.X - formMain.veiwX;
-			int y = pos.Y - formMain.viewY;
+			int x = pos.X - frmMain.viewX;
+			int y = pos.Y - frmMain.viewY;
 			g.DrawRectangle(p, pos.X, pos.Y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
         }
 
