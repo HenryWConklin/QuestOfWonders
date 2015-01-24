@@ -16,15 +16,23 @@ namespace QuestOfWonders
         Color GRASS_COLOR = Color.FromArgb(0, 255, 0);
         Color SPIKE_COLOR = Color.FromArgb(255, 0, 0);
         Color PLAYER_COLOR = Color.FromArgb(0, 0, 255);
+        Color ORB_COLOR = Color.FromArgb(255, 255, 0);
 
         Brush tmpGrass = new SolidBrush(Color.DarkGreen);
         Brush tmpDirt = new SolidBrush(Color.Brown);
         Brush tmpSpike = new SolidBrush(Color.Red);
+        Brush tmpOrb = new SolidBrush(Color.Gold);
+
+        Bitmap grassImg = null;
+        Bitmap dirtImg = null;
+        Bitmap spikeImg = null;
+        Bitmap orbImg = null;
 
         public static int NOTHING_INT = 0;
         public static int DIRT_INT = 1;
         public static int GRASS_INT = 2;
         public static int SPIKE_INT = 3;
+        public static int ORB_INT = 4;
 
         int[,] map;
         public int widthInTiles;
@@ -38,7 +46,7 @@ namespace QuestOfWonders
             widthInTiles = img.Width;
             heightInTiles = img.Height;
 
-            Console.WriteLine("3, 35: " + img.GetPixel(3, 35).R + ", " + img.GetPixel(3, 35).G + ", " + img.GetPixel(3, 35).B);
+            LoadImages();
 
             for (int x = 0; x < img.Width; x++)
             {
@@ -60,13 +68,23 @@ namespace QuestOfWonders
                     {
                         map[x, y] = SPIKE_INT;
                     }
+                    else if (col == ORB_COLOR)
+                    {
+                        map[x, y] = ORB_INT;
+                    }
                     else if (col == PLAYER_COLOR)
                     {
-                        Point playerPoint = ArrayToScreenLocation(x, y-1);
+                        Point playerPoint = ArrayToScreenLocation(x, y - 1);
                         frmMain.CreatePlayer(playerPoint.X, playerPoint.Y);
                     }
                 }
             }
+        }
+
+        //Loads in the tile images
+        public void LoadImages()
+        {
+
         }
 
         //Reads in game coords, converts to map coords, and tells you what's there.
@@ -96,22 +114,35 @@ namespace QuestOfWonders
                 for (int y = 0; y < heightInTiles; y++)
                 {
                     Brush drawBrush = null;
+                    Bitmap img = null;
 
                     if (map[x, y] == DIRT_INT)
                     {
                         drawBrush = tmpDirt;
+                        img = dirtImg;
                     }
                     else if (map[x, y] == GRASS_INT)
-                    { 
+                    {
                         drawBrush = tmpGrass;
+                        img = grassImg;
                     }
                     else if (map[x, y] == SPIKE_INT)
                     {
                         drawBrush = tmpSpike;
+                        img = spikeImg;
+                    }
+                    else if (map[x, y] == ORB_INT)
+                    {
+                        drawBrush = tmpOrb;
+                        img = orbImg;
                     }
 
-
-                    if (drawBrush != null)
+                    if (img != null)
+                    {
+                        Point locInWorld = ArrayToScreenLocation(x, y);
+                        g.DrawImage(img, locInWorld.X - frmMain.viewX, locInWorld.Y - frmMain.viewY, TILE_SIZE, TILE_SIZE);
+                    }
+                    else if (drawBrush != null)
                     {
                         Point locInWorld = ArrayToScreenLocation(x, y);
                         g.FillRectangle(drawBrush, locInWorld.X - frmMain.viewX, locInWorld.Y - frmMain.viewY, TILE_SIZE, TILE_SIZE);
