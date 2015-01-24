@@ -15,7 +15,7 @@ namespace QuestOfWonders
         Color DIRT_COLOR = Color.FromArgb(0, 0, 0);
         Color GRASS_COLOR = Color.FromArgb(0, 255, 0);
         Color SPIKE_COLOR = Color.FromArgb(255, 0, 0);
-        Color PLAYER_COLOR = Color.FromArgb(255, 255, 0);
+        Color PLAYER_COLOR = Color.FromArgb(0, 0, 255);
 
         Brush tmpGrass = new SolidBrush(Color.DarkGreen);
         Brush tmpDirt = new SolidBrush(Color.Brown);
@@ -37,7 +37,9 @@ namespace QuestOfWonders
             map = new int[img.Width, img.Height];
             widthInTiles = img.Width;
             heightInTiles = img.Height;
-            
+
+            Console.WriteLine("3, 35: " + img.GetPixel(3, 35).R + ", " + img.GetPixel(3, 35).G + ", " + img.GetPixel(3, 35).B);
+
             for (int x = 0; x < img.Width; x++)
             {
                 for (int y = 0; y < img.Height; y++)
