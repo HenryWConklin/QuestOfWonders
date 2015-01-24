@@ -91,7 +91,7 @@ namespace QuestOfWonders
 
         public void FinishLevel()
         {
-            Console.WriteLine("Next Level!");
+            frmMain.NextLevel();
         }
 
         public void LaunchCollisionEvent()
