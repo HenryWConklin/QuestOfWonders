@@ -15,9 +15,9 @@ namespace QuestOfWonders
 	
     class Player
     {
-		private static int SPEED = 5;
-		private static int JUMPSPEED = 10;
-		private static int GRAVITY = -1;
+		private const int SPEED = 5;
+		private const int JUMPSPEED = 10;
+		private const int GRAVITY = -1;
 
 		private Point pos;
 		private PointF vel;
