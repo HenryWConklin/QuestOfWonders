@@ -12,6 +12,8 @@ namespace QuestOfWonders
 {
     public partial class frmMain : Form
     {
+        private const float FRAME_TIME = 1f / 60;
+
         Bitmap buffer;
         Graphics bufferGraphics;
         Graphics panelGraphics;
@@ -28,6 +30,8 @@ namespace QuestOfWonders
         public static int viewHeight;
 
         public bool hasDrawnMap = false;
+
+        public float timeAccum;
 
         Map currentMap;
         static Player player;
@@ -47,6 +51,7 @@ namespace QuestOfWonders
             panelGraphics = pnlMain.CreateGraphics();
             viewWidth = pnlMain.Width;
             viewHeight = pnlMain.Height;
+            timeAccum = 0;
         }
 
 
@@ -82,19 +87,23 @@ namespace QuestOfWonders
             long ticksElapsed = currentTicks - prevTicks;
             prevTicks = currentTicks;
 
-            //float deltaTime = (float)(TimeSpan.FromTicks(ticksElapsed).TotalSeconds);
-            float deltaTime = 1;
-
-            if(currentMap != null) currentMap.Update(deltaTime);
-            if (player != null)
+            float deltaTime = (float)(TimeSpan.FromTicks(ticksElapsed).TotalSeconds);
+            //float deltaTime = 1;
+            timeAccum += deltaTime;
+            while (timeAccum > FRAME_TIME)
             {
-                player.Update(deltaTime);
-                if (currentMap.CheckLocation(player.GetPos().X + 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0 ||
-                    currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE - 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0)
-                    player.Ground();
+                if (currentMap != null) currentMap.Update(FRAME_TIME);
+                if (player != null)
+                {
+                    player.Update(FRAME_TIME);
+                    DoCollision();
+                    if (currentMap.CheckLocation(player.GetPos().X + 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0 ||
+                        currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE - 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0)
+                        player.Ground();
+                }
+                timeAccum -= FRAME_TIME;
             }
             UpdateView();
-            DoCollision();
         }
 
         public bool CheckPlayerMapCollision()

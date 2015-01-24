@@ -15,10 +15,10 @@ namespace QuestOfWonders
 	
     class Player
     {
-		private const int SPEED = 5;
-		private const int JUMPSPEED = 10;
-		private const float GRAVITY = .5f;
-        private const float GRAVITY_CAP = 5;
+		private const int SPEED = 100;
+		private const int JUMPSPEED = 400;
+		private const float GRAVITY = 2000f;
+        private const float GRAVITY_CAP = 200;
 
         private PointF pos;
 		private PointF vel;
@@ -47,6 +47,7 @@ namespace QuestOfWonders
 
         public void Update(float time)
         {
+
 			pos.X += vel.X * time;
 			pos.Y += vel.Y * time;
             if (! onGround)
