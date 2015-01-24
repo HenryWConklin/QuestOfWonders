@@ -47,8 +47,8 @@ namespace QuestOfWonders
 
         public static Wonder wonder = null;
 
-        public static List<Projectile> projectiles;
-        public static List<Enemy> enemies;
+        public static List<Projectile> projectiles = new List<Projectile>();
+        public static List<Enemy> enemies = new List<Enemy>();
 
         public frmMain()
         {
