@@ -120,6 +120,7 @@ namespace QuestOfWonders
 
             if (wonder != null) wonder.Draw(bufferGraphics);
 
+<<<<<<< HEAD
             g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
 
             foreach (Enemy e in enemies)
@@ -131,6 +132,19 @@ namespace QuestOfWonders
             {
                 p.Draw(g);
             }
+=======
+            g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
+
+            foreach (Enemy e in enemies)
+            {
+                e.Draw(g);
+            }
+
+            foreach (Projectile p in projectiles)
+            {
+                p.Draw(g);
+            }
+>>>>>>> 1fd1b48b32126c910d37e2a929d418360b74966d
         }
 
         public void UpdateGame()
@@ -149,6 +163,7 @@ namespace QuestOfWonders
             timeAccum += deltaTime;
             while (timeAccum > FRAME_TIME)
             {
+<<<<<<< HEAD
                 if (currentMap != null) currentMap.Update(FRAME_TIME);
                 
                 foreach (Enemy e in enemies)
@@ -159,6 +174,18 @@ namespace QuestOfWonders
                 foreach (Projectile p in projectiles)
                 {
                     p.Update(FRAME_TIME);
+=======
+                if (currentMap != null) currentMap.Update(FRAME_TIME);
+                
+                foreach (Enemy e in enemies)
+                {
+                    e.Update(FRAME_TIME);
+                }
+                
+                foreach (Projectile p in projectiles)
+                {
+                    p.Update(FRAME_TIME);
+>>>>>>> 1fd1b48b32126c910d37e2a929d418360b74966d
                 }
 
                 if (player != null)
@@ -291,6 +318,8 @@ namespace QuestOfWonders
 
         public static void Restart()
         {
+            enemies.Clear();
+            projectiles.Clear();
             text = null;
             wonder = null;
             player = null;
