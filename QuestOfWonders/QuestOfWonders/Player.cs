@@ -15,10 +15,10 @@ namespace QuestOfWonders
 	
     class Player
     {
-		private const int SPEED = 100;
-		private const int JUMPSPEED = 400;
+		private const int SPEED = 300;
+		private const int JUMPSPEED = 500;
 		private const float GRAVITY = 2000f;
-        private const float GRAVITY_CAP = 200;
+        private const float GRAVITY_CAP = 500;
 
         private PointF pos;
 		private PointF vel;
