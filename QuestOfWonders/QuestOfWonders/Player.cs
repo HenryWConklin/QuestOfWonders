@@ -31,8 +31,8 @@ namespace QuestOfWonders
 
         private bool leftPressed;
         private bool rightPressed;
-		
-		//private Animation sprite;
+
+        private Animation sprite;
 
 		public Player(int x, int y)
 		{
@@ -42,6 +42,8 @@ namespace QuestOfWonders
             isDead = false;
             leftPressed = false;
             rightPressed = false;
+            sprite = new Animation("playeranim", 4);
+
 		}
 
         public void Draw(Graphics g)
@@ -49,11 +51,13 @@ namespace QuestOfWonders
             Brush b = new SolidBrush(Color.Red);
 			int x = (int)pos.X - frmMain.viewX;
 			int y = (int)pos.Y - frmMain.viewY;
-			g.FillRectangle(b, x, y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
+            //g.FillRectangle(b, x, y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
+            g.DrawImage(sprite.GetFrame(), x, y, Map.TILE_SIZE, Map.TILE_SIZE * 2);
         }
 
         public void Update(float time)
         {
+            sprite.Update(time);
 			pos.X += vel.X * time;
 			pos.Y += vel.Y * time;
             if (! onGround)
