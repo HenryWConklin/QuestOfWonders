@@ -87,7 +87,7 @@ namespace QuestOfWonders
 
         public Point getPos()
         {
-            return new Point((int)pos.X, (int)pos.Y);
+            return new Point((int)pos.X + WIDTH/2, (int)pos.Y+HEIGHT/2);
         }
     }
 }
