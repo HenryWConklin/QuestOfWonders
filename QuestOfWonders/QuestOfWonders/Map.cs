@@ -28,5 +28,15 @@ namespace QuestOfWonders
 
             return 0;
         }
+
+        public void Draw(Graphics g)
+        {
+
+        }
+
+        public void Update(float time)
+        {
+
+        }
     }
 }

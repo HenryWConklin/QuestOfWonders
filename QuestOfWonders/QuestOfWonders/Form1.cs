@@ -85,7 +85,7 @@ namespace QuestOfWonders
         {
             if (e.KeyCode == Keys.D)
             {
-                testX += 50;
+                
             }
         }
     }
