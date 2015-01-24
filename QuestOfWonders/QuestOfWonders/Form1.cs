@@ -65,7 +65,7 @@ namespace QuestOfWonders
             panelGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             timeAccum = 0;
 
-            levelMaps = new String[] { "Resources/QuestOfWondersStage1_1.bmp", "Resources/QuestOfWondersStage2.bmp", "Resources/QuestOfWondersStage4.bmp" };
+            levelMaps = new String[] { "Resources/QuestOfWondersStage1_1.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage4.bmp" };
             currentLevel = 0;
         }
 
@@ -94,6 +94,11 @@ namespace QuestOfWonders
                 currentLevel++;
                 Restart();
             }
+        }
+
+        public static void StopPlayerHoriz()
+        {
+            player.StopHorizVelocity();
         }
 
         public void Draw(Graphics g)
@@ -219,7 +224,8 @@ namespace QuestOfWonders
             if (player != null)
             {
                 int hBuffer = 200;
-                int vBuffer = 100;
+                int vBufferUpper = 200;
+                int vBufferLower = 200;
 
                 int newX = viewX;
                 int newY = viewY;
@@ -237,13 +243,13 @@ namespace QuestOfWonders
                 }
 
 
-                if (playerY < viewY + vBuffer)
+                if (playerY < viewY + vBufferUpper)
                 {
-                    newY = (playerY - vBuffer);
+                    newY = (playerY - vBufferUpper);
                 }
-                if (playerY > viewY + viewHeight - vBuffer)
+                if (playerY > viewY + viewHeight - vBufferLower)
                 {
-                    newY = (playerY + vBuffer - viewHeight);
+                    newY = (playerY + vBufferLower - viewHeight);
                 }
 
                 newX = Math.Min(Math.Max(newX, 0), currentMap.widthInTiles * Map.TILE_SIZE - viewWidth);

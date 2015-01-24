@@ -16,7 +16,7 @@ namespace QuestOfWonders
     class Player
     {
 		private const int SPEED = 300;
-		private const int JUMPSPEED = 500;
+		private const int JUMPSPEED = 550;
 		private const float GRAVITY = 2000f;
         private const float GRAVITY_CAP = 500;
 
@@ -198,6 +198,12 @@ namespace QuestOfWonders
                     vel.X = 0;
                 }
             }
+        }
+
+        internal void StopHorizVelocity()
+        {
+            vel.X = 0;
+            this.rightPressed = false;
         }
     }
 }
