@@ -69,9 +69,9 @@ namespace QuestOfWonders
             DoCollision();
         }
 
-        public void DoCollsion()
+        public void DoCollision()
         {
-
+			
         }
 
         private void btnBegin_Click(object sender, EventArgs e)
