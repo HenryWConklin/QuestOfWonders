@@ -23,10 +23,14 @@ namespace QuestOfWonders
         private PointF pos;
 		private PointF vel;
 		private bool onGround;
+        private bool isDead;
 
 		private Keys leftKey = Keys.Left;
 		private Keys rightKey = Keys.Right;
 		private Keys jumpKey = Keys.Space;
+
+        private bool leftPressed;
+        private bool rightPressed;
 		
 		//private Animation sprite;
 
@@ -35,6 +39,9 @@ namespace QuestOfWonders
 			pos = new PointF(x, y);
 			vel = new PointF(0, 0);
 			onGround = true;
+            isDead = false;
+            leftPressed = false;
+            rightPressed = false;
 		}
 
         public void Draw(Graphics g)
@@ -47,7 +54,6 @@ namespace QuestOfWonders
 
         public void Update(float time)
         {
-
 			pos.X += vel.X * time;
 			pos.Y += vel.Y * time;
             if (! onGround)
@@ -113,16 +119,23 @@ namespace QuestOfWonders
 
 		public void Kill()
 		{
-			//do stuff
+            isDead = true;
 		}
+
+        public bool IsDead()
+        {
+            return isDead;
+        }
 
         public void OnKeyDown(Keys key)
         {
             if (key == leftKey) {
                 vel.X = -SPEED;
+                leftPressed = true;
             }
             else if (key == rightKey) {
                 vel.X = SPEED;
+                rightPressed = true;
             }
             else if (key == jumpKey) {
                 Jump();
@@ -133,11 +146,27 @@ namespace QuestOfWonders
         {
             if (key == leftKey)
             {
-                vel.X = 0;
+                leftPressed = false;
+                if (rightPressed)
+                {
+                    vel.X = SPEED;
+                }
+                else
+                {
+                    vel.X = 0;
+                }
             }
             else if (key == rightKey)
             {
-                vel.X = 0;
+                rightPressed = false;
+                if (leftPressed)
+                {
+                    vel.X = -SPEED;
+                }
+                else
+                {
+                    vel.X = 0;
+                }
             }
         }
     }
