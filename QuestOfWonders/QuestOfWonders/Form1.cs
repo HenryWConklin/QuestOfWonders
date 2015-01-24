@@ -22,6 +22,8 @@ namespace QuestOfWonders
         
         public static int viewX = 0;
         public static int viewY = 0;
+        public static int viewWidth;
+        public static int viewHeight;
 
         Map currentMap;
 
@@ -35,6 +37,8 @@ namespace QuestOfWonders
             buffer = new Bitmap(pnlMain.Width, pnlMain.Height);
             bufferGraphics = Graphics.FromImage(buffer);
             panelGraphics = pnlMain.CreateGraphics();
+            viewWidth = pnlMain.Width;
+            viewHeight = pnlMain.Height;
         }
 
 
@@ -86,7 +90,19 @@ namespace QuestOfWonders
         {
             if (e.KeyCode == Keys.D)
             {
-                
+                viewX = Math.Min(viewX + 10, currentMap.widthInTiles * Map.TILE_SIZE - viewWidth);
+            }
+            if (e.KeyCode == Keys.A)
+            {
+                viewX = Math.Max(0, viewX - 10);
+            }
+            if (e.KeyCode == Keys.W)
+            {
+                viewY = Math.Max(viewY - 10, 0);
+            }
+            if (e.KeyCode == Keys.S)
+            {
+                viewY = Math.Min(viewY + 10, currentMap.heightInTiles * Map.TILE_SIZE - viewHeight);
             }
         }
     }

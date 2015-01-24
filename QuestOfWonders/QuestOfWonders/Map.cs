@@ -10,7 +10,7 @@ namespace QuestOfWonders
 {
     class Map
     {
-        public static int TILE_SIZE = 20;
+        public static int TILE_SIZE = 16;
 
         Color DIRT_COLOR = Color.FromArgb(0, 0, 0);
         Color GRASS_COLOR = Color.FromArgb(0, 255, 0);
@@ -23,16 +23,16 @@ namespace QuestOfWonders
         public const int GRASS_INT = 2;
 
         int[,] map;
-        int width;
-        int height;
+        public int widthInTiles;
+        public int heightInTiles;
 
         public Map(string imgFileLoc)
         {
             Bitmap img = (Bitmap)Bitmap.FromFile(imgFileLoc);
 
             map = new int[img.Width, img.Height];
-            width = img.Width;
-            height = img.Height;
+            widthInTiles = img.Width;
+            heightInTiles = img.Height;
             
             for (int x = 0; x < img.Width; x++)
             {
@@ -69,9 +69,9 @@ namespace QuestOfWonders
 
         public void Draw(Graphics g)
         {
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < widthInTiles; x++)
             {
-                for (int y = 0; y < height; y++)
+                for (int y = 0; y < heightInTiles; y++)
                 {
                     Brush drawBrush = null;
                     if (map[x, y] == DIRT_INT)
@@ -85,7 +85,7 @@ namespace QuestOfWonders
                     if (drawBrush != null)
                     {
                         Point locInWorld = ArrayToScreenLocation(x, y);
-                        g.FillRectangle(drawBrush, locInWorld.X, locInWorld.Y, TILE_SIZE, TILE_SIZE);
+                        g.FillRectangle(drawBrush, locInWorld.X -frmMain.viewX, locInWorld.Y - frmMain.viewY, TILE_SIZE, TILE_SIZE);
                     }
                 }
             }
