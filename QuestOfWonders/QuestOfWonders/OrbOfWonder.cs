@@ -16,7 +16,7 @@ namespace QuestOfWonders
 
         public void Draw(Graphics g)
         {
-
+            if(!hasBeenHit) g.DrawImage(img, x, y, width, height);
         }
         public void Update(float time)
         {
@@ -35,7 +35,7 @@ namespace QuestOfWonders
         {
             if (!hasBeenHit)
             {
-
+                hasBeenHit = true;
             }
         }
     }
