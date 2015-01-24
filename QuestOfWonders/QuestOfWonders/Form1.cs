@@ -89,8 +89,8 @@ namespace QuestOfWonders
             if (player != null)
             {
                 player.Update(deltaTime);
-                if (currentMap.CheckLocation(player.pos.X + 1, player.pos.Y + 2 * Map.TILE_SIZE + 1) != 0 ||
-                    currentMap.CheckLocation(player.pos.X + Map.TILE_SIZE - 1, player.pos.Y + 2 * Map.TILE_SIZE + 1) != 0)
+                if (currentMap.CheckLocation(player.GetPos().X + 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0 ||
+                    currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE - 1, player.GetPos().Y + 2 * Map.TILE_SIZE + 1) != 0)
                     player.Ground();
             }
             UpdateView();
@@ -99,12 +99,12 @@ namespace QuestOfWonders
 
         public bool CheckPlayerMapCollision()
         {
-            int tl = currentMap.CheckLocation(player.pos.X + 1,                 player.pos.Y +1);
-            int tr = currentMap.CheckLocation(player.pos.X + Map.TILE_SIZE-1,   player.pos.Y+1);
-            int hl = currentMap.CheckLocation(player.pos.X+1,                   player.pos.Y + Map.TILE_SIZE);
-            int hr = currentMap.CheckLocation(player.pos.X + Map.TILE_SIZE-1,   player.pos.Y + Map.TILE_SIZE);
-            int bl = currentMap.CheckLocation(player.pos.X+1,                   player.pos.Y + 2 * Map.TILE_SIZE-1);
-            int br = currentMap.CheckLocation(player.pos.X + Map.TILE_SIZE-1,   player.pos.Y + 2 * Map.TILE_SIZE-1);
+            int tl = currentMap.CheckLocation(player.GetPos().X + 1,                 player.GetPos().Y +1);
+            int tr = currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE-1,   player.GetPos().Y+1);
+            int hl = currentMap.CheckLocation(player.GetPos().X+1,                   player.GetPos().Y + Map.TILE_SIZE);
+            int hr = currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE-1,   player.GetPos().Y + Map.TILE_SIZE);
+            int bl = currentMap.CheckLocation(player.GetPos().X+1,                   player.GetPos().Y + 2 * Map.TILE_SIZE-1);
+            int br = currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE-1,   player.GetPos().Y + 2 * Map.TILE_SIZE-1);
 
             return (tl + tr + hl + hr + bl + br != 0);
         }
@@ -113,18 +113,18 @@ namespace QuestOfWonders
         {
             if (player != null)
             {
-                Point startPos = new Point(player.pos.X, player.pos.Y);
+                Point startPos = new Point(player.GetPos().X, player.GetPos().Y);
 
                 if (CheckPlayerMapCollision())
                 {
-                    player.pos.Y = (player.pos.Y + Map.TILE_SIZE/2) / Map.TILE_SIZE * Map.TILE_SIZE;   
+                    player.SetPosY((player.GetPos().Y + Map.TILE_SIZE/2) / Map.TILE_SIZE * Map.TILE_SIZE);   
                 }               
 
                 if (CheckPlayerMapCollision())
                 {
-                    player.pos.Y = startPos.Y;
-                    player.pos.X = (player.pos.X + Map.TILE_SIZE/2)/ Map.TILE_SIZE * Map.TILE_SIZE;
-                    if (player.pos.X < startPos.X)
+                    player.SetPosY(startPos.Y);
+                    player.SetPosX((player.GetPos().X + Map.TILE_SIZE/2)/ Map.TILE_SIZE * Map.TILE_SIZE);
+                    if (player.GetPos().X < startPos.X)
                         player.OnCollide(Direction.Right);
                     else
                         player.OnCollide(Direction.Left);
@@ -132,13 +132,13 @@ namespace QuestOfWonders
 
                 if (CheckPlayerMapCollision())
                 {
-                    player.pos.Y = (player.pos.Y + Map.TILE_SIZE / 2) / Map.TILE_SIZE * Map.TILE_SIZE;
+                    player.SetPosY((player.GetPos().Y + Map.TILE_SIZE / 2) / Map.TILE_SIZE * Map.TILE_SIZE);
 
                 }
 
-                if (player.pos.Y < startPos.Y)
+                if (player.GetPos().Y < startPos.Y)
                     player.OnCollide(Direction.Down);
-                else if (player.pos.Y > startPos.Y)
+                else if (player.GetPos().Y > startPos.Y)
                     player.OnCollide(Direction.Up);
                 
             }
@@ -154,8 +154,8 @@ namespace QuestOfWonders
                 int newX = viewX;
                 int newY = viewY;
 
-                int playerX = player.pos.X;
-                int playerY = player.pos.Y;
+                int playerX = player.GetPos().X;
+                int playerY = player.GetPos().Y;
 
                 if (playerX < viewX + hBuffer)
                 {
