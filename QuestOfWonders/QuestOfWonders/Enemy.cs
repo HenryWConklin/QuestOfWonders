@@ -9,7 +9,7 @@ namespace QuestOfWonders
 {
     public class Enemy
     {
-        public const float VEL = 150;
+        public const float VEL = 50;
 
         public const int LEFT = -1;
         public const int STATIONARY = 0;
@@ -43,7 +43,7 @@ namespace QuestOfWonders
 
         public void Draw(Graphics g)
         {
-            g.FillRectangle(brush, (int)pos.X - frmMain.viewX, (int)pos.Y - frmMain.viewY, Map.TILE_SIZE, Map.TILE_SIZE);
+            g.FillRectangle(brush, (int)pos.X - frmMain.viewX, (int)pos.Y - frmMain.viewY, Map.TILE_SIZE, Map.TILE_SIZE * 2);
         }
 
         public void Turn()
