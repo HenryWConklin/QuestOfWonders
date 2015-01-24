@@ -61,7 +61,7 @@ namespace QuestOfWonders
 
             if(currentMap != null) currentMap.Draw(bufferGraphics);
             if (player != null) player.Draw(bufferGraphics);
-
+            
             panelGraphics.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
         }
 
