@@ -15,8 +15,10 @@ namespace QuestOfWonders
 
         private float time;
         private int frame;
+        private bool looping;
+        private bool running;
 
-        public Animation(String name, int numFrames)
+        public Animation(String name, int numFrames, bool loop = true)
         {
             frames = new Bitmap[numFrames];
             for (int i = 0; i < frames.Length; i++)
@@ -24,20 +26,37 @@ namespace QuestOfWonders
                 frames[i] = new Bitmap(Bitmap.FromFile("Resources/" + name + i + ".png"));
                 
             }
-
+            looping = loop;
             frame = 0;
             time = 0;
+            running = true;
         }
 
         public void Update(float timePassed)
         {
-            time += timePassed;
-            while (time > FRAME_TIME)
+            if (running)
             {
-                frame++;
-                frame %= frames.Length;
-                time -= FRAME_TIME;
+                time += timePassed;
+                while (time > FRAME_TIME)
+                {
+                    frame++;
+                    if (looping)
+                        frame %= frames.Length;
+                    else if (frame >= frames.Length)
+                        frame = frames.Length - 1;
+                    time -= FRAME_TIME;
+                }
             }
+        }
+
+        public void Pause()
+        {
+            running = false;
+        }
+
+        public void Resume()
+        {
+            running = true;
         }
 
         public Bitmap GetFrame()
