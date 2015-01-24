@@ -32,11 +32,13 @@ namespace QuestOfWonders
         private bool leftPressed;
         private bool rightPressed;
 
+        private bool facingRight;
+
         private int animIndex;
         private Animation[] anims;
 
-        private const int ANIM_LEFT = 0;
-        private const int ANIM_RIGHT = 1;
+        private const int ANIM_MOVE = 0;
+        private const int ANIM_STILL = 2;
 
 		public Player(int x, int y)
 		{
@@ -46,19 +48,20 @@ namespace QuestOfWonders
             isDead = false;
             leftPressed = false;
             rightPressed = false;
-            animIndex = ANIM_LEFT;
-            anims = new Animation[2];
-            anims[ANIM_LEFT] = new Animation("linkwalkingleft", 10);
-            anims[ANIM_RIGHT] = new Animation("linkwalkingright", 10);
+            animIndex = ANIM_STILL;
+            facingRight = true;
+            anims = new Animation[3];
+            anims[ANIM_MOVE] = new Animation("linkwalkingright", 10);
+            anims[ANIM_STILL] = new Animation("linkwalkingright", 1);
 		}
 
         public void Draw(Graphics g)
         {
             Brush b = new SolidBrush(Color.Red);
-			int x = (int)pos.X - frmMain.viewX;
+			int x = (int)pos.X - frmMain.viewX - (!facingRight?0:Map.TILE_SIZE);
 			int y = (int)pos.Y - frmMain.viewY;
             //g.FillRectangle(b, x, y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
-            g.DrawImage(anims[animIndex].GetFrame(), x, y, Map.TILE_SIZE, Map.TILE_SIZE * 2);
+            g.DrawImage(anims[animIndex].GetFrame(), x, y, (!facingRight?-1:1) * Map.TILE_SIZE, Map.TILE_SIZE * 2);
         }
 
         public void Update(float time)
@@ -158,12 +161,14 @@ namespace QuestOfWonders
             if (key == leftKey) {
                 vel.X = -SPEED;
                 leftPressed = true;
-                SetAnim(ANIM_LEFT);
+                facingRight = false;
+                SetAnim(ANIM_MOVE);
             }
             else if (key == rightKey) {
                 vel.X = SPEED;
+                facingRight = true;
                 rightPressed = true;
-                SetAnim(ANIM_RIGHT);
+                SetAnim(ANIM_MOVE);
             }
             else if (key == jumpKey) {
                 Jump();
@@ -178,10 +183,11 @@ namespace QuestOfWonders
                 if (rightPressed)
                 {
                     vel.X = SPEED;
-                    SetAnim(ANIM_RIGHT);
+                    facingRight = true;
                 }
                 else
                 {
+                    SetAnim(ANIM_STILL);
                     vel.X = 0;
                 }
             }
@@ -191,11 +197,12 @@ namespace QuestOfWonders
                 if (leftPressed)
                 {
                     vel.X = -SPEED;
-                    SetAnim(ANIM_LEFT);
+                    facingRight = false;
                 }
                 else
                 {
                     vel.X = 0;
+                    SetAnim(ANIM_STILL);
                 }
             }
         }
@@ -204,6 +211,7 @@ namespace QuestOfWonders
         {
             vel.X = 0;
             this.rightPressed = false;
+            this.leftPressed = false;
         }
     }
 }
