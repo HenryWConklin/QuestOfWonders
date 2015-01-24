@@ -70,6 +70,9 @@ namespace QuestOfWonders
 
             levelMaps = new String[] { "Resources/QuestOfWondersStage1_1.bmp", "Resources/QuestOfWondersStage2.bmp", "Resources/QuestOfWondersStage4.bmp" };
             currentLevel = 0;
+
+            enemies = new List<Enemy>();
+            projectiles = new List<Projectile>();
         }
 
         public void Run()
@@ -113,11 +116,21 @@ namespace QuestOfWonders
             if (wonder != null) wonder.Draw(bufferGraphics);
 
             g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
+
+            foreach (Enemy e in enemies)
+            {
+                e.Draw(g);
+            }
+
+            foreach (Projectile p in projectiles)
+            {
+                p.Draw(g);
+            }
         }
 
         public void UpdateGame()
         {
-            if (player.IsDead())
+            if (player != null && player.IsDead())
             {
                 Restart();
             }
@@ -132,10 +145,21 @@ namespace QuestOfWonders
             while (timeAccum > FRAME_TIME)
             {
                 if (currentMap != null) currentMap.Update(FRAME_TIME);
+                
+                foreach (Enemy e in enemies)
+                {
+                    e.Update(FRAME_TIME);
+                }
+                
+                foreach (Projectile p in projectiles)
+                {
+                    p.Update(FRAME_TIME);
+                }
+
                 if (player != null)
                 {
-                        player.Update(FRAME_TIME);
-                        DoCollision();
+                    player.Update(FRAME_TIME);
+                    DoCollision();
                 }
                 timeAccum -= FRAME_TIME;
             }
