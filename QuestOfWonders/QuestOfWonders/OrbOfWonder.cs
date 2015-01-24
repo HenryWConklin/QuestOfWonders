@@ -101,6 +101,7 @@ namespace QuestOfWonders
                 frmMain.allowPlayerControl = false;
                 hasBeenHit = true;
                 frmMain.text = new Textbox(textboxText, new Rectangle(150, 50, frmMain.viewWidth - 300, 100));
+                frmMain.StopPlayerHoriz();
             }
         }
 

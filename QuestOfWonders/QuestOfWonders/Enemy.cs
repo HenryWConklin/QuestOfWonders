@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace QuestOfWonders
 {
-    class Enemy
+    public class Enemy
     {
         public const float VEL = 150;
 
@@ -58,7 +58,7 @@ namespace QuestOfWonders
     }
 
     
-    class Projectile
+    public class Projectile
     {
         public const int WIDTH = 10;
         public const int HEIGHT = 5;
