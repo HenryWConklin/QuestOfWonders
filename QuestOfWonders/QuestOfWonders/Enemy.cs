@@ -7,6 +7,57 @@ using System.Drawing;
 
 namespace QuestOfWonders
 {
+    class Enemy
+    {
+        public const float VEL = 150;
+
+        public const int LEFT = -1;
+        public const int STATIONARY = 0;
+        public const int RIGHT = 1;
+
+        private PointF pos;
+        private int dir;
+        private Brush brush;
+
+        public Enemy(PointF p, int direction)
+        {
+            pos = p;
+            dir = direction;
+            brush = new SolidBrush(Color.RosyBrown);
+        }
+
+        public Point GetPos()
+        {
+            return new Point((int)pos.X, (int)pos.Y);
+        }
+
+        public int GetDir()
+        {
+            return dir;
+        }
+
+        public void Update(float time)
+        {
+            pos.X += time * VEL * dir;
+        }
+
+        public void Draw(Graphics g)
+        {
+            g.FillRectangle(brush, (int)pos.X - frmMain.viewX, (int)pos.Y - frmMain.viewY, Map.TILE_SIZE, Map.TILE_SIZE);
+        }
+
+        public void Turn()
+        {
+            dir = -dir;
+        }
+
+        public Rectangle GetCollisionBounds()
+        {
+            return new Rectangle((int)pos.X, (int)pos.Y, Map.TILE_SIZE, Map.TILE_SIZE * 2);
+        }
+    }
+
+    
     class Projectile
     {
         public const int WIDTH = 10;
@@ -37,45 +88,6 @@ namespace QuestOfWonders
         public Point getPos()
         {
             return new Point((int)pos.X, (int)pos.Y);
-        }
-    }
-
-    class Enemy
-    {
-        public const float VEL = 150;
-
-        private PointF pos;
-        private bool dirRight;
-        private Brush brush;
-
-        public Enemy(PointF p, bool right)
-        {
-            pos = p;
-            dirRight = right;
-            brush = new SolidBrush(Color.RosyBrown);
-        }
-
-        public void Update(float time)
-        {
-            if (dirRight)
-                pos.X += time * VEL;
-            else
-                pos.X -= time * VEL;
-        }
-
-        public void Draw(Graphics g)
-        {
-            g.FillRectangle(brush, (int)pos.X - frmMain.viewX, (int)pos.Y - frmMain.viewY, Map.TILE_SIZE, Map.TILE_SIZE);
-        }
-
-        public void Turn()
-        {
-            dirRight = !dirRight;
-        }
-
-        public Rectangle GetCollisionBounds()
-        {
-            return new Rectangle((int)pos.X, (int)pos.Y, Map.TILE_SIZE, Map.TILE_SIZE);
         }
     }
 }
