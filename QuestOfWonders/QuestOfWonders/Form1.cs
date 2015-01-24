@@ -16,6 +16,8 @@ namespace QuestOfWonders
         Graphics bufferGraphics;
         Graphics panelGraphics;
 
+        Bitmap bkgImg;
+
         bool running = false;
 
         Brush skyBrush = new SolidBrush(Color.SkyBlue);
@@ -24,6 +26,8 @@ namespace QuestOfWonders
         public static int viewY = 0;
         public static int viewWidth;
         public static int viewHeight;
+
+        public bool hasDrawnMap = false;
 
         Map currentMap;
         static Player player;
@@ -35,6 +39,7 @@ namespace QuestOfWonders
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            bkgImg = (Bitmap)Bitmap.FromFile("Resources/sky sunset.png");
             buffer = new Bitmap(pnlMain.Width, pnlMain.Height);
             bufferGraphics = Graphics.FromImage(buffer);
             panelGraphics = pnlMain.CreateGraphics();
@@ -57,9 +62,11 @@ namespace QuestOfWonders
 
         public void Draw()
         {
-            bufferGraphics.FillRectangle(skyBrush, 0, 0, pnlMain.Width, pnlMain.Height);
+            //bufferGraphics.FillRectangle(skyBrush, 0, 0, pnlMain.Width, pnlMain.Height);
+            bufferGraphics.DrawImage(bkgImg, 0, 0, pnlMain.Width, pnlMain.Height);
 
-            if(currentMap != null) currentMap.Draw(bufferGraphics);
+            if (currentMap != null && !hasDrawnMap) currentMap.Draw(bufferGraphics);
+            
             if (player != null) player.Draw(bufferGraphics);
             
             panelGraphics.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);

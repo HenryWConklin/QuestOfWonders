@@ -84,7 +84,10 @@ namespace QuestOfWonders
         //Loads in the tile images
         public void LoadImages()
         {
-
+            grassImg = (Bitmap)Bitmap.FromFile("Resources/grass.png");
+            dirtImg = (Bitmap)Bitmap.FromFile("Resources/metal.png");
+            spikeImg = (Bitmap)Bitmap.FromFile("Resources/spikes.png");
+            orbImg = (Bitmap)Bitmap.FromFile("Resources/orb of wonder.png");
         }
 
         //Reads in game coords, converts to map coords, and tells you what's there.
