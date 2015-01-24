@@ -27,6 +27,9 @@ namespace QuestOfWonders
 		private Keys leftKey = Keys.Left;
 		private Keys rightKey = Keys.Right;
 		private Keys jumpKey = Keys.Space;
+
+        private bool leftPressed;
+        private bool rightPressed;
 		
 		//private Animation sprite;
 
@@ -35,6 +38,8 @@ namespace QuestOfWonders
 			pos = new PointF(x, y);
 			vel = new PointF(0, 0);
 			onGround = true;
+            leftPressed = false;
+            rightPressed = false;
 		}
 
         public void Draw(Graphics g)
@@ -120,9 +125,11 @@ namespace QuestOfWonders
         {
             if (key == leftKey) {
                 vel.X = -SPEED;
+                leftPressed = true;
             }
             else if (key == rightKey) {
                 vel.X = SPEED;
+                rightPressed = true;
             }
             else if (key == jumpKey) {
                 Jump();
@@ -133,11 +140,27 @@ namespace QuestOfWonders
         {
             if (key == leftKey)
             {
-                vel.X = 0;
+                leftPressed = false;
+                if (rightPressed)
+                {
+                    vel.X = SPEED;
+                }
+                else
+                {
+                    vel.X = 0;
+                }
             }
             else if (key == rightKey)
             {
-                vel.X = 0;
+                rightPressed = false;
+                if (leftPressed)
+                {
+                    vel.X = -SPEED;
+                }
+                else
+                {
+                    vel.X = 0;
+                }
             }
         }
     }
