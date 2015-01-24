@@ -21,12 +21,10 @@ namespace QuestOfWonders
         Brush tmpGrass = new SolidBrush(Color.DarkGreen);
         Brush tmpDirt = new SolidBrush(Color.Brown);
         Brush tmpSpike = new SolidBrush(Color.Red);
-        Brush tmpOrb = new SolidBrush(Color.Gold);
 
         Bitmap grassImg = null;
         Bitmap dirtImg = null;
         Bitmap spikeImg = null;
-        Bitmap orbImg = null;
 
         public static int NOTHING_INT = 0;
         public static int DIRT_INT = 1;
@@ -70,7 +68,9 @@ namespace QuestOfWonders
                     }
                     else if (col == ORB_COLOR)
                     {
-                        map[x, y] = ORB_INT;
+                        Point wonderPoint = ArrayToScreenLocation(x, y);
+                        OrbOfWonder orb = new OrbOfWonder(wonderPoint.X, wonderPoint.Y);
+                        frmMain.SetWonder(orb);
                     }
                     else if (col == PLAYER_COLOR)
                     {
@@ -87,7 +87,6 @@ namespace QuestOfWonders
             grassImg = new Bitmap(Bitmap.FromFile("Resources/grassBig.png"), TILE_SIZE, TILE_SIZE);
             dirtImg = new Bitmap(Bitmap.FromFile("Resources/stoneBig.png"), TILE_SIZE, TILE_SIZE);
             spikeImg = new Bitmap(Bitmap.FromFile("Resources/spikes.png"), TILE_SIZE, TILE_SIZE);
-            orbImg = new Bitmap(Bitmap.FromFile("Resources/orb of wonder.png"), TILE_SIZE, TILE_SIZE);
         }
 
         //Reads in game coords, converts to map coords, and tells you what's there.
@@ -156,11 +155,6 @@ namespace QuestOfWonders
                     {
                         drawBrush = tmpSpike;
                         img = spikeImg;
-                    }
-                    else if (map[x, y] == ORB_INT)
-                    {
-                        drawBrush = tmpOrb;
-                        img = orbImg;
                     }
 
                     if (img != null)

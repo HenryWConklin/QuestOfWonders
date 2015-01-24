@@ -21,6 +21,7 @@ namespace QuestOfWonders
         Bitmap bkgImg;
 
         bool running = false;
+        public static bool allowPlayerControl = true;
 
         Brush skyBrush = new SolidBrush(Color.SkyBlue);
         
@@ -42,6 +43,8 @@ namespace QuestOfWonders
         long prevTicks;
 
         public static Textbox text;
+
+        public static Wonder wonder = null;
 
         public frmMain()
         {
@@ -107,6 +110,8 @@ namespace QuestOfWonders
 
             if (text != null) text.Draw(bufferGraphics);
 
+            if (wonder != null) wonder.Draw(bufferGraphics);
+
             g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
         }
 
@@ -136,7 +141,7 @@ namespace QuestOfWonders
             }
 
             if (text != null) text.Update(deltaTime);
-
+            if (wonder != null) wonder.Update(deltaTime);
             UpdateView();
         }
 
@@ -197,6 +202,7 @@ namespace QuestOfWonders
         public void Restart()
         {
             currentMap = new Map(levelMaps[currentLevel]);
+            allowPlayerControl = true;
         }
         
         public void UpdateView()
@@ -219,7 +225,7 @@ namespace QuestOfWonders
                 if (playerX > viewX + viewWidth - hBuffer)
                 {
                     newX = (playerX + hBuffer - viewWidth);
-        }
+                }
 
 
                 if (playerY < viewY + vBuffer)
@@ -243,6 +249,10 @@ namespace QuestOfWonders
         {
             player = new Player(x, y);
         }
+        public static void SetWonder(Wonder theWonder)
+        {
+            wonder = theWonder;   
+        }
 
         private void btnBegin_Click(object sender, EventArgs e)
         {
@@ -259,13 +269,18 @@ namespace QuestOfWonders
 
         private void frmMain_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            
         }
 
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
         {
             e.SuppressKeyPress = true;
-            player.OnKeyDown(e.KeyCode);
+            if (allowPlayerControl) player.OnKeyDown(e.KeyCode);
+            wonder.OnKeyDown(e.KeyCode);
+            if (e.KeyCode == Keys.P)
+            {
+                wonder.LaunchCollisionEvent();
+            }
         }
 
         public void MoveView(KeyEventArgs e)

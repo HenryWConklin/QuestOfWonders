@@ -12,9 +12,7 @@ namespace QuestOfWonders
         List<string> allText;
         int curTextNum = 0;
         Rectangle myPos;
-        Brush backColor;
-        Brush borderColor;
-        Brush textColor;
+        public Brush backColor, borderColor, textColor;
 
         private Rectangle textRect;
 
