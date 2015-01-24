@@ -13,6 +13,7 @@ namespace QuestOfWonders
     public partial class frmMain : Form
     {
         private const float FRAME_TIME = 1f / 60;
+        public static bool soundOn = true;
 
         Bitmap buffer;
         Graphics bufferGraphics;
@@ -45,7 +46,7 @@ namespace QuestOfWonders
         public static Textbox text;
 
         public static Wonder wonder = null;
-
+        
         public frmMain()
         {
             InitializeComponent();
@@ -264,6 +265,7 @@ namespace QuestOfWonders
 
         private void btnBegin_Click(object sender, EventArgs e)
         {
+            SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders2.wav", true);
             running = true;
             btnBegin.Visible = false;
             btnBegin.Enabled = false;
