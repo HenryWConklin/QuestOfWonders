@@ -34,11 +34,11 @@ namespace QuestOfWonders
 
         public float timeAccum;
 
-        Map currentMap;
+        static Map currentMap;
         static Player player;
 
-        private String[] levelMaps;
-        private int currentLevel;
+        private static String[] levelMaps;
+        private static int currentLevel;
 
         long prevTicks;
 
@@ -64,7 +64,7 @@ namespace QuestOfWonders
             panelGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             timeAccum = 0;
 
-            levelMaps = new String[] {"Resources/QuestOfWondersStage1_1.bmp"};
+            levelMaps = new String[] { "Resources/QuestOfWondersStage1_1.bmp", "Resources/QuestOfWondersStage2.bmp" };
             currentLevel = 0;
         }
 
@@ -83,6 +83,15 @@ namespace QuestOfWonders
                 UpdateGame();
                 pnlMain.Refresh();
                 Application.DoEvents();
+            }
+        }
+
+        public static void NextLevel()
+        {
+            if (currentLevel < 4)
+            {
+                currentLevel++;
+                Restart();
             }
         }
 
@@ -195,8 +204,11 @@ namespace QuestOfWonders
                 player.Ground();
         }
 
-        public void Restart()
+        public static void Restart()
         {
+            text = null;
+            wonder = null;
+            player = null;
             currentMap = new Map(levelMaps[currentLevel]);
             allowPlayerControl = true;
         }
@@ -272,12 +284,7 @@ namespace QuestOfWonders
         {
             e.SuppressKeyPress = true;
             if (allowPlayerControl) player.OnKeyDown(e.KeyCode);
-            wonder.OnKeyDown(e.KeyCode);
-            if (e.KeyCode == Keys.P)
-            {
-                wonder.LaunchCollisionEvent();
-                Console.WriteLine("Player Location: " + player.GetPos());
-            }
+            if(wonder != null) wonder.OnKeyDown(e.KeyCode);
         }
 
         public void MoveView(KeyEventArgs e)
