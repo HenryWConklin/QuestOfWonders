@@ -9,7 +9,7 @@ namespace QuestOfWonders
 {
     class Animation
     {
-        private const float FRAME_TIME = 1f / 30;
+        private const float FRAME_TIME = 1f / 10;
 
         private Bitmap[] frames;
 
@@ -22,6 +22,7 @@ namespace QuestOfWonders
             for (int i = 0; i < frames.Length; i++)
             {
                 frames[i] = new Bitmap(Bitmap.FromFile("Resources/" + name + i + ".png"));
+                
             }
 
             frame = 0;
@@ -42,6 +43,11 @@ namespace QuestOfWonders
         public Bitmap GetFrame()
         {
             return frames[frame];
+        }
+
+        public void Reset()
+        {
+            frame = 0;
         }
 
     
