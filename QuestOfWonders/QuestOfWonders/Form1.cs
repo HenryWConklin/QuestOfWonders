@@ -35,7 +35,7 @@ namespace QuestOfWonders
 
         public float timeAccum;
 
-        static Map currentMap;
+        public static Map currentMap;
         static Player player;
 
         private static String[] levelMaps;
