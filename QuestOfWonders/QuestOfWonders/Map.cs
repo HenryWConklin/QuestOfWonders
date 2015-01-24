@@ -14,13 +14,16 @@ namespace QuestOfWonders
 
         Color DIRT_COLOR = Color.FromArgb(0, 0, 0);
         Color GRASS_COLOR = Color.FromArgb(0, 255, 0);
+        Color SPIKE_COLOR = Color.FromArgb(255, 0, 0);
 
         Brush tmpGrass = new SolidBrush(Color.DarkGreen);
         Brush tmpDirt = new SolidBrush(Color.Brown);
+        Brush tmpSpike = new SolidBrush(Color.Red);
 
-        public const int NOTHING_INT = 0;
-        public const int DIRT_INT = 1;
-        public const int GRASS_INT = 2;
+        public static int NOTHING_INT = 0;
+        public static int DIRT_INT = 1;
+        public static int GRASS_INT = 2;
+        public static int SPIKE_INT = 3;
 
         int[,] map;
         public int widthInTiles;
@@ -44,11 +47,15 @@ namespace QuestOfWonders
                     Color col = img.GetPixel(x, y);
                     if (col == DIRT_COLOR)
                     {
-                        map[x, y] = 1;
+                        map[x, y] = DIRT_INT;
                     }
-                    if (col == GRASS_COLOR)
+                    else if (col == GRASS_COLOR)
                     {
-                        map[x, y] = 2;
+                        map[x, y] = GRASS_INT;
+                    }
+                    else if (col == SPIKE_COLOR)
+                    {
+                        map[x, y] = SPIKE_INT;
                     }
                 }
             }
@@ -57,8 +64,15 @@ namespace QuestOfWonders
         //Reads in game coords, converts to map coords, and tells you what's there.
         public int CheckLocation(int x, int y)
         {
+            int newX = (int)Math.Floor((float)x / (float)TILE_SIZE);
+            int newY = (int)Math.Floor((float)y / (float)TILE_SIZE);
 
-            return 0;
+            if (newX < 0) newX = 0;
+            if (newX > (widthInTiles - 1)) newX = widthInTiles - 1;
+            if (newY < 0) newY = 0;
+            if (newY > (heightInTiles - 1)) newY = heightInTiles - 1;
+
+            return map[newX , newY];
         }
 
         public Point ArrayToScreenLocation(int x, int y)
@@ -74,18 +88,25 @@ namespace QuestOfWonders
                 for (int y = 0; y < heightInTiles; y++)
                 {
                     Brush drawBrush = null;
+
                     if (map[x, y] == DIRT_INT)
                     {
                         drawBrush = tmpDirt;
                     }
-                    if (map[x, y] == GRASS_INT)
+                    else if (map[x, y] == GRASS_INT)
                     { 
                         drawBrush = tmpGrass;
                     }
+                    else if (map[x, y] == SPIKE_INT)
+                    {
+                        drawBrush = tmpSpike;
+                    }
+
+
                     if (drawBrush != null)
                     {
                         Point locInWorld = ArrayToScreenLocation(x, y);
-                        g.FillRectangle(drawBrush, locInWorld.X -frmMain.viewX, locInWorld.Y - frmMain.viewY, TILE_SIZE, TILE_SIZE);
+                        g.FillRectangle(drawBrush, locInWorld.X - frmMain.viewX, locInWorld.Y - frmMain.viewY, TILE_SIZE, TILE_SIZE);
                     }
                 }
             }
