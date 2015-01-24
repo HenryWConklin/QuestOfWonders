@@ -80,6 +80,11 @@ namespace QuestOfWonders
 			}
 		}
 
+        public Rectangle GetCollisionRectangle()
+        {
+            return new Rectangle(pos.X, pos.Y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
+        }
+
 		public void Kill()
 		{
 			//do stuff
