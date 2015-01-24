@@ -142,11 +142,13 @@ namespace QuestOfWonders
 
                     if (map[x, y] == DIRT_INT)
                     {
+                        g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
                         drawBrush = tmpDirt;
                         img = dirtImg;
                     }
                     else if (map[x, y] == GRASS_INT)
                     {
+                        g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
                         drawBrush = tmpGrass;
                         img = grassImg;
                     }
@@ -171,6 +173,7 @@ namespace QuestOfWonders
                         Point locInWorld = ArrayToScreenLocation(x, y);
                         g.FillRectangle(drawBrush, locInWorld.X - frmMain.viewX, locInWorld.Y - frmMain.viewY, TILE_SIZE, TILE_SIZE);
                     }
+                    g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
                 }
             }
         }
