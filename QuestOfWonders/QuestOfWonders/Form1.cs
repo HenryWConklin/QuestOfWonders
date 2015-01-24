@@ -26,6 +26,7 @@ namespace QuestOfWonders
         public static int viewHeight;
 
         Map currentMap;
+        static Player player;
 
         public frmMain()
         {
@@ -58,20 +59,27 @@ namespace QuestOfWonders
         {
             bufferGraphics.FillRectangle(skyBrush, 0, 0, pnlMain.Width, pnlMain.Height);
 
-            currentMap.Draw(bufferGraphics);
+            if(currentMap != null) currentMap.Draw(bufferGraphics);
+            if (player != null) player.Draw(bufferGraphics);
 
             panelGraphics.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
         }
 
         public void UpdateGame()
         {
-            currentMap.Update(1);
+            if(currentMap != null) currentMap.Update(1);
+            if (player != null) player.Update(1);
             DoCollision();
         }
 
         public void DoCollision()
         {
 
+        }
+
+        public static void CreatePlayer(int x, int y)
+        {
+            player = new Player(x, y);
         }
 
         private void btnBegin_Click(object sender, EventArgs e)
