@@ -74,7 +74,10 @@ namespace QuestOfWonders
 
         public void DoCollision()
         {
-			
+            if (player != null)
+            {
+                currentMap.CheckLocation(player.pos.X, player.pos.Y);
+            }
         }
 
         public static void CreatePlayer(int x, int y)

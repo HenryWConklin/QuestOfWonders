@@ -17,9 +17,9 @@ namespace QuestOfWonders
     {
 		private const int SPEED = 5;
 		private const int JUMPSPEED = 10;
-		private const int GRAVITY = -1;
+		private const float GRAVITY = .1f;
 
-		private Point pos;
+        public Point pos;
 		private PointF vel;
 		private bool onGround;
 
