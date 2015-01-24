@@ -32,6 +32,8 @@ namespace QuestOfWonders
         Map currentMap;
         static Player player;
 
+        long prevTicks;
+
         public frmMain()
         {
             InitializeComponent();
@@ -51,7 +53,8 @@ namespace QuestOfWonders
 
         public void Run()
         {
-            currentMap = new Map("Resources/QuestOfWondersStage1.bmp");
+            prevTicks = DateTime.Now.Ticks;
+            currentMap = new Map("Resources/QuestOfWondersStage1_1.bmp");
             while (running)
             {
                 UpdateGame();
@@ -74,10 +77,18 @@ namespace QuestOfWonders
 
         public void UpdateGame()
         {
-            if(currentMap != null) currentMap.Update(1);
+
+            long currentTicks = DateTime.Now.Ticks;
+            long ticksElapsed = currentTicks - prevTicks;
+            prevTicks = currentTicks;
+
+            //float deltaTime = (float)(TimeSpan.FromTicks(ticksElapsed).TotalSeconds);
+            float deltaTime = 1;
+
+            if(currentMap != null) currentMap.Update(deltaTime);
             if (player != null)
             {
-                player.Update(1);
+                player.Update(deltaTime);
                 if (currentMap.CheckLocation(player.pos.X + 1, player.pos.Y + 2 * Map.TILE_SIZE + 1) != 0 ||
                     currentMap.CheckLocation(player.pos.X + Map.TILE_SIZE - 1, player.pos.Y + 2 * Map.TILE_SIZE + 1) != 0)
                     player.Ground();
@@ -193,11 +204,12 @@ namespace QuestOfWonders
 
         private void frmMain_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+
         }
 
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
         {
+            e.SuppressKeyPress = true;
             player.OnKeyDown(e.KeyCode);
         }
 

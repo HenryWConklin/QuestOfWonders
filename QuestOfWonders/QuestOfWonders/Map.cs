@@ -85,7 +85,7 @@ namespace QuestOfWonders
         public void LoadImages()
         {
             grassImg = (Bitmap)Bitmap.FromFile("Resources/grass.png");
-            dirtImg = (Bitmap)Bitmap.FromFile("Resources/metal.png");
+            dirtImg = (Bitmap)Bitmap.FromFile("Resources/glassed stone.png");
             spikeImg = (Bitmap)Bitmap.FromFile("Resources/spikes.png");
             orbImg = (Bitmap)Bitmap.FromFile("Resources/orb of wonder.png");
         }
@@ -93,8 +93,9 @@ namespace QuestOfWonders
         //Reads in game coords, converts to map coords, and tells you what's there.
         public int CheckLocation(int x, int y)
         {
-            int newX = (int)Math.Floor((float)x / (float)TILE_SIZE);
-            int newY = (int)Math.Floor((float)y / (float)TILE_SIZE);
+            Point newPnt = ScreenToArrayLocation(x, y);
+            int newX = newPnt.X;
+            int newY = newPnt.Y;
 
             if (newX < 0) newX = 0;
             if (newX > (widthInTiles - 1)) newX = widthInTiles - 1;
@@ -102,6 +103,20 @@ namespace QuestOfWonders
             if (newY > (heightInTiles - 1)) newY = heightInTiles - 1;
 
             return map[newX , newY];
+        }
+
+        public Point ScreenToArrayLocation(int x, int y)
+        {
+            int newX = (int)Math.Floor((float)x / (float)TILE_SIZE);
+            int newY = (int)Math.Floor((float)y / (float)TILE_SIZE);
+
+            if (newX < 0) newX = 0;
+            if (newX > (widthInTiles)) newX = (widthInTiles);
+
+            if (newY < 0) newY = 0;
+            if (newY > (heightInTiles)) newY = (heightInTiles);
+
+            return new Point(newX, newY);
         }
 
         public Point ArrayToScreenLocation(int x, int y)
@@ -112,9 +127,15 @@ namespace QuestOfWonders
 
         public void Draw(Graphics g)
         {
-            for (int x = 0; x < widthInTiles; x++)
+
+            int hBuffer = TILE_SIZE * 2;
+            int vBuffer = TILE_SIZE * 2;
+            Point start = ScreenToArrayLocation(frmMain.viewX - hBuffer, frmMain.viewY - vBuffer);
+            Point end = ScreenToArrayLocation(frmMain.viewX + frmMain.viewWidth + hBuffer, frmMain.viewY + frmMain.viewHeight + vBuffer);
+
+            for (int x = start.X; x < end.X; x++)
             {
-                for (int y = 0; y < heightInTiles; y++)
+                for (int y = start.Y; y < end.Y; y++)
                 {
                     Brush drawBrush = null;
                     Bitmap img = null;
