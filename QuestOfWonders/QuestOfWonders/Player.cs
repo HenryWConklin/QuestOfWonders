@@ -32,7 +32,11 @@ namespace QuestOfWonders
         private bool leftPressed;
         private bool rightPressed;
 
-        private Animation sprite;
+        private int animIndex;
+        private Animation[] anims;
+
+        private const int ANIM_LEFT = 0;
+        private const int ANIM_RIGHT = 1;
 
 		public Player(int x, int y)
 		{
@@ -42,8 +46,10 @@ namespace QuestOfWonders
             isDead = false;
             leftPressed = false;
             rightPressed = false;
-            sprite = new Animation("playeranim", 4);
-
+            animIndex = ANIM_LEFT;
+            anims = new Animation[2];
+            anims[ANIM_LEFT] = new Animation("linkwalkingleft", 10);
+            anims[ANIM_RIGHT] = new Animation("linkwalkingright", 10);
 		}
 
         public void Draw(Graphics g)
@@ -52,12 +58,12 @@ namespace QuestOfWonders
 			int x = (int)pos.X - frmMain.viewX;
 			int y = (int)pos.Y - frmMain.viewY;
             //g.FillRectangle(b, x, y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
-            g.DrawImage(sprite.GetFrame(), x, y, Map.TILE_SIZE, Map.TILE_SIZE * 2);
+            g.DrawImage(anims[animIndex].GetFrame(), x, y, Map.TILE_SIZE, Map.TILE_SIZE * 2);
         }
 
         public void Update(float time)
         {
-            sprite.Update(time);
+            anims[animIndex].Update(time);
 			pos.X += vel.X * time;
 			pos.Y += vel.Y * time;
             if (! onGround)
@@ -126,6 +132,12 @@ namespace QuestOfWonders
             isDead = true;
 		}
 
+        private void SetAnim(int index)
+        {
+            anims[animIndex].Reset();
+            animIndex = index;
+        }
+
         public bool IsDead()
         {
             return isDead;
@@ -136,10 +148,12 @@ namespace QuestOfWonders
             if (key == leftKey) {
                 vel.X = -SPEED;
                 leftPressed = true;
+                SetAnim(ANIM_LEFT);
             }
             else if (key == rightKey) {
                 vel.X = SPEED;
                 rightPressed = true;
+                SetAnim(ANIM_RIGHT);
             }
             else if (key == jumpKey) {
                 Jump();
@@ -154,6 +168,7 @@ namespace QuestOfWonders
                 if (rightPressed)
                 {
                     vel.X = SPEED;
+                    SetAnim(ANIM_RIGHT);
                 }
                 else
                 {
@@ -166,6 +181,7 @@ namespace QuestOfWonders
                 if (leftPressed)
                 {
                     vel.X = -SPEED;
+                    SetAnim(ANIM_LEFT);
                 }
                 else
                 {
