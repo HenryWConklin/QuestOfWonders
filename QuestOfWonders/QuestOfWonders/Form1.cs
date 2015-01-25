@@ -318,7 +318,7 @@ namespace QuestOfWonders
             {
                 if (e.GetCollisionBounds().IntersectsWith(playerRect)) 
                 {
-                    //player.Kill();
+                    player.Kill();
                 }
 
                 int inFront = 0;

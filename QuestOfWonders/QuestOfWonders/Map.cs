@@ -133,7 +133,7 @@ namespace QuestOfWonders
                     else if (col == ORB_COLOR)
                     {
                         Point wonderPoint = ArrayToScreenLocation(x, y);
-                        Wonder orb = new StaffOfWonder(wonderPoint.X, wonderPoint.Y);
+                        Wonder orb = new OrbOfWonder(wonderPoint.X, wonderPoint.Y);
                         frmMain.SetWonder(orb);
                     }
                     else if (col == PLAYER_COLOR)
@@ -171,7 +171,9 @@ namespace QuestOfWonders
                     }
                     else if (col == STAFF_COLOR)
                     {
-
+                        Point wonderPoint = ArrayToScreenLocation(x, y);
+                        Wonder staff = new StaffOfWonder(wonderPoint.X, wonderPoint.Y);
+                        frmMain.SetWonder(staff);
                     }
                     else if (col == DOOR_COLOR)
                     {
