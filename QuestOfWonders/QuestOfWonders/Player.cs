@@ -28,6 +28,7 @@ namespace QuestOfWonders
 		private List<Keys> leftKey = new List<Keys>(new Keys[]{Keys.A, Keys.Left});
 		private List<Keys> rightKey = new List<Keys>(new Keys[]{Keys.D, Keys.Right});
 		private List<Keys> jumpKey = new List<Keys>(new Keys[]{Keys.Space, Keys.Up, Keys.W});
+        private Keys restart = Keys.R;
 
         private bool leftPressed;
         private bool rightPressed;
@@ -172,6 +173,10 @@ namespace QuestOfWonders
             }
             else if (jumpKey.Contains(key)) {
                 Jump();
+            }
+            else if (key == restart)
+            {
+                this.Kill();
             }
         }
 
