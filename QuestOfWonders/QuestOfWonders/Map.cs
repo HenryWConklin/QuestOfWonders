@@ -30,6 +30,7 @@ namespace QuestOfWonders
         Color VILLAIN_COLOR = Color.FromArgb(100, 200, 255);
         Color VILLAIN_RAY_COLOR = Color.FromArgb(65, 10, 100);
         Color SWITCH_COLOR = Color.FromArgb(25, 175, 200);
+        Color FINALSCENE_COLOR = Color.FromArgb(20, 30, 40);
 
         Brush tmpGrass = new SolidBrush(Color.DarkGreen);
         Brush tmpDirt = new SolidBrush(Color.Brown);
@@ -197,6 +198,12 @@ namespace QuestOfWonders
                     else if (col == VILLAIN_RAY_COLOR)
                     {
 
+                    }
+                    else if (col == FINALSCENE_COLOR)
+                    {
+                        Point wonderPoint = ArrayToScreenLocation(x, y);
+                        Wonder finalLauncher = new FinalSceneLauncher(wonderPoint.X, wonderPoint.Y);
+                        frmMain.SetWonder(finalLauncher);   
                     }
                 }
             }

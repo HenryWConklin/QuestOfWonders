@@ -12,14 +12,13 @@ namespace QuestOfWonders
     {
         //Bitmap img;
         int x, y;
-        int width = 30;
-        int height = 30;
+        int width = 32;
+        int height = 96;
         public bool hasBeenHit = false;
 
-        int breakIndex = 3; //Break on text frame 3
-        List<int> evilChatTextFrames = new List<int> { 6, 8 }; //When the player starts
+        List<int> evilChatTextFrames = new List<int> { 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }; //When the player starts
 
-        Color evilCol = Color.DeepPink;
+        Color evilCol = Color.DarkRed;
         Color narratorCol = Color.DarkSlateGray;
 
         public FinalSceneLauncher(int x, int y)
@@ -31,16 +30,19 @@ namespace QuestOfWonders
 
         List<string> textboxText = new List<String>()
         {
-            "Congratualtions! You found the orb! Press any key to save the world.",
-            "NO! Not that key! Press the ‘any’ key.",
-            "I SAID… PRESS THE ANY KEY TO SAVE THE WORLD!",
-            "Did you just..?  Did you really just drop and destroy the Orb of Wonders? What are you, a buffoon? Now what will we do? How will you stop Dr. Waru!? There’s nothing you can… WAIT!",
-            "I know something else that may be able to defeat Dr. Waru! It’s a long shot and it will be far more challenging, but I know you can do it!",
-            "…Or rather, since it’s YOUR fault if he wins now, you had better not fail!",
-            "But-",
-            "DO NOT SASS ME, TORPE! You are a silent protagonist and you will act as such!",
+            "That's him! That's Dr. Waru!",
+            "Uh-oh - it looks like he's preparing for a monologue! I'm out!",
             "...",
-            "That’s better… Now, ONWARD TO ADVENTURE!"
+            "Nyahahahahahahaha! You discovered my lair, did you?",
+            "Well, you are too late! My Death Laser will destroy all life outside of this lab and I shall have my revenge!",
+            "Why do I need to exact my vengence? Well, allow me to explain in the form of...",
+            "THIS SONG!",
+            "When I was a child, I never got my way!",
+            "My parents wouldn't get me a new toy every day.",
+            "I built a robot army and found a nice warm cave",
+            "And here I've laid in wait, and I built a giant laser and now I will destroy the world.",
+            "...",
+            "Would you like me to sing that again?\n       >Yes          No"
         };
 
         int textIndex = 0;
@@ -60,11 +62,6 @@ namespace QuestOfWonders
             {
                 textIndex++;
 
-                if (textIndex == breakIndex)
-                {
-                    BreakOrb();
-                }
-
                 if (textIndex < textboxText.Count)
                 {
                     if (evilChatTextFrames.Contains(textIndex))
@@ -79,7 +76,8 @@ namespace QuestOfWonders
                 }
                 else
                 {
-                    FinishLevel();
+                    //FinishLevel();
+                    frmMain.allowPlayerControl = true;
                 }
             }
         }
