@@ -8,12 +8,12 @@ using System.Drawing;
 
 namespace QuestOfWonders
 {
-	enum Direction
+	public enum Direction
 	{
 		Left, Right, Up, Down
 	};
 	
-    class Player
+    public class Player
     {
 		private const int SPEED = 300;
 		private const int JUMPSPEED = 550;
@@ -145,6 +145,11 @@ namespace QuestOfWonders
 		{
             isDead = true;
 		}
+
+        public void PickUpItem()
+        {
+            SetAnim(ANIM_STILL); // Change
+        }
 
         private void SetAnim(int index)
         {
