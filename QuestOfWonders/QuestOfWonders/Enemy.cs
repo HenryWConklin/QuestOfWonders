@@ -67,8 +67,11 @@ namespace QuestOfWonders
         private PointF vel;
         private Brush brush;
 
+        Image img;
+
         public Projectile(PointF p, PointF v)
         {
+            img = new Bitmap(Bitmap.FromFile("Resources/bullet.png"), WIDTH, HEIGHT);
             pos = p;
             vel = v;
             brush = new SolidBrush(Color.PapayaWhip);
@@ -82,7 +85,7 @@ namespace QuestOfWonders
 
         public void Draw(Graphics g)
         {
-            g.FillEllipse(brush, (int)pos.X - frmMain.viewX, (int)pos.Y - frmMain.viewY, WIDTH, HEIGHT);
+            g.DrawImage(img, (int)pos.X - frmMain.viewX, (int)pos.Y - frmMain.viewY, WIDTH, HEIGHT);
         }
 
         public Point getPos()
