@@ -192,7 +192,9 @@ namespace QuestOfWonders
                     }
                     else if (col == VILLAIN_COLOR)
                     {
-
+                        Point waruPoint = ArrayToScreenLocation(x, y-1);
+                        Entity waru = new Entity(new Point(waruPoint.X, waruPoint.Y), "Resources/villain.png", TILE_SIZE, TILE_SIZE*2);
+                        frmMain.AddEntity(waru);
                     }
                     else if (col == VILLAIN_RAY_COLOR)
                     {

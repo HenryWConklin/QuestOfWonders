@@ -64,6 +64,8 @@ namespace QuestOfWonders
 
         private List<Keys> pressedKeys;
 
+        public static List<Entity> drawEntities = new List<Entity>();
+
         public static bool finalKey = false;
 
         public frmMain()
@@ -84,7 +86,7 @@ namespace QuestOfWonders
             panelGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             timeAccum = 0;
 
-            levelMaps = new String[] { "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
+            levelMaps = new String[] { "Resources/QuestOfWondersStage1.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
             levelGrass = new int[] { 0, 0, 1, 1 };
             currentLevel = 0;
 
@@ -176,6 +178,11 @@ namespace QuestOfWonders
             if (player != null) player.Draw(bufferGraphics);
 
             if (wonder != null) wonder.Draw(bufferGraphics);
+
+            foreach (Entity e in drawEntities)
+            {
+                e.Draw(bufferGraphics);
+            }
 
             foreach (Switch s in switches)
             {
@@ -411,6 +418,11 @@ namespace QuestOfWonders
                 }
             }
             
+        }
+
+        public static void AddEntity(Entity e)
+        {
+            drawEntities.Add(e);
         }
 
         public static void Restart()
