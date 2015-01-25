@@ -128,6 +128,13 @@ namespace QuestOfWonders
 
             if (wonder != null) wonder.Draw(bufferGraphics);
 
+            if (door != null) door.Draw(bufferGraphics);
+
+            foreach (Switch s in switches)
+            {
+                s.Draw(g);
+            }
+
             g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
 
             foreach (Enemy e in enemies)
@@ -246,7 +253,7 @@ namespace QuestOfWonders
                 Projectile proj = projectiles[i];
                 if (player.GetCollisionRectangle().Contains(proj.getPos()))
                 {
-                    player.Kill();
+                    //player.Kill();
                     projectiles.RemoveAt(i);
                     i--;
                     continue;

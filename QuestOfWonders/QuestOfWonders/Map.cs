@@ -23,6 +23,13 @@ namespace QuestOfWonders
         Color USHOOTER_COLOR = Color.FromArgb(100, 255, 200);
         Color DSHOOTER_COLOR = Color.FromArgb(255, 200, 150);
         Color REDGRASS_COLOR = Color.FromArgb(255, 100, 50);
+        Color SWORD_COLOR = Color.FromArgb(200, 175, 25);
+        Color STAFF_COLOR = Color.FromArgb(0, 255, 255);
+        Color DOOR_COLOR = Color.FromArgb(150, 100, 75);
+        Color STEEL_COLOR = Color.FromArgb(100, 40, 20);
+        Color VILLAIN_COLOR = Color.FromArgb(100, 200, 255);
+        Color VILLAIN_RAY_COLOR = Color.FromArgb(65, 10, 100);
+        Color SWITCH_COLOR = Color.FromArgb(25, 175, 200);
 
         Brush tmpGrass = new SolidBrush(Color.DarkGreen);
         Brush tmpDirt = new SolidBrush(Color.Brown);
@@ -45,7 +52,7 @@ namespace QuestOfWonders
         Bitmap shootLeftImg = null;
         Bitmap shootRightImg = null;
         Bitmap shootUpImg = null;
-
+        Bitmap steelImg = null;
 
         public static int NOTHING_INT = 0;
         public static int DIRT_INT = 1;
@@ -55,6 +62,7 @@ namespace QuestOfWonders
         public static int RSHOOTER_INT = 5;
         public static int USHOOTER_INT = 6;
         public static int DSHOOTER_INT = 7;
+        public static int STEEL_INT = 8;
 
         public static float shooterVel = 100.0f;
 
@@ -156,6 +164,34 @@ namespace QuestOfWonders
                         map[x, y] = DSHOOTER_INT;
                         Point shooterPoint = ArrayToScreenLocation(x, y);
                         frmMain.AddShooter(new Point(shooterPoint.X + TILE_SIZE / 2 - bulletW / 2, shooterPoint.Y + TILE_SIZE + shooterYOffset), new PointF(0.0f, shooterVel));
+                    }
+                    else if (col == SWORD_COLOR)
+                    {
+
+                    }
+                    else if (col == STAFF_COLOR)
+                    {
+
+                    }
+                    else if (col == DOOR_COLOR)
+                    {
+                        frmMain.door = new Door(ArrayToScreenLocation(x, y));
+                    }
+                    else if (col == SWITCH_COLOR)
+                    {
+                        frmMain.switches.Add(new Switch(ArrayToScreenLocation(x, y)));
+                    }
+                    else if (col == STEEL_COLOR)
+                    {
+                        map[x, y] = STEEL_INT;
+                    }
+                    else if (col == VILLAIN_COLOR)
+                    {
+
+                    }
+                    else if (col == VILLAIN_RAY_COLOR)
+                    {
+
                     }
                 }
             }

@@ -53,13 +53,8 @@ namespace QuestOfWonders
 
         public static List<Projectile> projectiles = new List<Projectile>();
         public static List<Enemy> enemies = new List<Enemy>();
-<<<<<<< HEAD
         public static Dictionary<Point, PointF> shooters = new Dictionary<Point, PointF>();
         public static List<Switch> switches = new List<Switch>();
-=======
-        public static Dictionary<Point, PointF> shooters = new Dictionary<Point, PointF>();
-        public static List<Switch> switches = new List<Switch>();
->>>>>>> d090a700f00d6887ddf130d7f84bf1c939dcc47d
         public static Door door;
 
         public frmMain()
@@ -80,7 +75,11 @@ namespace QuestOfWonders
             panelGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             timeAccum = 0;
 
-            levelMaps = new String[] { "Resources/QuestOfWondersStage1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
+<<<<<<< HEAD
+            levelMaps = new String[] { "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
+=======
+            levelMaps = new String[] { "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
+>>>>>>> cd3bb1ded648f815d3ab427421da5ff6500284cc
             levelGrass = new int[] { 0, 1, 1, 1 };
             currentLevel = 0;
 
@@ -133,6 +132,13 @@ namespace QuestOfWonders
 
             if (wonder != null) wonder.Draw(bufferGraphics);
 
+            if (door != null) door.Draw(bufferGraphics);
+
+            foreach (Switch s in switches)
+            {
+                s.Draw(g);
+            }
+
             g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
 
             foreach (Enemy e in enemies)
@@ -165,24 +171,6 @@ namespace QuestOfWonders
             {
                 FireShooters();
                 shooterTimer = 0;
-            }
-
-            if (door != null)
-            {
-
-                bool openDoor = true;
-                foreach (Switch s in switches)
-                {
-                    if (!s.isOn)
-                    {
-                        openDoor = false;
-                        break;
-                    }
-                }
-                if (openDoor)
-                {
-                    door = null;
-                }
             }
 
             if (door != null)
@@ -269,7 +257,7 @@ namespace QuestOfWonders
                 Projectile proj = projectiles[i];
                 if (player.GetCollisionRectangle().Contains(proj.getPos()))
                 {
-                    player.Kill();
+                    //player.Kill();
                     projectiles.RemoveAt(i);
                     i--;
                     continue;
@@ -283,28 +271,19 @@ namespace QuestOfWonders
 
             //spikes
             int bl = currentMap.CheckLocation(player.GetPos().X, player.GetPos().Y + 2 * Map.TILE_SIZE);
-            int br = currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE, player.GetPos().Y + 2 * Map.TILE_SIZE);
+            int br = currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE - 1, player.GetPos().Y + 2 * Map.TILE_SIZE);
             if (bl == Map.SPIKE_INT || br == Map.SPIKE_INT)
             {
                 player.Kill();
             }
             
             //walls
-<<<<<<< HEAD
             Point startPos = new Point(player.GetPos().X, player.GetPos().Y);
             Rectangle playerRect = player.GetCollisionRectangle();
             Rectangle doorRect = new Rectangle();
             if (door != null)
             {
                 doorRect = door.GetCollisionRectangle();
-=======
-            Point startPos = new Point(player.GetPos().X, player.GetPos().Y);
-            Rectangle playerRect = player.GetCollisionRectangle();
-            Rectangle doorRect = new Rectangle();
-            if (door != null)
-            {
-                doorRect = door.GetCollisionRectangle();
->>>>>>> d090a700f00d6887ddf130d7f84bf1c939dcc47d
             }
 
             if (CheckPlayerMapCollision() || doorRect.IntersectsWith(playerRect))
@@ -365,7 +344,6 @@ namespace QuestOfWonders
 
             }
 
-<<<<<<< HEAD
             //Switches
             foreach (Switch s in switches)
             {
@@ -373,15 +351,6 @@ namespace QuestOfWonders
                 {
                     s.isOn = true;
                 }
-=======
-            //Switches
-            foreach (Switch s in switches)
-            {
-                if (s.GetCollisionRectangle().IntersectsWith(playerRect))
-                {
-                    s.isOn = true;
-                }
->>>>>>> d090a700f00d6887ddf130d7f84bf1c939dcc47d
             }
             
         }
@@ -403,7 +372,7 @@ namespace QuestOfWonders
         {
             if (player != null)
             {
-                int hBuffer = 200;
+                int hBuffer = 300;
                 int vBufferUpper = 200;
                 int vBufferLower = 200;
 
