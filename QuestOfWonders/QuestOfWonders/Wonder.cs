@@ -17,6 +17,6 @@ namespace QuestOfWonders
         void LaunchCollisionEvent();
         void Update(float time);
         void Draw(Graphics g);
-        void OnKeyDown(Keys key);
+        bool OnKeyDown(Keys key);
     }
 }

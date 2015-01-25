@@ -64,7 +64,7 @@ namespace QuestOfWonders
 
         }
 
-        public void OnKeyDown(Keys key)
+        public bool OnKeyDown(Keys key)
         {
             if (hasBeenHit)
             {
@@ -104,6 +104,7 @@ namespace QuestOfWonders
                     frmMain.allowPlayerControl = true;
                 }
             }
+			return false;
         }
 
         public void BreakOrb()
