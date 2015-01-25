@@ -218,7 +218,8 @@ namespace QuestOfWonders
                 }
                 else
                 {
-                    SetAnim(ANIM_STILL);
+                    if (!jumping)
+                        SetAnim(ANIM_STILL);
                     vel.X = 0;
                 }
             }
@@ -233,7 +234,8 @@ namespace QuestOfWonders
                 else
                 {
                     vel.X = 0;
-                    SetAnim(ANIM_STILL);
+                    if (!jumping)
+                        SetAnim(ANIM_STILL);
                 }
             }
         }
