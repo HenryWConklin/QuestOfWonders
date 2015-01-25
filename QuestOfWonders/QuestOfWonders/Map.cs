@@ -187,7 +187,8 @@ namespace QuestOfWonders
                     }
                     else if (col == SWITCH_COLOR)
                     {
-                        frmMain.switches.Add(new Switch(ArrayToScreenLocation(x, y)));
+                        if (frmMain.startLevel)
+                            frmMain.switches.Add(new Switch(ArrayToScreenLocation(x, y)));
                     }
                     else if (col == STEEL_COLOR)
                     {
