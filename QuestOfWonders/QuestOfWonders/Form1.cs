@@ -64,6 +64,8 @@ namespace QuestOfWonders
 
         private List<Keys> pressedKeys;
 
+        public static List<Entity> drawEntities = new List<Entity>();
+
         public static bool finalKey = false;
 
         public frmMain()
@@ -176,6 +178,11 @@ namespace QuestOfWonders
             if (player != null) player.Draw(bufferGraphics);
 
             if (wonder != null) wonder.Draw(bufferGraphics);
+
+            foreach (Entity e in drawEntities)
+            {
+                e.Draw(bufferGraphics);
+            }
 
             foreach (Switch s in switches)
             {
@@ -409,6 +416,11 @@ namespace QuestOfWonders
                 }
             }
             
+        }
+
+        public static void AddEntity(Entity e)
+        {
+            drawEntities.Add(e);
         }
 
         public static void Restart()
