@@ -52,6 +52,8 @@ namespace QuestOfWonders
         public static List<Projectile> projectiles = new List<Projectile>();
         public static List<Enemy> enemies = new List<Enemy>();
         public static Dictionary<Point, PointF> shooters = new Dictionary<Point, PointF>();
+        public static List<Switch> switches = new List<Switch>();
+        public static Door door;
 
         public frmMain()
         {
@@ -156,6 +158,24 @@ namespace QuestOfWonders
                 FireShooters();
                 shooterTimer = 0;
             }
+
+            if (door != null)
+            {
+
+                bool openDoor = true;
+                foreach (Switch s in switches)
+                {
+                    if (!s.isOn)
+                    {
+                        openDoor = false;
+                        break;
+                    }
+                }
+                if (openDoor)
+                {
+                    door = null;
+                }
+            }
             while (timeAccum > FRAME_TIME)
             {
                 if (currentMap != null) currentMap.Update(FRAME_TIME);
@@ -245,13 +265,19 @@ namespace QuestOfWonders
             
             //walls
             Point startPos = new Point(player.GetPos().X, player.GetPos().Y);
+            Rectangle playerRect = player.GetCollisionRectangle();
+            Rectangle doorRect = new Rectangle();
+            if (door != null)
+            {
+                doorRect = door.GetCollisionRectangle();
+            }
 
-            if (CheckPlayerMapCollision())
+            if (CheckPlayerMapCollision() || doorRect.IntersectsWith(playerRect))
             {
                 player.SetPosY((player.GetPos().Y + Map.TILE_SIZE/2) / Map.TILE_SIZE * Map.TILE_SIZE);   
             }               
 
-            if (CheckPlayerMapCollision())
+            if (CheckPlayerMapCollision() || doorRect.IntersectsWith(playerRect))
             {
                 player.SetPosY(startPos.Y);
                 player.SetPosX((player.GetPos().X + Map.TILE_SIZE/2)/ Map.TILE_SIZE * Map.TILE_SIZE);
@@ -261,7 +287,7 @@ namespace QuestOfWonders
                     player.OnCollide(Direction.Left);
             }
 
-            if (CheckPlayerMapCollision())
+            if (CheckPlayerMapCollision() || doorRect.IntersectsWith(playerRect))
             {
                 player.SetPosY((player.GetPos().Y + Map.TILE_SIZE / 2) / Map.TILE_SIZE * Map.TILE_SIZE);
 
@@ -277,7 +303,7 @@ namespace QuestOfWonders
                 player.Ground();
 
             // Enemies
-            Rectangle playerRect = player.GetCollisionRectangle();
+            
             foreach (Enemy e in enemies)
             {
                 if (e.GetCollisionBounds().IntersectsWith(playerRect)) 
@@ -304,6 +330,14 @@ namespace QuestOfWonders
 
             }
 
+            //Switches
+            foreach (Switch s in switches)
+            {
+                if (s.GetCollisionRectangle().IntersectsWith(playerRect))
+                {
+                    s.isOn = true;
+                }
+            }
             
         }
 
