@@ -51,7 +51,7 @@ namespace QuestOfWonders
         public void Draw(Graphics g)
         {
             if (aura != null)
-                g.DrawImage(aura, x - frmMain.viewX - 16, y - frmMain.viewY - 16, width + 32, height + 32);
+                g.DrawImage(aura, x - frmMain.viewX - 32, y - frmMain.viewY - 32, width + 64, height + 64);
            g.DrawImage(img, x - frmMain.viewX, y - frmMain.viewY, width, height);
         }
         public void Update(float time)
