@@ -11,10 +11,10 @@ namespace QuestOfWonders
     {
         private const float FRAME_TIME = 1f / 10;
 
-        private Bitmap[] frames;
+        public Bitmap[] frames;
 
         private float time;
-        private int frame;
+        public int frame;
         private bool looping;
         private bool running;
 
