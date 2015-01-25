@@ -22,9 +22,6 @@ namespace QuestOfWonders
         Color playerCol = Color.DarkSlateBlue;
         Color narratorCol = Color.DarkSlateGray;
 
-        public static string dirRepl = "<DIR>";
-        public static string otherDirRepl = "<OTHERDIR>";
-
         public StaffOfWonder(int x, int y)
         {
             this.x = x;
@@ -35,10 +32,10 @@ namespace QuestOfWonders
         List<string> textboxText = new List<String>()
         {
             "Congratualtions. You found the staff... Press control to finally defeat Dr. Waru.",
-            "No! You… you moron! Did you just press the " + dirRepl + " control? Now the staff is broken too! What were you thinking? It's never the " + dirRepl + " control! It's always " + otherDirRepl + " control!" +
-            " Now you've broken the Ancient Staff of Wondrous Wonders. Now what will happen to this world!? All is lost! There’s nothing we can- WAIT!",
+            "No! You… you moron! Not that control! The one one the other side! Who uses the control on THAT side?" +
+            " Now you've broken the Ancient Staff of Wondrous Wonders, all because you couldn't use the correct control. Now what will happen to this world!? All is lost! There’s nothing we can - WAIT!",
             "There’s one thing we can try! It’s the last resort that the people of the Ghyathanti tribe left this world long ago! The Secret Sword of Wonderfully" +
-            " Wonderful Wonders! The world doesn’t have much time! *clears throat*  And thus, the brilliant...",
+            " Wonderful Wonders! The world doesn’t have much time! *clears throat*  And thus, the brilliant... er... the fantastic...",
             "Hmm...",
             "Well. Torpe ran as quickly as possible to the Red Fields of Horrendously Hideous Trials to retrieve the sword and humanity’s LAST hope!!!!!"
         };
@@ -60,15 +57,11 @@ namespace QuestOfWonders
             {
                 if (!cntrlClicked)
                 {
-                    if (key == Keys.LControlKey)
+                    if (key == Keys.ControlKey)
                     {
-
+                        cntrlClicked = true;
+                        frmMain.text.Advance();
                     }
-                    else if (key == Keys.RControlKey)
-                    {
-
-                    }
-                    cntrlClicked = true;
                 }
                 else
                 {
@@ -79,7 +72,7 @@ namespace QuestOfWonders
                         BreakOrb();
                     }
 
-                    if (textIndex < textboxText.Count)
+                    if (textIndex < textboxText.Count - 1)
                     {
                         frmMain.text.Advance();
                     }

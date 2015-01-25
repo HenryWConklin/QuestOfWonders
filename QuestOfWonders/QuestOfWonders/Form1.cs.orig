@@ -76,12 +76,12 @@ namespace QuestOfWonders
             timeAccum = 0;
 
 <<<<<<< HEAD
-            levelMaps = new String[] { "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
+            levelMaps = new String[] { "Resources/QuestOfWondersStage1.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
             levelGrass = new int[] { 0, 0, 1, 1 };
 =======
-            levelMaps = new String[] { "Resources/QuestOfWondersStage1.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
-            levelGrass = new int[] { 0, 1, 1, 1 };
->>>>>>> e3369f43f0d1c5f426f2ecb962083a4c8357de60
+            levelMaps = new String[] { "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
+            levelGrass = new int[] { 0, 0, 1, 1 };
+>>>>>>> 8a4ef17f51f8daeb6974586b57f92bc0b7df64e1
             currentLevel = 0;
 
             enemies = new List<Enemy>();
