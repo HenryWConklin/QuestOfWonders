@@ -41,6 +41,7 @@ namespace QuestOfWonders
         private const int ANIM_MOVE = 0;
         private const int ANIM_STILL = 1;
         private const int ANIM_HOLD = 2;
+        private const int ANIM_JUMP = 3;
 
 		public Player(int x, int y)
 		{
@@ -52,10 +53,11 @@ namespace QuestOfWonders
             rightPressed = false;
             animIndex = ANIM_STILL;
             facingRight = true;
-            anims = new Animation[3];
+            anims = new Animation[4];
             anims[ANIM_MOVE] = new Animation("walk", 8);
             anims[ANIM_STILL] = new Animation("stand", 1);
             anims[ANIM_HOLD] = new Animation("handsup", 1);
+            anims[ANIM_JUMP] = new Animation("jump", 1);
 		}
 
         public void Draw(Graphics g)
@@ -82,10 +84,18 @@ namespace QuestOfWonders
                 vel.X = 0;
             }
 			pos.Y += vel.Y * time;
-            if (! onGround)
+            if (!onGround)
             {
+                
                 vel.Y += GRAVITY * time;
                 vel.Y = Math.Min(vel.Y, GRAVITY_CAP);
+            }
+            else if (animIndex == ANIM_JUMP)
+            {
+                if (leftPressed || rightPressed)
+                    SetAnim(ANIM_MOVE);
+                else
+                    SetAnim(ANIM_STILL);
             }
             onGround = false;
         }
@@ -94,7 +104,9 @@ namespace QuestOfWonders
 		{
 			if (onGround)
 			{
+                SetAnim(ANIM_JUMP);
 				vel.Y = -JUMPSPEED;
+                onGround = false;
                 //SoundSystem.playSound("QuestOfWonders.Resources.Jump.wav", false);
 			}
 		}
@@ -157,6 +169,8 @@ namespace QuestOfWonders
 
         private void SetAnim(int index)
         {
+          
+            Console.WriteLine(index);
             anims[animIndex].Reset();
             animIndex = index;
         }
@@ -172,13 +186,15 @@ namespace QuestOfWonders
                 vel.X = -SPEED;
                 leftPressed = true;
                 facingRight = false;
-                SetAnim(ANIM_MOVE);
+                if (onGround)
+                    SetAnim(ANIM_MOVE);
             }
             else if (rightKey.Contains(key)) {
                 vel.X = SPEED;
                 facingRight = true;
                 rightPressed = true;
-                SetAnim(ANIM_MOVE);
+                if (onGround)
+                    SetAnim(ANIM_MOVE);
             }
             else if (jumpKey.Contains(key)) {
                 Jump();
