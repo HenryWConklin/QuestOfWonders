@@ -24,7 +24,7 @@ namespace QuestOfWonders
 
         public void Draw(Graphics g)
         {
-            g.DrawImage((isOn ? on : off), pos);
+            g.DrawImage((isOn ? on : off), pos.X - frmMain.viewX, pos.Y - frmMain.viewY, Map.TILE_SIZE, Map.TILE_SIZE);
         }
 
         public Rectangle GetCollisionRectangle()
