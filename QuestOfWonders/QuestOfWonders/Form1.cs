@@ -166,6 +166,8 @@ namespace QuestOfWonders
                 pnlMain.Refresh();
                 Application.DoEvents();
             }
+
+            
         }
 
         public static void NextLevel()
@@ -174,7 +176,7 @@ namespace QuestOfWonders
             {
                 currentLevel++;
                 SoundSystem.stopSound("QuestOfWonders.Resources.Quest of Wonders" + (currentLevel) + ".wav");
-                SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders" + (currentLevel+1)+".wav", true);
+                SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders" + (currentLevel + 1) + ".wav", true);
                 bkgImg = backgrounds[currentLevel];
                 startLevel = true;
                 Restart();
@@ -189,6 +191,8 @@ namespace QuestOfWonders
         public void Draw(Graphics g)
         {
             //bufferGraphics.FillRectangle(skyBrush, 0, 0, pnlMain.Width, pnlMain.Height);
+           
+
             bufferGraphics.DrawImage(bkgImg, 0, 0, pnlMain.Width, pnlMain.Height);
 
             if (currentMap != null) currentMap.Draw(bufferGraphics);
@@ -227,6 +231,11 @@ namespace QuestOfWonders
 
             if (exploding)
                 bufferGraphics.DrawImage(explosionAnim.GetFrame(), 0, 0, viewWidth, viewHeight);
+
+            if (endGameTextOn && text.done)
+            {
+                bufferGraphics.DrawImage((Bitmap)Bitmap.FromFile("Resources/credits.png"), 0, 0, buffer.Width, buffer.Height);
+            }
 
             g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
 
@@ -599,6 +608,7 @@ namespace QuestOfWonders
                 {
                     text.backColor = endTextCol3;
                 }
+              
                 text.Advance();
             }
         }
