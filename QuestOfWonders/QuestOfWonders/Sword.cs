@@ -28,8 +28,7 @@ namespace QuestOfWonders
             "You know what? Forget it.",
             "*clears throat*",
             "Well then, Torpe, it truly has come to this. You must go and face the awful Dr. Waru without the aid of ANY of the THREE mystical objects... because GOD KNOWS there's something special about you.",
-            "Time to visit the secret hideout of Dr. Waru hidden inside...",
-            "The Cave of DOOM!"
+            "Time to visit the secret hideout of Dr. Waru, hidden inside..."
         };
 
         private List<String> textboxText5 = new List<String>()
