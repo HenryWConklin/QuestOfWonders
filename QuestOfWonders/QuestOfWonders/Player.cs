@@ -25,8 +25,8 @@ namespace QuestOfWonders
 		private bool onGround;
         private bool isDead;
 
-		private Keys leftKey = Keys.Left;
-		private Keys rightKey = Keys.Right;
+		private Keys leftKey = Keys.A;
+		private Keys rightKey = Keys.D;
 		private Keys jumpKey = Keys.Space;
 
         private bool leftPressed;
@@ -38,7 +38,7 @@ namespace QuestOfWonders
         private Animation[] anims;
 
         private const int ANIM_MOVE = 0;
-        private const int ANIM_STILL = 2;
+        private const int ANIM_STILL = 1;
 
 		public Player(int x, int y)
 		{
@@ -58,7 +58,7 @@ namespace QuestOfWonders
         public void Draw(Graphics g)
         {
             Brush b = new SolidBrush(Color.Red);
-			int x = (int)pos.X - frmMain.viewX - (!facingRight?0:Map.TILE_SIZE);
+			int x = (int)pos.X - frmMain.viewX + (facingRight?0:Map.TILE_SIZE);
 			int y = (int)pos.Y - frmMain.viewY;
             //g.FillRectangle(b, x, y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
             g.DrawImage(anims[animIndex].GetFrame(), x, y, (!facingRight?-1:1) * Map.TILE_SIZE, Map.TILE_SIZE * 2);
