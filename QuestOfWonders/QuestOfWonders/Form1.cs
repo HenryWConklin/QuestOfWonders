@@ -57,6 +57,8 @@ namespace QuestOfWonders
         public static List<Switch> switches = new List<Switch>();
         public static Door door;
 
+        private List<Keys> pressedKeys;
+
         public frmMain()
         {
             InitializeComponent();
@@ -81,6 +83,8 @@ namespace QuestOfWonders
 
             enemies = new List<Enemy>();
             projectiles = new List<Projectile>();
+
+            pressedKeys = new List<Keys>();
         }
 
         public void Run()
@@ -448,8 +452,12 @@ namespace QuestOfWonders
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
         {
             e.SuppressKeyPress = true;
-            if (allowPlayerControl) player.OnKeyDown(e.KeyCode);
-            if(wonder != null) wonder.OnKeyDown(e.KeyCode);
+            if (!pressedKeys.Contains(e.KeyCode))
+            {
+                if (allowPlayerControl) player.OnKeyDown(e.KeyCode);
+                if (wonder != null) wonder.OnKeyDown(e.KeyCode);
+                pressedKeys.Add(e.KeyCode);
+            }
         }
 
         public void MoveView(KeyEventArgs e)
@@ -476,6 +484,7 @@ namespace QuestOfWonders
         {
 
             if (player != null) player.OnKeyUp(e.KeyCode);
+            pressedKeys.Remove(e.KeyCode);
         }
 
         private void pnlMain_Paint(object sender, PaintEventArgs e)
