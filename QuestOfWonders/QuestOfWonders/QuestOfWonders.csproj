@@ -62,6 +62,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SoundSystem.cs" />
     <Compile Include="Switch.cs" />
+    <Compile Include="Sword.cs" />
     <Compile Include="Textbox.cs" />
     <Compile Include="Wonder.cs" />
     <EmbeddedResource Include="Form1.resx">

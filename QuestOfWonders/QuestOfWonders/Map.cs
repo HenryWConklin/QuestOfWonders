@@ -167,7 +167,9 @@ namespace QuestOfWonders
                     }
                     else if (col == SWORD_COLOR)
                     {
-
+                        Point wonderPoint = ArrayToScreenLocation(x, y);
+                        Sword orb = new Sword(wonderPoint);
+                        frmMain.SetWonder(orb);
                     }
                     else if (col == STAFF_COLOR)
                     {
