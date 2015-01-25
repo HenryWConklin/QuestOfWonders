@@ -22,12 +22,12 @@ namespace QuestOfWonders
 
         private List<String> textboxTextShift = new List<String>() 
         {
-            "NO not THAT shift key! My God I can't believe you did that AGAIN!",
+            "NO not the shift key! My God I can't believe you did that... AGAIN!",
             "I thought you would know better this time. Really. I honestly believed in you. Wow... What a disappointment. I can only imagine how your parents dealt with you all your life.",
             "You know what? Forget it.",
             "*clears throat*",
-            "The ignoramus know by few as Torpe decided to simply go and face the awful Dr. Waru without the aid of a mystical object...",
-            "because God knows he must be gifted with other magical abilities to mess up this much already. Therefore, Torpe headed to the Doctor's secret hideout hidden inside...",
+            "Well then, Torpe, it truly has come to this. You must go and face the awful Dr. Waru without the aid of ANY of the THREE mystical objects... because GOD KNOWS there's something special about you.",
+            "Time to visit the secret hideout of Dr. Waru hidden inside...",
             "The Cave of DOOM!"
         };
 
@@ -37,8 +37,8 @@ namespace QuestOfWonders
             "I thought you step up to the plate and save the world this time. Really. I honestly believed in you. Wow... What a disappointment. I can only imagine how your parents dealt with you all your life.",
             "You know what? Forget it.",
             "*clears throat*",
-            "The ignoramus know by few as Torpe decided to simply go and face the awful Dr. Waru without the aid of a mystical object...",
-            "Because God knows he must be gifted with other magical abilities to mess up this much already. Therefore, Torpe headed to the Doctor's secret hideout hidden inside...",
+            "Well then, Torpe, it truly has come to this. You must go and face the awful Dr. Waru without the aid of ANY of the THREE mystical objects... because GOD KNOWS there's something special about you.",
+            "Time to visit the secret hideout of Dr. Waru hidden inside...",
             "The Cave of DOOM!"
         };
 
