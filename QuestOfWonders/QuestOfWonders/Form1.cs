@@ -106,7 +106,7 @@ namespace QuestOfWonders
                 "Resources/QuestOfWondersStage4.bmp",
                 "Resources/FinalLevel.png" };
             levelGrass = new int[] { 0, 0, 1, 1, 0 };
-            currentLevel = 2;
+            currentLevel = 0;
 
 
             levelStartText = new List<String>[]
