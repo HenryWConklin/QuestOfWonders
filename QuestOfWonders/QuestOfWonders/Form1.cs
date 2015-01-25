@@ -68,6 +68,9 @@ namespace QuestOfWonders
 
         public static bool finalKey = false;
 
+        private Animation explosionAnim;
+        private bool exploding = false;
+
         public frmMain()
         {
             InitializeComponent();
@@ -86,8 +89,8 @@ namespace QuestOfWonders
             panelGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             timeAccum = 0;
 
-            levelMaps = new String[] { "Resources/QuestOfWondersStage1.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
-            levelGrass = new int[] { 0, 0, 1, 1 };
+            levelMaps = new String[] { "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage1.bmp" };
+            levelGrass = new int[] { 0, 0, 1, 1, 0 };
             currentLevel = 0;
 
 
@@ -108,7 +111,10 @@ namespace QuestOfWonders
                     "The Cave OF DOOM!",
                     "Have fun!",
                     "", "", "Oh, fine...", "So, in The Cave OF DOOM, there are three switches.", "Got that?", "Three!", "Okay?",
-                    "Good. They open the door to Dr. Waru's lair.", "Good Luck!", "You'll need it..."}
+                    "Good. They open the door to Dr. Waru's lair.", "Good Luck!", "You'll need it..."},
+                    new List<String>() {
+                        "Well.... What do we do now?"
+                    }
             };
 
 
@@ -116,13 +122,16 @@ namespace QuestOfWonders
                 new Bitmap(Bitmap.FromFile("Resources/sky blue.png")),
                 new Bitmap(Bitmap.FromFile("Resources/sky foggy.png")),
                 new Bitmap(Bitmap.FromFile("Resources/sky sunset.png")),
-                new Bitmap(Bitmap.FromFile("Resources/cave.png"))
+                new Bitmap(Bitmap.FromFile("Resources/cave.png")),
+                new Bitmap(Bitmap.FromFile("Resources/sky foggy.png"))
             };
 
             bkgImg = backgrounds[currentLevel];
 
             enemies = new List<Enemy>();
             projectiles = new List<Projectile>();
+
+            explosionAnim = new Animation("explosion", 9, false);
 
             pressedKeys = new List<Keys>();
             SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders1.wav", true);
@@ -200,6 +209,9 @@ namespace QuestOfWonders
             }
 
             if (text != null) text.Draw(bufferGraphics);
+
+            if (exploding)
+                bufferGraphics.DrawImage(explosionAnim.GetFrame(), 0, 0, viewWidth, viewHeight);
 
             g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
 
@@ -286,6 +298,17 @@ namespace QuestOfWonders
                     laser.OnCollide();
                 }
             }
+
+            if (exploding)
+            {
+                explosionAnim.Update(deltaTime);
+                if (explosionAnim.frame == explosionAnim.frames.Length - 1)
+                {
+                    NextLevel();
+                    exploding = false;
+                }
+            }
+
             UpdateView();
         }
 
@@ -589,6 +612,8 @@ namespace QuestOfWonders
         public void LaunchDoomsdayEvent()
         {
             Console.WriteLine("Ka-boom!");
+            exploding = true;
+            finalKey = false;
         }
     }
 }
