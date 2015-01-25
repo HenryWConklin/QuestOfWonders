@@ -14,6 +14,8 @@ namespace QuestOfWonders
         int x, y;
         int width = 32;
         int height = 96;
+        int songEntranceIndex = 7;
+        public bool playSong = true;
         public bool hasBeenHit = false;
 
         List<int> evilChatTextFrames = new List<int> { 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }; //When the player starts
@@ -64,6 +66,10 @@ namespace QuestOfWonders
 
                 if (textIndex < textboxText.Count)
                 {
+                    if (playSong && textIndex == songEntranceIndex)
+                    {
+                        SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders2.wav", true);
+                    }
                     if (evilChatTextFrames.Contains(textIndex))
                     {
                         frmMain.text.backColor = new SolidBrush(evilCol);
@@ -96,6 +102,7 @@ namespace QuestOfWonders
         {
             if (!hasBeenHit)
             {
+                SoundSystem.stopAllSounds();
                 frmMain.allowPlayerControl = false;
                 hasBeenHit = true;
                 frmMain.text = new Textbox(textboxText, new Rectangle(150, 50, frmMain.viewWidth - 300, 100));
