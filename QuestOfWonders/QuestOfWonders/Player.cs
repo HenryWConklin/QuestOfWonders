@@ -42,6 +42,7 @@ namespace QuestOfWonders
         private const int ANIM_STILL = 1;
         private const int ANIM_HOLD = 2;
         private const int ANIM_JUMP = 3;
+        private bool jumping;
 
 		public Player(int x, int y)
 		{
@@ -86,16 +87,18 @@ namespace QuestOfWonders
 			pos.Y += vel.Y * time;
             if (!onGround)
             {
-                
                 vel.Y += GRAVITY * time;
                 vel.Y = Math.Min(vel.Y, GRAVITY_CAP);
+                
             }
-            else if (animIndex == ANIM_JUMP)
+            if (!jumping && animIndex == ANIM_JUMP)
             {
                 if (leftPressed || rightPressed)
                     SetAnim(ANIM_MOVE);
                 else
                     SetAnim(ANIM_STILL);
+                Console.WriteLine("not jumping");
+                Console.WriteLine(onGround);
             }
             onGround = false;
         }
@@ -104,9 +107,10 @@ namespace QuestOfWonders
 		{
 			if (onGround)
 			{
-                SetAnim(ANIM_JUMP);
 				vel.Y = -JUMPSPEED;
-                onGround = false;
+                jumping = true;
+                SetAnim(ANIM_JUMP);
+                Console.WriteLine("jumping");
                 //SoundSystem.playSound("QuestOfWonders.Resources.Jump.wav", false);
 			}
 		}
@@ -154,6 +158,8 @@ namespace QuestOfWonders
         public void Ground()
         {
             onGround = true;
+            jumping = false;
+            Console.WriteLine("not jumping");
         }
 
 		public void Kill()
