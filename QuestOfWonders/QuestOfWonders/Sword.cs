@@ -79,6 +79,7 @@ namespace QuestOfWonders
                 state = 1;
                 frmMain.text = new Textbox(textboxText, new Rectangle(150, 50, frmMain.viewWidth - 300, 100));
                 frmMain.StopPlayerHoriz();
+                frmMain.player.PickUpItem();
             }
         }
 

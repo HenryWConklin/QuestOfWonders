@@ -40,6 +40,7 @@ namespace QuestOfWonders
 
         private const int ANIM_MOVE = 0;
         private const int ANIM_STILL = 1;
+        private const int ANIM_HOLD = 2;
 
 		public Player(int x, int y)
 		{
@@ -54,6 +55,7 @@ namespace QuestOfWonders
             anims = new Animation[3];
             anims[ANIM_MOVE] = new Animation("walk", 8);
             anims[ANIM_STILL] = new Animation("stand", 1);
+            anims[ANIM_HOLD] = new Animation("handsup", 1);
 		}
 
         public void Draw(Graphics g)
@@ -148,7 +150,7 @@ namespace QuestOfWonders
 
         public void PickUpItem()
         {
-            SetAnim(ANIM_STILL); // Change
+            SetAnim(ANIM_HOLD);
         }
 
         private void SetAnim(int index)
