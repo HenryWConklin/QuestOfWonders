@@ -260,7 +260,7 @@ namespace QuestOfWonders
 
             //spikes
             int bl = currentMap.CheckLocation(player.GetPos().X, player.GetPos().Y + 2 * Map.TILE_SIZE);
-            int br = currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE, player.GetPos().Y + 2 * Map.TILE_SIZE);
+            int br = currentMap.CheckLocation(player.GetPos().X + Map.TILE_SIZE - 1, player.GetPos().Y + 2 * Map.TILE_SIZE);
             if (bl == Map.SPIKE_INT || br == Map.SPIKE_INT)
             {
                 player.Kill();
