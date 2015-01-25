@@ -25,9 +25,9 @@ namespace QuestOfWonders
 		private bool onGround;
         private bool isDead;
 
-		private Keys leftKey = Keys.A;
-		private Keys rightKey = Keys.D;
-		private Keys jumpKey = Keys.Space;
+		private List<Keys> leftKey = new List<Keys>(new Keys[]{Keys.A, Keys.Left});
+		private List<Keys> rightKey = new List<Keys>(new Keys[]{Keys.D, Keys.Right});
+		private List<Keys> jumpKey = new List<Keys>(new Keys[]{Keys.Space, Keys.Up, Keys.W});
 
         private bool leftPressed;
         private bool rightPressed;
@@ -158,26 +158,26 @@ namespace QuestOfWonders
 
         public void OnKeyDown(Keys key)
         {
-            if (key == leftKey) {
+            if (leftKey.Contains(key)) {
                 vel.X = -SPEED;
                 leftPressed = true;
                 facingRight = false;
                 SetAnim(ANIM_MOVE);
             }
-            else if (key == rightKey) {
+            else if (rightKey.Contains(key)) {
                 vel.X = SPEED;
                 facingRight = true;
                 rightPressed = true;
                 SetAnim(ANIM_MOVE);
             }
-            else if (key == jumpKey) {
+            else if (jumpKey.Contains(key)) {
                 Jump();
             }
         }
 
         public void OnKeyUp(Keys key)
         {
-            if (key == leftKey)
+            if (leftKey.Contains(key))
             {
                 leftPressed = false;
                 if (rightPressed)
@@ -191,7 +191,7 @@ namespace QuestOfWonders
                     vel.X = 0;
                 }
             }
-            else if (key == rightKey)
+            else if (rightKey.Contains(key))
             {
                 rightPressed = false;
                 if (leftPressed)
