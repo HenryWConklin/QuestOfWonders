@@ -71,6 +71,17 @@ namespace QuestOfWonders
         private Animation explosionAnim;
         private bool exploding = false;
 
+        public static bool endGameTextOn = false;
+        private List<String> endGameText = new List<string>()
+        {
+            "...",
+            "...",
+            "So... What do we do now?"
+        };
+        public Brush endTextCol1 = new SolidBrush(Color.DarkSlateBlue);
+        public Brush endTextCol2 = new SolidBrush(Color.DarkRed);
+        public Brush endTextCol3 = new SolidBrush(Color.DarkSlateGray);
+
         public frmMain()
         {
             InitializeComponent();
@@ -89,7 +100,7 @@ namespace QuestOfWonders
             panelGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             timeAccum = 0;
 
-            levelMaps = new String[] { "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage1.bmp" };
+            levelMaps = new String[] { "Resources/QuestOfWondersStage1.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp", "Resources/FinalLevel.bmp" };
             levelGrass = new int[] { 0, 0, 1, 1, 0 };
             currentLevel = 0;
 
@@ -112,9 +123,7 @@ namespace QuestOfWonders
                     "Have fun!",
                     "", "", "Oh, fine...", "So, in The Cave OF DOOM, there are three switches.", "Got that?", "Three!", "Okay?",
                     "Good. They open the door to Dr. Waru's lair.", "Good Luck!", "You'll need it..."},
-                    new List<String>() {
-                        "Well.... What do we do now?"
-                    }
+                    null
             };
 
 
@@ -306,6 +315,12 @@ namespace QuestOfWonders
                 {
                     NextLevel();
                     exploding = false;
+                    finalKey = false;
+                    Textbox end = new Textbox(endGameText);
+                    allowPlayerControl = false;
+                    end.backColor = endTextCol1;
+                    text = end;
+                    endGameTextOn = true;
                 }
             }
 
@@ -450,6 +465,7 @@ namespace QuestOfWonders
 
         public static void Restart()
         {
+            drawEntities.Clear();
             shooters.Clear();
             enemies.Clear();
             projectiles.Clear();
@@ -566,6 +582,18 @@ namespace QuestOfWonders
                 LaunchDoomsdayEvent();
             }
             if (laser != null) laser.KeyDown(e.KeyCode);
+            if (endGameTextOn && text != null)
+            {
+                if (text.backColor == endTextCol1)
+                {
+                    text.backColor = endTextCol2;
+                }
+                else if (text.backColor == endTextCol2)
+                {
+                    text.backColor = endTextCol3;
+                }
+                text.Advance();
+            }
         }
 
         public void MoveView(KeyEventArgs e)
@@ -611,7 +639,6 @@ namespace QuestOfWonders
 
         public void LaunchDoomsdayEvent()
         {
-            Console.WriteLine("Ka-boom!");
             exploding = true;
             finalKey = false;
         }

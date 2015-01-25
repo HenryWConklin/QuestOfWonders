@@ -218,10 +218,13 @@ namespace QuestOfWonders
 
         public void LaunchStartText(List<string> startText)
         {
-            frmMain.inStartText = true;
-            frmMain.allowPlayerControl = false;
-            Textbox start = new Textbox(startText);
-            frmMain.text = start;
+            if (startText != null)
+            {
+                frmMain.inStartText = true;
+                frmMain.allowPlayerControl = false;
+                Textbox start = new Textbox(startText);
+                frmMain.text = start;
+            }
         }
 
         //Loads in the tile images
