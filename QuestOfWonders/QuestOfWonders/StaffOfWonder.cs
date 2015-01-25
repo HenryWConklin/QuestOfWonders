@@ -38,10 +38,10 @@ namespace QuestOfWonders
             "Congratualtions. You found the staff... Press control to finally defeat Dr. Waru.",
             "No! You… you moron! Not that control! The one one the other side! Who uses the control on THAT side?" +
             " Now you've broken the Ancient Staff of Wondrous Wonders, all because you couldn't use the correct control. Now what will happen to this world!? All is lost! There’s nothing we can - WAIT!",
-            "There’s one thing we can try! It’s the last resort that the people of the Ghyathanti tribe left this world long ago! The Secret Sword of Wonderfully" +
+            "There’s one thing we can try! It’s our last resort, left by the people of the Ghyathanti tribe long ago: The Secret Sword of Wonderfully" +
             " Wonderful Wonders! The world doesn’t have much time! *clears throat*  And thus, the brilliant... er... the fantastic...",
             "Hmm...",
-            "Well. Torpe ran as quickly as possible to the Red Fields of Horrendously Hideous Trials to retrieve the sword and humanity’s LAST hope!!!!!"
+            "Well. Torpe ran as quickly as possible to the Red Fields of Horrendously Hideous Trials to retrieve the sword and humanity’s LAST hope!"
         };
 
         int textIndex = 0;

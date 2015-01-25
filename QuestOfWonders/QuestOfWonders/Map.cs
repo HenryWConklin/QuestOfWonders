@@ -18,6 +18,7 @@ namespace QuestOfWonders
         Color PLAYER_COLOR = Color.FromArgb(0, 0, 255);
         Color ORB_COLOR = Color.FromArgb(255, 255, 0);
         Color ENEMY_COLOR = Color.FromArgb(100, 100, 100);
+        Color STILL_ENEMY_COLOR = Color.FromArgb(100, 100, 200);
         Color LSHOOTER_COLOR = Color.FromArgb(255, 0, 255);
         Color RSHOOTER_COLOR = Color.FromArgb(50, 100, 50);
         Color USHOOTER_COLOR = Color.FromArgb(100, 255, 200);
@@ -128,6 +129,12 @@ namespace QuestOfWonders
                     {
                         Point enemyPoint = ArrayToScreenLocation(x, y - 1);
                         Enemy enemy = new Enemy(enemyPoint, Enemy.RIGHT);
+                        frmMain.AddEnemy(enemy);
+                    }
+                    else if (col == STILL_ENEMY_COLOR)
+                    {
+                        Point enemyPoint = ArrayToScreenLocation(x, y - 1);
+                        Enemy enemy = new Enemy(enemyPoint, Enemy.STATIONARY);
                         frmMain.AddEnemy(enemy);
                     }
                     else if (col == SPIKE_COLOR)
