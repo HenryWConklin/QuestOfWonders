@@ -97,6 +97,7 @@ namespace QuestOfWonders
                 vy += 2000 * time;
                 if (pos.Y >= frmMain.player.GetPos().Y + 2 * Map.TILE_SIZE - getHeight())
                 {
+                    //SoundSystem.playSound("QuestOfWonders.Resources.Break.wav", false);
                     state = 3;
                     img = new Bitmap(Bitmap.FromFile("Resources/broken sword.png"), getWidth(), getHeight());
                 }

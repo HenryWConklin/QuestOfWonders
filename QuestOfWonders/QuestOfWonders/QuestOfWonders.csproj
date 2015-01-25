@@ -310,10 +310,18 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Break.wav" />
-    <Content Include="Resources\Explosion.wav" />
-    <Content Include="Resources\Hit.wav" />
-    <Content Include="Resources\Jump.wav" />
+    <EmbeddedResource Include="Resources\Break.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Explosion.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Hit.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Jump.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Resources\Shoot.wav" />
   </ItemGroup>
   <ItemGroup>
