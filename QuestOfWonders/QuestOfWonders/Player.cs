@@ -95,6 +95,7 @@ namespace QuestOfWonders
 			if (onGround)
 			{
 				vel.Y = -JUMPSPEED;
+                //SoundSystem.playSound("QuestOfWonders.Resources.Jump.wav", false);
 			}
 		}
 
@@ -145,6 +146,7 @@ namespace QuestOfWonders
 
 		public void Kill()
 		{
+            //SoundSystem.playSound("QuestOfWonders.Resources.Hit.wav", false);
             isDead = true;
 		}
 

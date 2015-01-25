@@ -64,6 +64,7 @@ namespace QuestOfWonders
                 vy += 2000 * time;
                 if (y >= frmMain.player.GetPos().Y + 2 * Map.TILE_SIZE - height)
                 {
+                    //SoundSystem.playSound("QuestOfWonders.Resources.Break.wav", false);
                     y -= 2;
                     dropped = false;
                     img = new Bitmap(Bitmap.FromFile("Resources/broken staff.png"));

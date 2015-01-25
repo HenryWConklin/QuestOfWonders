@@ -291,6 +291,8 @@ namespace QuestOfWonders
 
         public void FireShooters()
         {
+            if (shooters.Keys.Count > 0) 
+                SoundSystem.playSound("QuestOfWonders.Resources.Shoot.wav", false);
             foreach (Point p in shooters.Keys)
             {
                 Projectile proj = new Projectile(p, shooters[p]);
