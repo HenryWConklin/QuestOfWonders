@@ -79,6 +79,10 @@ namespace QuestOfWonders
                         frmMain.text.backColor = new SolidBrush(narratorCol);
                     }
                     frmMain.text.Advance();
+                    if (frmMain.text.done)
+                    {
+                        frmMain.allowPlayerControl = true;
+                    }
                 }
                 else
                 {
