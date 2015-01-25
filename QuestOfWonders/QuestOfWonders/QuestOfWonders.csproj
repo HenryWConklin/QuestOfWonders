@@ -326,6 +326,9 @@
     <EmbeddedResource Include="Resources\jump0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\credits.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Resources\Explosion.wav" />
     <EmbeddedResource Include="Resources\explosion0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -347,6 +350,10 @@
     <EmbeddedResource Include="Resources\rock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Content Include="Resources\Quest of Wonders Stinger 1.wav" />
+    <Content Include="Resources\Quest of Wonders Stinger 2.wav" />
+    <Content Include="Resources\Quest of Wonders Stinger 3.wav" />
+    <Content Include="Resources\Quest of Wonders Stinger 4.wav" />
     <Content Include="Resources\Shoot.wav" />
   </ItemGroup>
   <ItemGroup>

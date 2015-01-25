@@ -93,17 +93,20 @@ namespace QuestOfWonders
                 vel.Y = Math.Min(vel.Y, GRAVITY_CAP);
                 
             }
-            if (jumping)
+            if (!locked)
             {
-                SetAnim(ANIM_JUMP);
-            }
-            else if (leftPressed || rightPressed)
-            {
-                SetAnim(ANIM_MOVE);
-            }
-            else
-            {
-                SetAnim(ANIM_STILL);
+                if (jumping)
+                {
+                    SetAnim(ANIM_JUMP);
+                }
+                else if (leftPressed || rightPressed)
+                {
+                    SetAnim(ANIM_MOVE);
+                }
+                else
+                {
+                    SetAnim(ANIM_STILL);
+                }
             }
             onGround = false;
         }
