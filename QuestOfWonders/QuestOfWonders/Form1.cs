@@ -179,10 +179,7 @@ namespace QuestOfWonders
 
             if (wonder != null) wonder.Draw(bufferGraphics);
 
-            foreach (Entity e in drawEntities)
-            {
-                e.Draw(bufferGraphics);
-            }
+            
 
             foreach (Switch s in switches)
             {
@@ -197,6 +194,11 @@ namespace QuestOfWonders
             foreach (Projectile p in projectiles)
             {
                 p.Draw(bufferGraphics);
+            }
+
+            foreach (Entity e in drawEntities)
+            {
+                e.Draw(bufferGraphics);
             }
 
             if (text != null) text.Draw(bufferGraphics);
@@ -430,6 +432,7 @@ namespace QuestOfWonders
             shooters.Clear();
             enemies.Clear();
             projectiles.Clear();
+            drawEntities.Clear();
             text = null;
             laser = null;
             wonder = null;

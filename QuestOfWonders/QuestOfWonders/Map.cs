@@ -31,6 +31,10 @@ namespace QuestOfWonders
         Color VILLAIN_RAY_COLOR = Color.FromArgb(65, 10, 100);
         Color SWITCH_COLOR = Color.FromArgb(25, 175, 200);
         Color FINALSCENE_COLOR = Color.FromArgb(20, 30, 40);
+        Color TREE_COLOR = Color.FromArgb(50, 50, 255);
+        Color TREE_PINK_COLOR = Color.FromArgb(50, 255, 50);
+        Color TREE_BURNT_COLOR = Color.FromArgb(255, 50, 50);
+        Color ROCK_COLOR = Color.FromArgb(255, 255, 50);
 
         Brush tmpGrass = new SolidBrush(Color.DarkGreen);
         Brush tmpDirt = new SolidBrush(Color.Brown);
@@ -207,6 +211,28 @@ namespace QuestOfWonders
                         Point wonderPoint = ArrayToScreenLocation(x, y);
                         Wonder finalLauncher = new FinalSceneLauncher(wonderPoint.X, wonderPoint.Y);
                         frmMain.SetWonder(finalLauncher);   
+                    }
+                    else if (col == TREE_COLOR)
+                    {
+                        Point p = ArrayToScreenLocation(x, y);
+                        p.Y -= 3*TILE_SIZE/2;
+                        frmMain.AddEntity(new Entity(p, "Resources/tree.png"));
+                    }
+                    else if (col == TREE_PINK_COLOR)
+                    {
+                        Point p = ArrayToScreenLocation(x, y);
+                        p.Y -= 3 * TILE_SIZE / 2;
+                        frmMain.AddEntity(new Entity(p, "Resources/tree pink.png"));
+                    }
+                    else if (col == TREE_BURNT_COLOR)
+                    {
+                        Point p = ArrayToScreenLocation(x, y);
+                        p.Y -= 3 * TILE_SIZE / 2;
+                        frmMain.AddEntity(new Entity(p, "Resources/burnt tree.png"));
+                    }
+                    else if (col == ROCK_COLOR)
+                    {
+                        frmMain.AddEntity(new Entity(ArrayToScreenLocation(x, y), "Resources/rock.png"));
                     }
                 }
             }

@@ -93,11 +93,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\QuestOfWondersStage2.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\QuestOfWondersStage1.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -178,11 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Copy of spikes.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\QuestOfWondersStage1_1.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
@@ -312,12 +302,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Break.wav" />
+    <EmbeddedResource Include="Resources\tree pink.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\evil laserBig.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="Resources\Explosion.wav" />
     <Content Include="Resources\Hit.wav" />
     <Content Include="Resources\Jump.wav" />
+    <EmbeddedResource Include="Resources\rock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Resources\Shoot.wav" />
   </ItemGroup>
   <ItemGroup>
