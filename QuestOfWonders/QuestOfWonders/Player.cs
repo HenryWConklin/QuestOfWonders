@@ -169,8 +169,7 @@ namespace QuestOfWonders
 
         private void SetAnim(int index)
         {
-          
-            Console.WriteLine(index);
+
             anims[animIndex].Reset();
             animIndex = index;
         }
