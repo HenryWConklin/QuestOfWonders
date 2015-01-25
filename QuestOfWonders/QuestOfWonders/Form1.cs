@@ -85,6 +85,8 @@ namespace QuestOfWonders
             projectiles = new List<Projectile>();
 
             pressedKeys = new List<Keys>();
+            SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders1.wav", true);
+            
         }
 
         public void Run()
@@ -92,6 +94,7 @@ namespace QuestOfWonders
             prevTicks = DateTime.Now.Ticks;
             currentMap = new Map(levelMaps[0], levelGrass[0]);
 
+            
 
             pnlMain.Paint += new PaintEventHandler(pnlMain_Paint);
             pnlMain.Refresh();
@@ -110,6 +113,8 @@ namespace QuestOfWonders
             if (currentLevel < 4)
             {
                 currentLevel++;
+                SoundSystem.stopSound("QuestOfWonders.Resources.Quest of Wonders" + (currentLevel) + ".wav");
+                SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders" + (currentLevel+1)+".wav", true);
                 Restart();
             }
         }
@@ -432,7 +437,6 @@ namespace QuestOfWonders
 
         private void btnBegin_Click(object sender, EventArgs e)
         {
-            SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders2.wav", true);
             running = true;
             btnBegin.Visible = false;
             btnBegin.Enabled = false;

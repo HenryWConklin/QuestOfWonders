@@ -277,6 +277,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\cave.png" />
+    <Content Include="Resources\Copy of Quest of Wonders1.wav" />
+    <Content Include="Resources\Copy of Quest of Wonders3.wav" />
+    <EmbeddedResource Include="Resources\Quest of Wonders1.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Quest of Wonders3.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Quest of Wonders4.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
