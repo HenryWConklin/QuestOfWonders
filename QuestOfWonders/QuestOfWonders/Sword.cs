@@ -14,6 +14,7 @@ namespace QuestOfWonders
         private Bitmap img;
         private int state;
         private int textIndex;
+        private float vy;
 
         private List<String> textboxText = new List<String>()
         {
@@ -47,6 +48,7 @@ namespace QuestOfWonders
             img = new Bitmap(Bitmap.FromFile("Resources/sword.png"));
             state = 0;
             textIndex = 0;
+            vy = 0;
         }
 
         public int getX()
@@ -82,33 +84,46 @@ namespace QuestOfWonders
 
         public void Update(float time)
         {
+            if (state==1)
+            {
+                pos.X = frmMain.player.GetPos().X - 16;
+                pos.Y = frmMain.player.GetPos().Y - Map.TILE_SIZE;
+            }
+            if (state==2)
+            {
+                pos.X += (int)(200 * time);
+                pos.Y += (int)(vy * time);
+                vy += 2000 * time;
+                if (pos.Y >= frmMain.player.GetPos().Y + 2 * Map.TILE_SIZE - getHeight())
+                {
+                    state = 3;
+                    img = new Bitmap(Bitmap.FromFile("Resources/broken sword.png"), getWidth(), getHeight());
+                }
+            }
 
         }
 
         public void Draw(Graphics g)
         {
-            if (state == 0) g.DrawImage(img, pos.X - frmMain.viewX, pos.Y - frmMain.viewY);
+            g.DrawImage(img, pos.X - frmMain.viewX, pos.Y - frmMain.viewY);
         }
 
         public void OnKeyDown(Keys key)
         {
             if (state == 1)
             {
-                Console.Out.WriteLine(key);
                 if (key == Keys.ShiftKey)
                 {
                     frmMain.text = new Textbox(textboxTextShift, new Rectangle(150, 50, frmMain.viewWidth - 300, 100));
                     state = 2;
-                    BreakSword();
                 }
                 else if (key == Keys.D5)
                 {
                     frmMain.text = new Textbox(textboxText5, new Rectangle(150, 50, frmMain.viewWidth - 300, 100));
                     state = 2;
-                    BreakSword();
                 }
             }
-            else if (state == 2 && key != Keys.ShiftKey && key != Keys.D5)
+            else if (state >= 2 && key != Keys.ShiftKey && key != Keys.D5)
             {
                 textIndex++;
                
@@ -122,10 +137,6 @@ namespace QuestOfWonders
                 }
                 
             }
-        }
-        private void BreakSword()
-        {
-            Console.WriteLine("Broke Sword");
         }
     }
 

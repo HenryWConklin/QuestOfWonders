@@ -12,9 +12,12 @@ namespace QuestOfWonders
     {
         Bitmap img;
         int x, y;
+        float vy;
         int width = 30;
         int height = 30;
         public bool hasBeenHit = false;
+        private bool holding = false;
+        private bool dropped = false;
 
         int breakIndex = 5; //Break on text frame 3
         List<int> playerChatTextFrames = new List<int>{8, 10}; //When the player starts
@@ -26,6 +29,7 @@ namespace QuestOfWonders
         {
             this.x = x;
             this.y = y;
+            this.vy = 0;
             img = new Bitmap(Bitmap.FromFile("Resources/orb of wonder.png"), width, height);
         }
 
@@ -49,11 +53,28 @@ namespace QuestOfWonders
 
         public void Draw(Graphics g)
         {
-            if(!hasBeenHit) g.DrawImage(img, x - frmMain.viewX, y - frmMain.viewY, width, height);
+            g.DrawImage(img, x - frmMain.viewX, y - frmMain.viewY, width, height);
         }
+
         public void Update(float time)
         {
-
+            if (holding)
+            {
+                x = frmMain.player.GetPos().X;
+                y = frmMain.player.GetPos().Y - Map.TILE_SIZE;
+            }
+            if (dropped)
+            {
+                x += (int)(150 * time);
+                y += (int)(vy * time);
+                vy += 2000 * time;
+                if (y >= frmMain.player.GetPos().Y + 2 * Map.TILE_SIZE - height)
+                {
+                    y -= 2;
+                    dropped = false;
+                    img = new Bitmap(Bitmap.FromFile("Resources/broken orb.png"));
+                }
+            }
         }
 
         public void OnKeyDown(Keys key)
@@ -88,7 +109,8 @@ namespace QuestOfWonders
 
         public void BreakOrb()
         {
-            Console.WriteLine("You Broke It!");
+            dropped = true;
+            holding = false;
         }
 
         public void FinishLevel()
@@ -102,6 +124,7 @@ namespace QuestOfWonders
             {
                 frmMain.allowPlayerControl = false;
                 hasBeenHit = true;
+                holding = true;
                 frmMain.text = new Textbox(textboxText, new Rectangle(150, 50, frmMain.viewWidth - 300, 100));
                 frmMain.StopPlayerHoriz();
             }

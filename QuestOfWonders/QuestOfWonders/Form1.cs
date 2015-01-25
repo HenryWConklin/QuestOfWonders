@@ -39,7 +39,7 @@ namespace QuestOfWonders
         public float shooterTime = 2.5f; //Seconds
 
         public static Map currentMap;
-        static Player player;
+        public static Player player;
 
         private static String[] levelMaps;
         private static List<String>[] levelStartText;
@@ -82,7 +82,7 @@ namespace QuestOfWonders
 
             levelMaps = new String[] { "Resources/QuestOfWondersStage1.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
             levelGrass = new int[] { 0, 0, 1, 1 };
-            currentLevel = 0;
+            currentLevel = 1;
 
 
             levelStartText = new List<String>[]
@@ -113,7 +113,7 @@ namespace QuestOfWonders
                 new Bitmap(Bitmap.FromFile("Resources/cave.png"))
             };
 
-            bkgImg = backgrounds[0];
+            bkgImg = backgrounds[currentLevel];
 
             enemies = new List<Enemy>();
             projectiles = new List<Projectile>();
