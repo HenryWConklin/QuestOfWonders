@@ -100,7 +100,7 @@ namespace QuestOfWonders
             {
                 SetAnim(ANIM_MOVE);
             }
-            else if (onGround)
+            else
             {
                 SetAnim(ANIM_STILL);
             }
