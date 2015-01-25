@@ -253,7 +253,7 @@ namespace QuestOfWonders
                 Projectile proj = projectiles[i];
                 if (player.GetCollisionRectangle().Contains(proj.getPos()))
                 {
-                    //player.Kill();
+                    player.Kill();
                     projectiles.RemoveAt(i);
                     i--;
                     continue;
