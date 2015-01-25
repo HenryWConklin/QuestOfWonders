@@ -217,6 +217,7 @@ namespace QuestOfWonders
             vel.X = 0;
             this.rightPressed = false;
             this.leftPressed = false;
+            SetAnim(ANIM_STILL);
         }
     }
 }

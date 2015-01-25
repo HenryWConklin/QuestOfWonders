@@ -18,8 +18,8 @@ namespace QuestOfWonders
         {
             isOn = false;
             pos = p;
-            on = new Bitmap(Bitmap.FromFile("Resources/metal.png"));
-            off = new Bitmap(Bitmap.FromFile("Resources/stone.png"));
+            on = new Bitmap(Bitmap.FromFile("Resources/lever on.png"));
+            off = new Bitmap(Bitmap.FromFile("Resources/lever off.png"));
         }
 
         public void Draw(Graphics g)
