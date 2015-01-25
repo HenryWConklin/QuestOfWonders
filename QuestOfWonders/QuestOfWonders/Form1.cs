@@ -54,6 +54,8 @@ namespace QuestOfWonders
 
         public static Wonder wonder = null;
 
+        public static Laser laser = null;
+
         public static List<Projectile> projectiles = new List<Projectile>();
         public static List<Enemy> enemies = new List<Enemy>();
         public static Dictionary<Point, PointF> shooters = new Dictionary<Point, PointF>();
@@ -61,6 +63,8 @@ namespace QuestOfWonders
         public static Door door;
 
         private List<Keys> pressedKeys;
+
+        public static bool finalKey = false;
 
         public frmMain()
         {
@@ -80,7 +84,7 @@ namespace QuestOfWonders
             panelGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             timeAccum = 0;
 
-            levelMaps = new String[] { "Resources/QuestOfWondersStage1.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
+            levelMaps = new String[] { "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
             levelGrass = new int[] { 0, 0, 1, 1 };
             currentLevel = 0;
 
@@ -166,6 +170,8 @@ namespace QuestOfWonders
             if (currentMap != null) currentMap.Draw(bufferGraphics);
 
             if (door != null) door.Draw(bufferGraphics);
+
+            if (laser != null) laser.Draw(bufferGraphics);
 
             if (player != null) player.Draw(bufferGraphics);
 
@@ -263,6 +269,15 @@ namespace QuestOfWonders
                     wonder.LaunchCollisionEvent();
                 }
                 wonder.Update(deltaTime);
+            }
+            if (laser != null)
+            {
+                Rectangle laserRect = laser.GetCollisionRect();
+                Rectangle playerRect = player.GetCollisionRectangle();
+                if (laserRect.IntersectsWith(playerRect))
+                {
+                    laser.OnCollide();
+                }
             }
             UpdateView();
         }
@@ -404,6 +419,7 @@ namespace QuestOfWonders
             enemies.Clear();
             projectiles.Clear();
             text = null;
+            laser = null;
             wonder = null;
             player = null;
             allowPlayerControl = true;
@@ -510,6 +526,11 @@ namespace QuestOfWonders
                 }
                 pressedKeys.Add(e.KeyCode);
             }
+            if (finalKey)
+            {
+                LaunchDoomsdayEvent();
+            }
+            if (laser != null) laser.KeyDown(e.KeyCode);
         }
 
         public void MoveView(KeyEventArgs e)
@@ -546,6 +567,16 @@ namespace QuestOfWonders
 
         private void pnlMain_Click(object sender, EventArgs e)
         {
+        }
+
+        internal static void SetLaser(Laser las)
+        {
+            laser = las;
+        }
+
+        public void LaunchDoomsdayEvent()
+        {
+            Console.WriteLine("Ka-boom!");
         }
     }
 }

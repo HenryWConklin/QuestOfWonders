@@ -196,7 +196,9 @@ namespace QuestOfWonders
                     }
                     else if (col == VILLAIN_RAY_COLOR)
                     {
-
+                        Point laserPoint = ArrayToScreenLocation(x, y);
+                        Laser laser = new Laser(laserPoint.X, laserPoint.Y);
+                        frmMain.SetLaser(laser);   
                     }
                     else if (col == FINALSCENE_COLOR)
                     {
