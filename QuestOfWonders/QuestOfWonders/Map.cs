@@ -232,7 +232,9 @@ namespace QuestOfWonders
                     }
                     else if (col == ROCK_COLOR)
                     {
-                        frmMain.AddEntity(new Entity(ArrayToScreenLocation(x, y), "Resources/rock.png"));
+                        Point p = ArrayToScreenLocation(x, y);
+                        p.Y -= 5;
+                        frmMain.AddEntity(new Entity(p, "Resources/rock.png"));
                     }
                 }
             }
