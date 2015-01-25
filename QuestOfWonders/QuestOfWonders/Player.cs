@@ -52,17 +52,17 @@ namespace QuestOfWonders
             animIndex = ANIM_STILL;
             facingRight = true;
             anims = new Animation[3];
-            anims[ANIM_MOVE] = new Animation("linkwalkingright", 10);
-            anims[ANIM_STILL] = new Animation("linkwalkingright", 1);
+            anims[ANIM_MOVE] = new Animation("walk", 8);
+            anims[ANIM_STILL] = new Animation("stand", 1);
 		}
 
         public void Draw(Graphics g)
         {
             Brush b = new SolidBrush(Color.Red);
-			int x = (int)pos.X - frmMain.viewX + (facingRight?0:Map.TILE_SIZE);
+			int x = (int)pos.X - frmMain.viewX + (!facingRight?0:Map.TILE_SIZE);
 			int y = (int)pos.Y - frmMain.viewY;
             //g.FillRectangle(b, x, y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
-            g.DrawImage(anims[animIndex].GetFrame(), x, y, (!facingRight?-1:1) * Map.TILE_SIZE, Map.TILE_SIZE * 2);
+            g.DrawImage(anims[animIndex].GetFrame(), x, y, (facingRight?-1:1) * Map.TILE_SIZE, Map.TILE_SIZE * 2);
         }
 
         public void Update(float time)
