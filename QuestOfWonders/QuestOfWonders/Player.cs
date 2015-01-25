@@ -189,7 +189,7 @@ namespace QuestOfWonders
 
         public void OnKeyUp(Keys key)
         {
-            if (leftKey.Contains(key))
+            if (leftKey.Contains(key) && leftPressed)
             {
                 leftPressed = false;
                 if (rightPressed)
@@ -203,7 +203,7 @@ namespace QuestOfWonders
                     vel.X = 0;
                 }
             }
-            else if (rightKey.Contains(key))
+            else if (rightKey.Contains(key) && rightPressed)
             {
                 rightPressed = false;
                 if (leftPressed)
