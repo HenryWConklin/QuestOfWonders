@@ -59,10 +59,10 @@ namespace QuestOfWonders
         public void Draw(Graphics g)
         {
             Brush b = new SolidBrush(Color.Red);
-			int x = (int)pos.X - frmMain.viewX + (!facingRight?0:Map.TILE_SIZE);
+			int x = (int)pos.X - frmMain.viewX + (facingRight?0:Map.TILE_SIZE);
 			int y = (int)pos.Y - frmMain.viewY;
             //g.FillRectangle(b, x, y, Map.TILE_SIZE, 2 * Map.TILE_SIZE);
-            g.DrawImage(anims[animIndex].GetFrame(), x, y, (facingRight?-1:1) * Map.TILE_SIZE, Map.TILE_SIZE * 2);
+            g.DrawImage(anims[animIndex].GetFrame(), x, y, (!facingRight?-1:1) * Map.TILE_SIZE, Map.TILE_SIZE * 2);
         }
 
         public void Update(float time)

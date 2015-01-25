@@ -17,13 +17,13 @@ namespace QuestOfWonders
 
         private PointF pos;
         private int dir;
-        private Brush brush;
+        private Bitmap img;
 
         public Enemy(PointF p, int direction)
         {
             pos = p;
             dir = direction;
-            brush = new SolidBrush(Color.RosyBrown);
+            img = new Bitmap(Bitmap.FromFile("Resources/enemy.png"));
         }
 
         public Point GetPos()
@@ -43,7 +43,7 @@ namespace QuestOfWonders
 
         public void Draw(Graphics g)
         {
-            g.FillRectangle(brush, (int)pos.X - frmMain.viewX, (int)pos.Y - frmMain.viewY, Map.TILE_SIZE, Map.TILE_SIZE * 2);
+            g.DrawImage(img, (int)pos.X - frmMain.viewX + (dir==-1?Map.TILE_SIZE:0), (int)pos.Y - frmMain.viewY, (dir!=0?dir:1)*Map.TILE_SIZE, Map.TILE_SIZE * 2);
         }
 
         public void Turn()
