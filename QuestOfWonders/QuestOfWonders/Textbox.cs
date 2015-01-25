@@ -16,10 +16,15 @@ namespace QuestOfWonders
 
         private Rectangle textRect;
 
-        bool done = false;
+        public bool done = false;
 
         int borderSize = 4;
         Font myFont;
+
+        public Textbox(List<string> text)
+        {
+            setup(text, new Rectangle(150, 50, frmMain.viewWidth - 300, 100), Color.DarkSlateGray, Color.Black, Color.White);
+        }
 
         public Textbox(List<string> text, Rectangle rect)
         {

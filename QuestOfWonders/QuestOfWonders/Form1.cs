@@ -15,6 +15,9 @@ namespace QuestOfWonders
         private const float FRAME_TIME = 1f / 60;
         public static bool soundOn = true;
 
+        public static bool startLevel = true;
+        public static bool inStartText = false;
+
         Bitmap buffer;
         Graphics bufferGraphics;
         Graphics panelGraphics;
@@ -39,6 +42,7 @@ namespace QuestOfWonders
         static Player player;
 
         private static String[] levelMaps;
+        private static List<String>[] levelStartText;
         private static int[] levelGrass;
         private static int currentLevel;
 
@@ -80,6 +84,28 @@ namespace QuestOfWonders
             levelGrass = new int[] { 0, 0, 1, 1 };
             currentLevel = 0;
 
+
+            levelStartText = new List<String>[]
+            {
+                new List<String>() {"At long last, oh Torpe, you mighty hero, we have found the location of the Orb of Wonders – the mystical object that can defeat the nefarious Dr. Waru, and his Dastardly Plot!\n\n(Space to Progress)",
+                    "Only one trial remains: The Dreaded Spike Maze…",
+                    "OF DEATH!"},
+                new List<String>() {"",
+                    "Thus, after another long, arduous journey, I have led our hero Torpe once more to a magical artifact: The Ancient Staff of Wondrous Wonders.",
+                    "Let the valiant quest resume! As we boldly go where no - OH MY GOD! How many spikes are there!?",
+                    "And look at those big, scary creatures! They're terrifying! Definitely. Do. Not. Touch. Those."},
+                new List<String>() {"",
+                    "Here. The Red Fields of Horrendously Hideous Trials. Home to the most elusive of the world's mystical objects...",
+                    "You should be grateful.",
+                    "The Secret Sword of Wonderfully Wonderful Wonders (otherwise know as the  world's LAST chance) should in here."},
+                new List<String>() {"",
+                    "The Cave OF DOOM!",
+                    "Have fun!",
+                    "", "", "Oh, fine...", "So, in The Cave OF DOOM, there are three switches.", "Got that?", "Three!", "Okay?",
+                    "Good. They open the door to Dr. Waru's lair.", "Good Luck!", "You'll need it..."}
+            };
+
+
             backgrounds = new Bitmap[] {
                 new Bitmap(Bitmap.FromFile("Resources/sky blue.png")),
                 new Bitmap(Bitmap.FromFile("Resources/sky foggy.png")),
@@ -100,7 +126,7 @@ namespace QuestOfWonders
         public void Run()
         {
             prevTicks = DateTime.Now.Ticks;
-            currentMap = new Map(levelMaps[0], levelGrass[0]);
+            currentMap = new Map(levelMaps[0], levelGrass[0], levelStartText[0]);
 
             pnlMain.Paint += new PaintEventHandler(pnlMain_Paint);
             pnlMain.Refresh();
@@ -122,6 +148,7 @@ namespace QuestOfWonders
                 SoundSystem.stopSound("QuestOfWonders.Resources.Quest of Wonders" + (currentLevel) + ".wav");
                 SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders" + (currentLevel+1)+".wav", true);
                 bkgImg = backgrounds[currentLevel];
+                startLevel = true;
                 Restart();
             }
         }
@@ -142,8 +169,6 @@ namespace QuestOfWonders
 
             if (player != null) player.Draw(bufferGraphics);
 
-            if (text != null) text.Draw(bufferGraphics);
-
             if (wonder != null) wonder.Draw(bufferGraphics);
 
             foreach (Switch s in switches)
@@ -151,17 +176,21 @@ namespace QuestOfWonders
                 s.Draw(bufferGraphics);
             }
 
-            g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
-
             foreach (Enemy e in enemies)
             {
-                e.Draw(g);
+                e.Draw(bufferGraphics);
             }
 
             foreach (Projectile p in projectiles)
             {
-                p.Draw(g);
+                p.Draw(bufferGraphics);
             }
+
+            if (text != null) text.Draw(bufferGraphics);
+
+            g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
+
+
         }
 
         public void UpdateGame()
@@ -376,8 +405,8 @@ namespace QuestOfWonders
             text = null;
             wonder = null;
             player = null;
-            currentMap = new Map(levelMaps[currentLevel], levelGrass[currentLevel]);
             allowPlayerControl = true;
+            currentMap = new Map(levelMaps[currentLevel], levelGrass[currentLevel], levelStartText[currentLevel]);
             shooterTimer = 0;
         }
         
@@ -467,6 +496,17 @@ namespace QuestOfWonders
             {
                 if (allowPlayerControl) player.OnKeyDown(e.KeyCode);
                 if (wonder != null) wonder.OnKeyDown(e.KeyCode);
+                if (e.KeyCode == Keys.Space && inStartText && text != null)
+                {
+                    text.Advance();
+                    if (text.done)
+                    {
+                        text = null;
+                        inStartText = false;
+                        allowPlayerControl = true;
+                        startLevel = false;
+                    }
+                }
                 pressedKeys.Add(e.KeyCode);
             }
         }

@@ -46,7 +46,6 @@ namespace QuestOfWonders
         Bitmap grassImg = null;
         Bitmap dirtImg = null;
         Bitmap spikeImg = null;
-        Bitmap shooterImg = null;
         Bitmap redGrassImg = null;
         Bitmap redDirtImg = null;
         Bitmap shootDownImg = null;
@@ -80,7 +79,7 @@ namespace QuestOfWonders
         public static int RED_GRASS = 1;
         public int GrassType = 0;
 
-        public Map(string imgFileLoc, int grassType)
+        public Map(string imgFileLoc, int grassType, List<string> startText)
         {
             this.GrassType = grassType;
             Bitmap img = (Bitmap)Bitmap.FromFile(imgFileLoc);
@@ -207,6 +206,18 @@ namespace QuestOfWonders
                     }
                 }
             }
+            if (frmMain.startLevel)
+            {
+                LaunchStartText(startText);
+            }
+        }
+
+        public void LaunchStartText(List<string> startText)
+        {
+            frmMain.inStartText = true;
+            frmMain.allowPlayerControl = false;
+            Textbox start = new Textbox(startText);
+            frmMain.text = start;
         }
 
         //Loads in the tile images
