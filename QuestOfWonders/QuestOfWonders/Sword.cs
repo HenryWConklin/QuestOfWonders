@@ -77,6 +77,7 @@ namespace QuestOfWonders
                 state = 1;
                 frmMain.text = new Textbox(textboxText, new Rectangle(150, 50, frmMain.viewWidth - 300, 100));
                 frmMain.StopPlayerHoriz();
+                SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders Stinger 3.wav", false);
                 frmMain.player.PickUpItem();
             }
         }
@@ -95,7 +96,7 @@ namespace QuestOfWonders
                 vy += 2000 * time;
                 if (pos.Y >= frmMain.player.GetPos().Y + 2 * Map.TILE_SIZE - getHeight())
                 {
-                    //SoundSystem.playSound("QuestOfWonders.Resources.Break.wav", false);
+                    SoundSystem.playSound("QuestOfWonders.Resources.Break.wav", false);
                     state = 3;
                     img = new Bitmap(Bitmap.FromFile("Resources/broken sword.png"), getWidth(), getHeight());
                 }

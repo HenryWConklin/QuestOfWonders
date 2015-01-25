@@ -112,6 +112,7 @@ namespace QuestOfWonders
         {
             dropped = true;
             holding = false;
+            SoundSystem.playSound("QuestOfWonders.Resources.Break.wav", false);
         }
 
         public void FinishLevel()
@@ -129,6 +130,7 @@ namespace QuestOfWonders
                 frmMain.text = new Textbox(textboxText, new Rectangle(150, 50, frmMain.viewWidth - 300, 100));
                 frmMain.StopPlayerHoriz();
                 frmMain.player.PickUpItem();
+                SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders Stinger 1.wav", false);
             }
         }
 

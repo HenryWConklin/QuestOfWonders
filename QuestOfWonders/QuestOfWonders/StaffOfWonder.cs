@@ -64,7 +64,7 @@ namespace QuestOfWonders
                 vy += 2000 * time;
                 if (y >= frmMain.player.GetPos().Y + 2 * Map.TILE_SIZE - height)
                 {
-                    //SoundSystem.playSound("QuestOfWonders.Resources.Break.wav", false);
+                    SoundSystem.playSound("QuestOfWonders.Resources.Break.wav", false);
                     y -= 2;
                     dropped = false;
                     img = new Bitmap(Bitmap.FromFile("Resources/broken staff.png"));
@@ -124,6 +124,7 @@ namespace QuestOfWonders
                 frmMain.text = new Textbox(textboxText, new Rectangle(150, 50, frmMain.viewWidth - 300, 100));
                 frmMain.StopPlayerHoriz();
                 frmMain.player.PickUpItem();
+                SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders Stinger 2.wav", false);
             }
         }
 

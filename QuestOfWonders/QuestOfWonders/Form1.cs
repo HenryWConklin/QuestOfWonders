@@ -106,7 +106,7 @@ namespace QuestOfWonders
                 "Resources/QuestOfWondersStage4.bmp",
                 "Resources/FinalLevel.png" };
             levelGrass = new int[] { 0, 0, 1, 1, 0 };
-            currentLevel = 0;
+            currentLevel = 2;
 
 
             levelStartText = new List<String>[]
@@ -177,7 +177,8 @@ namespace QuestOfWonders
             {
                 currentLevel++;
                 SoundSystem.stopSound("QuestOfWonders.Resources.Quest of Wonders" + (currentLevel) + ".wav");
-                SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders" + (currentLevel + 1) + ".wav", true);
+                if (currentLevel < 3) 
+                    SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders" + (currentLevel + 1) + ".wav", true);
                 bkgImg = backgrounds[currentLevel];
                 startLevel = true;
                 Restart();
@@ -659,6 +660,7 @@ namespace QuestOfWonders
         {
             exploding = true;
             finalKey = false;
+            SoundSystem.playSound("QuestOfWonders.Resources.Explosion.wav", false);
         }
     }
 }
