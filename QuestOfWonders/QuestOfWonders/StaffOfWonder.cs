@@ -15,11 +15,15 @@ namespace QuestOfWonders
         int width = 32;
         int height = 64;
         public bool hasBeenHit = false;
+        public bool cntrlClicked = false;
 
         int breakIndex = 2; //Break on text frame 2
 
         Color playerCol = Color.DarkSlateBlue;
         Color narratorCol = Color.DarkSlateGray;
+
+        public static string dirRepl = "<DIR>";
+        public static string otherDirRepl = "<OTHERDIR>";
 
         public StaffOfWonder(int x, int y)
         {
@@ -31,7 +35,7 @@ namespace QuestOfWonders
         List<string> textboxText = new List<String>()
         {
             "Congratualtions. You found the staff... Press control to finally defeat Dr. Waru.",
-            "No! You… you moron! Did you just press the <DIR> control? What were you thinking? It's never the <DIR> control! It's always <OTHERDIR> control!" +
+            "No! You… you moron! Did you just press the " + dirRepl + " control? Now the staff is broken too! What were you thinking? It's never the " + dirRepl + " control! It's always " + otherDirRepl + " control!" +
             " Now you've broken the Ancient Staff of Wondrous Wonders. Now what will happen to this world!? All is lost! There’s nothing we can- WAIT!",
             "There’s one thing we can try! It’s the last resort that the people of the Ghyathanti tribe left this world long ago! The Secret Sword of Wonderfully" +
             " Wonderful Wonders! The world doesn’t have much time! *clears throat*  And thus, the brilliant...",
@@ -54,20 +58,35 @@ namespace QuestOfWonders
         {
             if (hasBeenHit)
             {
-                textIndex++;
-
-                if (textIndex == breakIndex)
+                if (!cntrlClicked)
                 {
-                    BreakOrb();
-                }
+                    if (key == Keys.LControlKey)
+                    {
 
-                if (textIndex < textboxText.Count)
-                {
-                    frmMain.text.Advance();
+                    }
+                    else if (key == Keys.RControlKey)
+                    {
+
+                    }
+                    cntrlClicked = true;
                 }
                 else
                 {
-                    FinishLevel();
+                    textIndex++;
+
+                    if (textIndex == breakIndex)
+                    {
+                        BreakOrb();
+                    }
+
+                    if (textIndex < textboxText.Count)
+                    {
+                        frmMain.text.Advance();
+                    }
+                    else
+                    {
+                        FinishLevel();
+                    }
                 }
             }
         }
