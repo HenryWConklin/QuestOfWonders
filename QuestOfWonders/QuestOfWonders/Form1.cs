@@ -173,8 +173,8 @@ namespace QuestOfWonders
             if (currentLevel < 4)
             {
                 currentLevel++;
-                SoundSystem.stopSound("QuestOfWonders.Resources.Quest of Wonders" + (currentLevel) + ".wav");
-                if (currentLevel < 3) 
+                SoundSystem.stopAllSounds();
+                if (currentLevel <= 3) 
                     SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders" + (currentLevel + 1) + ".wav", true);
                 bkgImg = backgrounds[currentLevel];
                 startLevel = true;
