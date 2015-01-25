@@ -19,7 +19,7 @@ namespace QuestOfWonders
         Graphics bufferGraphics;
         Graphics panelGraphics;
 
-        Bitmap bkgImg;
+        static Bitmap bkgImg;
 
         bool running = false;
         public static bool allowPlayerControl = true;
@@ -31,9 +31,6 @@ namespace QuestOfWonders
         public static int viewWidth;
         public static int viewHeight;
 
-        public bool hasDrawnMap = false;
-
-
         public float timeAccum;
         public static float shooterTimer = 0;
         public float shooterTime = 2.5f; //Seconds
@@ -44,6 +41,8 @@ namespace QuestOfWonders
         private static String[] levelMaps;
         private static int[] levelGrass;
         private static int currentLevel;
+
+        private static Bitmap[] backgrounds;
 
         long prevTicks;
 
@@ -66,7 +65,7 @@ namespace QuestOfWonders
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            bkgImg = (Bitmap)Bitmap.FromFile("Resources/sky blue.png");
+            
             buffer = new Bitmap(pnlMain.Width, pnlMain.Height);
             bufferGraphics = Graphics.FromImage(buffer);
             panelGraphics = pnlMain.CreateGraphics();
@@ -81,6 +80,15 @@ namespace QuestOfWonders
             levelGrass = new int[] { 0, 0, 1, 1 };
             currentLevel = 0;
 
+            backgrounds = new Bitmap[] {
+                new Bitmap(Bitmap.FromFile("Resources/sky blue.png")),
+                new Bitmap(Bitmap.FromFile("Resources/sky foggy.png")),
+                new Bitmap(Bitmap.FromFile("Resources/sky sunset.png")),
+                new Bitmap(Bitmap.FromFile("Resources/cave.png"))
+            };
+
+            bkgImg = backgrounds[0];
+
             enemies = new List<Enemy>();
             projectiles = new List<Projectile>();
 
@@ -93,8 +101,6 @@ namespace QuestOfWonders
         {
             prevTicks = DateTime.Now.Ticks;
             currentMap = new Map(levelMaps[0], levelGrass[0]);
-
-            
 
             pnlMain.Paint += new PaintEventHandler(pnlMain_Paint);
             pnlMain.Refresh();
@@ -115,6 +121,7 @@ namespace QuestOfWonders
                 currentLevel++;
                 SoundSystem.stopSound("QuestOfWonders.Resources.Quest of Wonders" + (currentLevel) + ".wav");
                 SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders" + (currentLevel+1)+".wav", true);
+                bkgImg = backgrounds[currentLevel];
                 Restart();
             }
         }
@@ -129,7 +136,7 @@ namespace QuestOfWonders
             //bufferGraphics.FillRectangle(skyBrush, 0, 0, pnlMain.Width, pnlMain.Height);
             bufferGraphics.DrawImage(bkgImg, 0, 0, pnlMain.Width, pnlMain.Height);
 
-            if (currentMap != null && !hasDrawnMap) currentMap.Draw(bufferGraphics);
+            if (currentMap != null) currentMap.Draw(bufferGraphics);
 
             if (door != null) door.Draw(bufferGraphics);
 
