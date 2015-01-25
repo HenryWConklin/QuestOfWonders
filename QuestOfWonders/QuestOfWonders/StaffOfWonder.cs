@@ -59,7 +59,7 @@ namespace QuestOfWonders
             }
             if (dropped)
             {
-                x += (int)(150 * time);
+                x += (int)(150 * time * (frmMain.player.facingRight ? 1 : -1));
                 y += (int)(vy * time);
                 vy += 2000 * time;
                 if (y >= frmMain.player.GetPos().Y + 2 * Map.TILE_SIZE - height)
