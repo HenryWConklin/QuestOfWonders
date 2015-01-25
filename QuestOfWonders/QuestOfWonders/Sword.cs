@@ -124,7 +124,7 @@ namespace QuestOfWonders
                     state = 2;
                 }
             }
-            else if (state >= 2)
+            else if (state >= 2 && key != Keys.ShiftKey && key != Keys.D5)
             {
                 textIndex++;
                

@@ -309,6 +309,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Break.wav" />
+    <Content Include="Resources\Explosion.wav" />
+    <Content Include="Resources\Hit.wav" />
+    <Content Include="Resources\Jump.wav" />
+    <Content Include="Resources\Shoot.wav" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Resources\handsup0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

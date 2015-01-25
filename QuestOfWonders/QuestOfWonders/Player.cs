@@ -33,7 +33,7 @@ namespace QuestOfWonders
         private bool leftPressed;
         private bool rightPressed;
 
-        private bool facingRight;
+        public bool facingRight;
 
         private int animIndex;
         private Animation[] anims;
