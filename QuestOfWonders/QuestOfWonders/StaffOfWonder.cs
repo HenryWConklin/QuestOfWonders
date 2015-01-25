@@ -20,8 +20,6 @@ namespace QuestOfWonders
         private bool holding;
         private bool dropped;
 
-        int breakIndex = 2; //Break on text frame 2
-
         Color playerCol = Color.DarkSlateBlue;
         Color narratorCol = Color.DarkSlateGray;
 
@@ -57,11 +55,11 @@ namespace QuestOfWonders
             if (holding)
             {
                 x = frmMain.player.GetPos().X;
-                y = frmMain.player.GetPos().Y - 2 * Map.TILE_SIZE;
+                y = frmMain.player.GetPos().Y - 2 * Map.TILE_SIZE - 10;
             }
             if (dropped)
             {
-                x += (int)(150 * time);
+                x += (int)(150 * time * (frmMain.player.facingRight ? 1 : -1));
                 y += (int)(vy * time);
                 vy += 2000 * time;
                 if (y >= frmMain.player.GetPos().Y + 2 * Map.TILE_SIZE - height)
@@ -84,16 +82,13 @@ namespace QuestOfWonders
                     {
                         cntrlClicked = true;
                         frmMain.text.Advance();
+                        BreakOrb();
                     }
                 }
                 else
-                {
-                    textIndex++;
+                {             
 
-                    if (textIndex == breakIndex)
-                    {
-                        BreakOrb();
-                    }
+                    textIndex++;
 
                     if (textIndex < textboxText.Count - 1)
                     {
@@ -127,6 +122,7 @@ namespace QuestOfWonders
                 holding = true;
                 frmMain.text = new Textbox(textboxText, new Rectangle(150, 50, frmMain.viewWidth - 300, 100));
                 frmMain.StopPlayerHoriz();
+                frmMain.player.PickUpItem();
             }
         }
 

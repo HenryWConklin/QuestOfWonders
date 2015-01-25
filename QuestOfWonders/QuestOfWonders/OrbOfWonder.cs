@@ -65,7 +65,7 @@ namespace QuestOfWonders
             }
             if (dropped)
             {
-                x += (int)(150 * time);
+                x += (int)(150 * time * (frmMain.player.facingRight ? 1: -1));
                 y += (int)(vy * time);
                 vy += 2000 * time;
                 if (y >= frmMain.player.GetPos().Y + 2 * Map.TILE_SIZE - height)
@@ -127,6 +127,7 @@ namespace QuestOfWonders
                 holding = true;
                 frmMain.text = new Textbox(textboxText, new Rectangle(150, 50, frmMain.viewWidth - 300, 100));
                 frmMain.StopPlayerHoriz();
+                frmMain.player.PickUpItem();
             }
         }
 

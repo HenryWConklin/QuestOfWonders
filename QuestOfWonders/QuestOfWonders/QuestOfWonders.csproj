@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animation.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="FinalSceneLauncher.cs" />
     <Compile Include="Laser.cs" />
     <Compile Include="StaffOfWonder.cs" />
@@ -318,6 +319,14 @@
     <Content Include="Resources\Hit.wav" />
     <Content Include="Resources\Jump.wav" />
     <Content Include="Resources\Shoot.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\handsup0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\villain.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

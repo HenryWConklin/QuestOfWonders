@@ -86,7 +86,7 @@ namespace QuestOfWonders
 
             levelMaps = new String[] { "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
             levelGrass = new int[] { 0, 0, 1, 1 };
-            currentLevel = 1;
+            currentLevel = 0;
 
 
             levelStartText = new List<String>[]
