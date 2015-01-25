@@ -22,12 +22,24 @@ namespace QuestOfWonders
 
         private List<String> textboxTextShift = new List<String>() 
         {
-            "NO not THAT shift key! My God I can't believe you did that AGAIN! I thought you would know better this time. Really. I honestly believed in you. Wow... What a disappointment. I can only imagine how your parents dealt with you all your life. You know what? Forget it. *clears throat* The ignoramus know by few as Torpe decided to simply go and face the awful Dr. Waru without the aid of a mystical object... Because God knows he must be gifted with other magical abilities to mess up this much already. Therefore, Torpe headed to the Doctor's secret hideout hidden inside... The Cave of DOOM!"
+            "NO not THAT shift key! My God I can't believe you did that AGAIN!",
+            "I thought you would know better this time. Really. I honestly believed in you. Wow... What a disappointment. I can only imagine how your parents dealt with you all your life.",
+            "You know what? Forget it.",
+            "*clears throat*",
+            "The ignoramus know by few as Torpe decided to simply go and face the awful Dr. Waru without the aid of a mystical object...",
+            "because God knows he must be gifted with other magical abilities to mess up this much already. Therefore, Torpe headed to the Doctor's secret hideout hidden inside...",
+            "The Cave of DOOM!"
         };
 
         private List<String> textboxText5 = new List<String>()
         {
-            "Did you really just click 5? Do you even type? I thought you step up to the plate and save the world this time. Really. I honestly believed in you. Wow... What a disappointment. I can only imagine how your parents dealt with you all your life. You know what? Forget it. *clears throat* The ignoramus know by few as Torpe decided to simply go and face the awful Dr. Waru without the aid of a mystical object... Because God knows he must be gifted with other magical abilities to mess up this much already. Therefore, Torpe headed to the Doctor's secret hideout hidden inside... The Cave of DOOM!"
+            "Did you really just click 5? Do you even type?",
+            "I thought you step up to the plate and save the world this time. Really. I honestly believed in you. Wow... What a disappointment. I can only imagine how your parents dealt with you all your life.",
+            "You know what? Forget it.",
+            "*clears throat*",
+            "The ignoramus know by few as Torpe decided to simply go and face the awful Dr. Waru without the aid of a mystical object...",
+            "Because God knows he must be gifted with other magical abilities to mess up this much already. Therefore, Torpe headed to the Doctor's secret hideout hidden inside...",
+            "The Cave of DOOM!"
         };
 
         public Sword(Point p)
