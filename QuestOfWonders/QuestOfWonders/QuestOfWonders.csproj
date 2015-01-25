@@ -323,6 +323,9 @@
     <EmbeddedResource Include="Resources\explosion7.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\jump0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Resources\Explosion.wav" />
     <EmbeddedResource Include="Resources\explosion0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
