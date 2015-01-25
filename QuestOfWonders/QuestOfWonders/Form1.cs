@@ -75,7 +75,7 @@ namespace QuestOfWonders
             panelGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             timeAccum = 0;
 
-            levelMaps = new String[] { "Resources/QuestOfWondersStage1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
+            levelMaps = new String[] { "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
             levelGrass = new int[] { 0, 1, 1, 1 };
             currentLevel = 0;
 
@@ -127,6 +127,13 @@ namespace QuestOfWonders
             if (text != null) text.Draw(bufferGraphics);
 
             if (wonder != null) wonder.Draw(bufferGraphics);
+
+            if (door != null) door.Draw(bufferGraphics);
+
+            foreach (Switch s in switches)
+            {
+                s.Draw(g);
+            }
 
             g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
 
@@ -246,7 +253,7 @@ namespace QuestOfWonders
                 Projectile proj = projectiles[i];
                 if (player.GetCollisionRectangle().Contains(proj.getPos()))
                 {
-                    player.Kill();
+                    //player.Kill();
                     projectiles.RemoveAt(i);
                     i--;
                     continue;
