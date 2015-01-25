@@ -114,16 +114,13 @@ namespace QuestOfWonders
                 new List<String>() {"At long last, oh Torpe, you mighty hero, we have found the location of the Orb of Wonders – the mystical object that can defeat the nefarious Dr. Waru, and his Dastardly Plot!\n\n(Space to Progress)",
                     "Only one trial remains: The Dreaded Spike Maze…",
                     "OF DEATH!"},
-                new List<String>() {"",
-                    "Thus, after another long, arduous journey, I have led our hero Torpe once more to a magical artifact: The Ancient Staff of Wondrous Wonders.",
+                new List<String>() {"Thus, after another long, arduous journey, I have led our hero Torpe once more to a magical artifact: The Ancient Staff of Wondrous Wonders.",
                     "Let the valiant quest resume! As we boldly go where no - OH MY GOD! How many spikes are there!?",
                     "And look at those big, scary creatures! They're terrifying! Definitely. Do. Not. Touch. Those."},
-                new List<String>() {"",
-                    "Okay, here. The Red Fields of Horrendously Hideous Trials. Home to the most elusive of the world's mystical objects...",
+                new List<String>() {"Okay, here. The Red Fields of Horrendously Hideous Trials. Home to the most elusive of the world's mystical objects...",
                     "You should be grateful.",
                     "The Secret Sword of Wonderfully Wonderful Wonders, otherwise known as the  world's LAST hope, is here."},
-                new List<String>() {"",
-                    "The Cave OF DOOM!",
+                new List<String>() {"The Cave OF DOOM!",
                     "Have fun!",
                     "...", "Oh, fine...", "So, in The Cave OF DOOM, there are three switches.", "Three.", "See, there's one right down there.", "Got that?",
                     "Good.",
@@ -581,7 +578,11 @@ namespace QuestOfWonders
             if (!pressedKeys.Contains(e.KeyCode))
             {
                 if (allowPlayerControl) player.OnKeyDown(e.KeyCode);
-                if (wonder != null) wonder.OnKeyDown(e.KeyCode);
+                if (wonder != null)
+				{
+					if (wonder.OnKeyDown(e.KeyCode))
+						return;
+				}
                 if (e.KeyCode == Keys.Space && inStartText && text != null)
                 {
                     text.Advance();

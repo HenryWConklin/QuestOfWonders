@@ -109,7 +109,7 @@ namespace QuestOfWonders
             g.DrawImage(img, pos.X - frmMain.viewX, pos.Y - frmMain.viewY);
         }
 
-        public void OnKeyDown(Keys key)
+        public bool OnKeyDown(Keys key)
         {
             if (state == 1)
             {
@@ -135,9 +135,11 @@ namespace QuestOfWonders
                 else
                 {
                     frmMain.NextLevel();
+					return true;
                 }
                 
             }
+			return false;
         }
     }
 
