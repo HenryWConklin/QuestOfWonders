@@ -43,6 +43,7 @@ namespace QuestOfWonders
         private const int ANIM_HOLD = 2;
         private const int ANIM_JUMP = 3;
         private bool jumping;
+        private bool locked;
 
 		public Player(int x, int y)
 		{
@@ -91,12 +92,17 @@ namespace QuestOfWonders
                 vel.Y = Math.Min(vel.Y, GRAVITY_CAP);
                 
             }
-            if (!jumping && animIndex == ANIM_JUMP)
+            if (jumping)
             {
-                if (leftPressed || rightPressed)
-                    SetAnim(ANIM_MOVE);
-                else
-                    SetAnim(ANIM_STILL);
+                SetAnim(ANIM_JUMP);
+            }
+            else if (leftPressed || rightPressed)
+            {
+                SetAnim(ANIM_MOVE);
+            }
+            else if (onGround)
+            {
+                SetAnim(ANIM_STILL);
             }
             onGround = false;
         }
@@ -107,7 +113,7 @@ namespace QuestOfWonders
 			{
 				vel.Y = -JUMPSPEED;
                 jumping = true;
-                SetAnim(ANIM_JUMP);
+                //SetAnim(ANIM_JUMP);
                 //SoundSystem.playSound("QuestOfWonders.Resources.Jump.wav", false);
 			}
 		}
@@ -166,13 +172,14 @@ namespace QuestOfWonders
 
         public void PickUpItem()
         {
+            locked = true;
             SetAnim(ANIM_HOLD);
         }
 
         private void SetAnim(int index)
         {
-
-            anims[animIndex].Reset();
+            if (index != animIndex)
+                anims[animIndex].Reset();
             animIndex = index;
         }
 
@@ -187,15 +194,15 @@ namespace QuestOfWonders
                 vel.X = -SPEED;
                 leftPressed = true;
                 facingRight = false;
-                if (onGround)
-                    SetAnim(ANIM_MOVE);
+                //if (onGround)
+                    //SetAnim(ANIM_MOVE);
             }
             else if (rightKey.Contains(key)) {
                 vel.X = SPEED;
                 facingRight = true;
                 rightPressed = true;
-                if (onGround)
-                    SetAnim(ANIM_MOVE);
+                //if (onGround)
+                    //SetAnim(ANIM_MOVE);
             }
             else if (jumpKey.Contains(key)) {
                 Jump();
@@ -218,8 +225,8 @@ namespace QuestOfWonders
                 }
                 else
                 {
-                    if (!jumping)
-                        SetAnim(ANIM_STILL);
+                    //if (!jumping)
+                        //SetAnim(ANIM_STILL);
                     vel.X = 0;
                 }
             }
@@ -234,8 +241,8 @@ namespace QuestOfWonders
                 else
                 {
                     vel.X = 0;
-                    if (!jumping)
-                        SetAnim(ANIM_STILL);
+                    //if (!jumping)
+                    //    SetAnim(ANIM_STILL);
                 }
             }
         }
