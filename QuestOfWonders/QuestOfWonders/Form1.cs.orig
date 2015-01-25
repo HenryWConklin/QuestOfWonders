@@ -76,11 +76,12 @@ namespace QuestOfWonders
             timeAccum = 0;
 
 <<<<<<< HEAD
-            levelMaps = new String[] { "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
-=======
             levelMaps = new String[] { "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
->>>>>>> cd3bb1ded648f815d3ab427421da5ff6500284cc
+            levelGrass = new int[] { 0, 0, 1, 1 };
+=======
+            levelMaps = new String[] { "Resources/QuestOfWondersStage1.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
             levelGrass = new int[] { 0, 1, 1, 1 };
+>>>>>>> e3369f43f0d1c5f426f2ecb962083a4c8357de60
             currentLevel = 0;
 
             enemies = new List<Enemy>();
@@ -126,17 +127,17 @@ namespace QuestOfWonders
 
             if (currentMap != null && !hasDrawnMap) currentMap.Draw(bufferGraphics);
 
+            if (door != null) door.Draw(bufferGraphics);
+
             if (player != null) player.Draw(bufferGraphics);
 
             if (text != null) text.Draw(bufferGraphics);
 
             if (wonder != null) wonder.Draw(bufferGraphics);
 
-            if (door != null) door.Draw(bufferGraphics);
-
             foreach (Switch s in switches)
             {
-                s.Draw(g);
+                s.Draw(bufferGraphics);
             }
 
             g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
@@ -187,7 +188,7 @@ namespace QuestOfWonders
                 }
                 if (openDoor)
                 {
-                    door = null;
+                    door.opened = true;
                 }
             }
             while (timeAccum > FRAME_TIME)
@@ -257,7 +258,7 @@ namespace QuestOfWonders
                 Projectile proj = projectiles[i];
                 if (player.GetCollisionRectangle().Contains(proj.getPos()))
                 {
-                    //player.Kill();
+                    player.Kill();
                     projectiles.RemoveAt(i);
                     i--;
                     continue;
@@ -322,7 +323,7 @@ namespace QuestOfWonders
             {
                 if (e.GetCollisionBounds().IntersectsWith(playerRect)) 
                 {
-                    player.Kill();
+                    //player.Kill();
                 }
 
                 int inFront = 0;
@@ -349,6 +350,7 @@ namespace QuestOfWonders
             {
                 if (s.GetCollisionRectangle().IntersectsWith(playerRect))
                 {
+                    Console.WriteLine("Switch hit");
                     s.isOn = true;
                 }
             }
