@@ -12,6 +12,7 @@ namespace QuestOfWonders
     {
         private Point pos;
         private Bitmap img;
+        private Bitmap aura;
         private int state;
         private int textIndex;
         private float vy;
@@ -44,6 +45,7 @@ namespace QuestOfWonders
         {
             pos = p;
             img = new Bitmap(Bitmap.FromFile("Resources/sword.png"));
+            aura = new Bitmap(Bitmap.FromFile("Resources/awesomness.png"));
             state = 0;
             textIndex = 0;
             vy = 0;
@@ -78,6 +80,7 @@ namespace QuestOfWonders
                 frmMain.text = new Textbox(textboxText, new Rectangle(150, 50, frmMain.viewWidth - 300, 100));
                 frmMain.StopPlayerHoriz();
                 SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders Stinger 3.wav", false);
+
                 frmMain.player.PickUpItem();
             }
         }
@@ -99,6 +102,7 @@ namespace QuestOfWonders
                     SoundSystem.playSound("QuestOfWonders.Resources.Break.wav", false);
                     state = 3;
                     img = new Bitmap(Bitmap.FromFile("Resources/broken sword.png"), getWidth(), getHeight());
+                    aura = null;
                 }
             }
 
@@ -106,6 +110,8 @@ namespace QuestOfWonders
 
         public void Draw(Graphics g)
         {
+            if (aura != null)
+                g.DrawImage(aura, pos.X - frmMain.viewX - 16, pos.Y - frmMain.viewY - 16, img.Width + 32, img.Height + 32);
             g.DrawImage(img, pos.X - frmMain.viewX, pos.Y - frmMain.viewY);
         }
 

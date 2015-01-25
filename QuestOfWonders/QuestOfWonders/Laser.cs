@@ -41,7 +41,7 @@ namespace QuestOfWonders
         {
             if (!hasLaunched)
             {
-                SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders Stinger 4.wav", false);
+                //SoundSystem.playSound("QuestOfWonders.Resources.Quest of Wonders Stinger 4.wav", false);
                 Textbox text = new Textbox(new List<String>() { "Press Space to use the Laser!", "TORPE! DID YOU REALLY JUST-" });
                 text.backColor = firstCol;
                 frmMain.text = text;

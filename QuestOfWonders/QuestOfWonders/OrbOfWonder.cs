@@ -11,6 +11,7 @@ namespace QuestOfWonders
     class OrbOfWonder : Wonder
     {
         Bitmap img;
+        Bitmap aura;
         int x, y;
         float vy;
         int width = 30;
@@ -31,6 +32,7 @@ namespace QuestOfWonders
             this.y = y;
             this.vy = 0;
             img = new Bitmap(Bitmap.FromFile("Resources/orb of wonder.png"), width, height);
+            aura = new Bitmap(Bitmap.FromFile("Resources/awesomness.png"));
         }
 
         List<string> textboxText = new List<String>()
@@ -53,6 +55,8 @@ namespace QuestOfWonders
 
         public void Draw(Graphics g)
         {
+            if (aura != null)
+                g.DrawImage(aura, x - frmMain.viewX - 16, y - frmMain.viewY -16, width + 32, height+ 32);
             g.DrawImage(img, x - frmMain.viewX, y - frmMain.viewY, width, height);
         }
 
@@ -74,6 +78,7 @@ namespace QuestOfWonders
                     y -= 2;
                     dropped = false;
                     img = new Bitmap(Bitmap.FromFile("Resources/broken orb.png"));
+                    aura = null;
                 }
             }
         }

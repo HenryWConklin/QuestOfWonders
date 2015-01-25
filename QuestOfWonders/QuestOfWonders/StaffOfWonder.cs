@@ -11,6 +11,7 @@ namespace QuestOfWonders
     class StaffOfWonder : Wonder
     {
         Bitmap img;
+        Bitmap aura;
         int x, y;
         int width = 32;
         int height = 64;
@@ -31,6 +32,7 @@ namespace QuestOfWonders
             holding = false;
             dropped = false;
             img = new Bitmap(Bitmap.FromFile("Resources/staff.png"), width, height);
+            aura = new Bitmap(Bitmap.FromFile("Resources/awesomness.png"));
         }
 
         List<string> textboxText = new List<String>()
@@ -48,6 +50,8 @@ namespace QuestOfWonders
 
         public void Draw(Graphics g)
         {
+            if (aura != null)
+                g.DrawImage(aura, x - frmMain.viewX - 16, y - frmMain.viewY - 16, width + 32, height + 32);
            g.DrawImage(img, x - frmMain.viewX, y - frmMain.viewY, width, height);
         }
         public void Update(float time)
@@ -68,6 +72,7 @@ namespace QuestOfWonders
                     y -= 2;
                     dropped = false;
                     img = new Bitmap(Bitmap.FromFile("Resources/broken staff.png"));
+                    aura = null;
                     width = img.Width;
                 }
             }
