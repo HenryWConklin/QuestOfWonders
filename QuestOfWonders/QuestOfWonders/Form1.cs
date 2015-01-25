@@ -33,14 +33,16 @@ namespace QuestOfWonders
 
         public bool hasDrawnMap = false;
 
+
         public float timeAccum;
         public static float shooterTimer = 0;
-        public static float shooterTime = 1; //Seconds
+        public float shooterTime = 2.5f; //Seconds
 
         public static Map currentMap;
         static Player player;
 
         private static String[] levelMaps;
+        private static int[] levelGrass;
         private static int currentLevel;
 
         long prevTicks;
@@ -62,7 +64,7 @@ namespace QuestOfWonders
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            bkgImg = (Bitmap)Bitmap.FromFile("Resources/sky sunset.png");
+            bkgImg = (Bitmap)Bitmap.FromFile("Resources/sky blue.png");
             buffer = new Bitmap(pnlMain.Width, pnlMain.Height);
             bufferGraphics = Graphics.FromImage(buffer);
             panelGraphics = pnlMain.CreateGraphics();
@@ -73,7 +75,8 @@ namespace QuestOfWonders
             panelGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             timeAccum = 0;
 
-            levelMaps = new String[] { "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage4.bmp" };
+            levelMaps = new String[] { "Resources/QuestOfWondersStage1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
+            levelGrass = new int[] { 0, 1, 1, 1 };
             currentLevel = 0;
 
             enemies = new List<Enemy>();
@@ -83,7 +86,7 @@ namespace QuestOfWonders
         public void Run()
         {
             prevTicks = DateTime.Now.Ticks;
-            currentMap = new Map(levelMaps[0]);
+            currentMap = new Map(levelMaps[0], levelGrass[0]);
 
 
             pnlMain.Paint += new PaintEventHandler(pnlMain_Paint);
@@ -349,7 +352,7 @@ namespace QuestOfWonders
             text = null;
             wonder = null;
             player = null;
-            currentMap = new Map(levelMaps[currentLevel]);
+            currentMap = new Map(levelMaps[currentLevel], levelGrass[currentLevel]);
             allowPlayerControl = true;
             shooterTimer = 0;
         }
