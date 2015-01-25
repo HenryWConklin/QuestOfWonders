@@ -75,7 +75,7 @@ namespace QuestOfWonders
             panelGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             timeAccum = 0;
 
-            levelMaps = new String[] { "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
+            levelMaps = new String[] { "Resources/QuestOfWondersStage4.bmp", "Resources/QuestOfWondersStage2_1.bmp", "Resources/QuestOfWondersStage3.bmp", "Resources/QuestOfWondersStage4.bmp" };
             levelGrass = new int[] { 0, 1, 1, 1 };
             currentLevel = 0;
 
@@ -122,17 +122,17 @@ namespace QuestOfWonders
 
             if (currentMap != null && !hasDrawnMap) currentMap.Draw(bufferGraphics);
 
+            if (door != null) door.Draw(bufferGraphics);
+
             if (player != null) player.Draw(bufferGraphics);
 
             if (text != null) text.Draw(bufferGraphics);
 
             if (wonder != null) wonder.Draw(bufferGraphics);
 
-            if (door != null) door.Draw(bufferGraphics);
-
             foreach (Switch s in switches)
             {
-                s.Draw(g);
+                s.Draw(bufferGraphics);
             }
 
             g.DrawImage(buffer, 0, 0, pnlMain.Width, pnlMain.Height);
@@ -183,7 +183,7 @@ namespace QuestOfWonders
                 }
                 if (openDoor)
                 {
-                    door = null;
+                    door.opened = true;
                 }
             }
             while (timeAccum > FRAME_TIME)
@@ -318,7 +318,7 @@ namespace QuestOfWonders
             {
                 if (e.GetCollisionBounds().IntersectsWith(playerRect)) 
                 {
-                    player.Kill();
+                    //player.Kill();
                 }
 
                 int inFront = 0;
@@ -345,6 +345,7 @@ namespace QuestOfWonders
             {
                 if (s.GetCollisionRectangle().IntersectsWith(playerRect))
                 {
+                    Console.WriteLine("Switch hit");
                     s.isOn = true;
                 }
             }
