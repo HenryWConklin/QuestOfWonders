@@ -23,7 +23,7 @@ namespace QuestOfWonders
 
         private List<String> textboxTextShift = new List<String>() 
         {
-            "NO not the shift key! My God I can't believe you did that... AGAIN!",
+            "NO not the shift key! Do you even type?",
             "I thought you would know better this time. Really. I honestly believed in you. Wow... What a disappointment. I can only imagine how your parents dealt with you all your life.",
             "You know what? Forget it.",
             "*clears throat*",
@@ -34,12 +34,10 @@ namespace QuestOfWonders
         private List<String> textboxText5 = new List<String>()
         {
             "Did you really just click 5? Do you even type?",
-            "I thought you step up to the plate and save the world this time. Really. I honestly believed in you. Wow... What a disappointment. I can only imagine how your parents dealt with you all your life.",
+            "I thought you would know better this time. Really. I honestly believed in you. Wow... What a disappointment.",
             "You know what? Forget it.",
-            "*clears throat*",
-            "Well then, Torpe, it truly has come to this. You must go and face the awful Dr. Waru without the aid of ANY of the THREE mystical objects... because GOD KNOWS there's something special about you.",
-            "Time to visit the secret hideout of Dr. Waru hidden inside...",
-            "The Cave of DOOM!"
+            "Well then, Torpe, it truly has come to this. You must go and face the awful Dr. Waru without ANY of the THREE mystical objects... because GOD KNOWS there's SOMETHING special about you.",
+            "Pack up your bags, Torpe! You've won an all expense paid trip to...",
         };
 
         public Sword(Point p)
