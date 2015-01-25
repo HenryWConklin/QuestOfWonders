@@ -97,8 +97,6 @@ namespace QuestOfWonders
                     SetAnim(ANIM_MOVE);
                 else
                     SetAnim(ANIM_STILL);
-                Console.WriteLine("not jumping");
-                Console.WriteLine(onGround);
             }
             onGround = false;
         }
@@ -110,7 +108,6 @@ namespace QuestOfWonders
 				vel.Y = -JUMPSPEED;
                 jumping = true;
                 SetAnim(ANIM_JUMP);
-                Console.WriteLine("jumping");
                 //SoundSystem.playSound("QuestOfWonders.Resources.Jump.wav", false);
 			}
 		}
@@ -159,7 +156,6 @@ namespace QuestOfWonders
         {
             onGround = true;
             jumping = false;
-            Console.WriteLine("not jumping");
         }
 
 		public void Kill()
