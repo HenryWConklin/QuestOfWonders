@@ -361,7 +361,6 @@ namespace QuestOfWonders
             {
                 if (s.GetCollisionRectangle().IntersectsWith(playerRect))
                 {
-                    Console.WriteLine("Switch hit");
                     s.isOn = true;
                 }
             }
