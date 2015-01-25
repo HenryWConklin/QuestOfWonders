@@ -119,14 +119,15 @@ namespace QuestOfWonders
                     "Let the valiant quest resume! As we boldly go where no - OH MY GOD! How many spikes are there!?",
                     "And look at those big, scary creatures! They're terrifying! Definitely. Do. Not. Touch. Those."},
                 new List<String>() {"",
-                    "Here. The Red Fields of Horrendously Hideous Trials. Home to the most elusive of the world's mystical objects...",
+                    "Okay, here. The Red Fields of Horrendously Hideous Trials. Home to the most elusive of the world's mystical objects...",
                     "You should be grateful.",
-                    "The Secret Sword of Wonderfully Wonderful Wonders (otherwise know as the  world's LAST chance) should in here."},
+                    "The Secret Sword of Wonderfully Wonderful Wonders, otherwise known as the  world's LAST hope, is here."},
                 new List<String>() {"",
                     "The Cave OF DOOM!",
                     "Have fun!",
-                    "", "", "Oh, fine...", "So, in The Cave OF DOOM, there are three switches.", "Got that?", "Three!", "Okay?",
-                    "Good. They open the door to Dr. Waru's lair.", "Good Luck!", "You'll need it..."},
+                    "...", "Oh, fine...", "So, in The Cave OF DOOM, there are three switches.", "Three.", "See, there's one right down there.", "Got that?",
+                    "Good.",
+                    "They open the door to Dr. Waru's lair.", "Good Luck!", "You'll need it..."},
                     null
             };
 

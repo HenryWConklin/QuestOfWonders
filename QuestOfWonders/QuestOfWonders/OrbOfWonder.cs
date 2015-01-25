@@ -41,7 +41,7 @@ namespace QuestOfWonders
             "NO! Not that key! Press the ‘any’ key.",
             "I SAID… PRESS THE ANY KEY TO SAVE THE WORLD!",
             "Did you just..?  Did you really just drop and destroy the Orb of Wonders? What are you, a buffoon? Now what will we do? How will you stop Dr. Waru!? There’s nothing you can… WAIT!",
-            "I know something else that may be able to defeat Dr. Waru! It’s a long shot and it will be far more challenging, but I know you can do it!",
+            "I know something else that may be able to defeat him! It’s a long shot and it will be far more challenging, but I know you can do it!",
             "... Or, rather, since it’s YOUR fault if he wins now, you had better not fail!",
             "But-",
             "DO NOT SASS ME, TORPE! You are a silent protagonist and you will act as such!",

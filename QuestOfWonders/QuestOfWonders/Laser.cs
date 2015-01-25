@@ -41,7 +41,7 @@ namespace QuestOfWonders
         {
             if (!hasLaunched)
             {
-                Textbox text = new Textbox(new List<String>() { "Press Space to use the Laser!", "NO! I leave you for FIVE MINUTES and-" });
+                Textbox text = new Textbox(new List<String>() { "Press Space to use the Laser!", "TORPE! DID YOU REALLY JUST-" });
                 text.backColor = firstCol;
                 frmMain.text = text;
                 hasLaunched = true;
