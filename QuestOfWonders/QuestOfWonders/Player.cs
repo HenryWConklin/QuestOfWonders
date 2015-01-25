@@ -53,6 +53,7 @@ namespace QuestOfWonders
             isDead = false;
             leftPressed = false;
             rightPressed = false;
+			jumping = true;
             animIndex = ANIM_STILL;
             facingRight = true;
             anims = new Animation[4];
