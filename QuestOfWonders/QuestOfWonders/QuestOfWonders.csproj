@@ -308,6 +308,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Break.wav" />
+    <Content Include="Resources\Explosion.wav" />
+    <Content Include="Resources\Hit.wav" />
+    <Content Include="Resources\Jump.wav" />
+    <Content Include="Resources\Shoot.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
