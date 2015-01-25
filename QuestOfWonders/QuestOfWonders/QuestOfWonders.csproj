@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Animation.cs" />
     <Compile Include="FinalSceneLauncher.cs" />
+    <Compile Include="Laser.cs" />
     <Compile Include="StaffOfWonder.cs" />
     <Compile Include="Door.cs" />
     <Compile Include="Enemy.cs" />
@@ -310,6 +311,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Break.wav" />
+    <EmbeddedResource Include="Resources\evil laserBig.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Resources\Explosion.wav" />
     <Content Include="Resources\Hit.wav" />
     <Content Include="Resources\Jump.wav" />
