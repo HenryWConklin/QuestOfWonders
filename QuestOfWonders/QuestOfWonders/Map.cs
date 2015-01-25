@@ -184,6 +184,7 @@ namespace QuestOfWonders
                     else if (col == STEEL_COLOR)
                     {
                         map[x, y] = STEEL_INT;
+                        steelImg = new Bitmap(Bitmap.FromFile("Resources/metal floor.png"));
                     }
                     else if (col == VILLAIN_COLOR)
                     {
@@ -321,6 +322,11 @@ namespace QuestOfWonders
                     {
                         drawBrush = tmpShootDown;
                         img = shootDownImg;
+                    }
+                    else if (map[x, y] == STEEL_INT)
+                    {
+                        drawBrush = tmpRedDirt;
+                        img = steelImg;
                     }
 
                     if (img != null)
