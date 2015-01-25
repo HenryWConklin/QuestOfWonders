@@ -63,12 +63,13 @@ namespace QuestOfWonders
                     if (key == Keys.LControlKey)
                     {
 
+                        cntrlClicked = true;
                     }
                     else if (key == Keys.RControlKey)
                     {
 
+                        cntrlClicked = true;
                     }
-                    cntrlClicked = true;
                 }
                 else
                 {

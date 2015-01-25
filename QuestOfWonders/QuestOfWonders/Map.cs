@@ -133,7 +133,7 @@ namespace QuestOfWonders
                     else if (col == ORB_COLOR)
                     {
                         Point wonderPoint = ArrayToScreenLocation(x, y);
-                        OrbOfWonder orb = new OrbOfWonder(wonderPoint.X, wonderPoint.Y);
+                        Wonder orb = new StaffOfWonder(wonderPoint.X, wonderPoint.Y);
                         frmMain.SetWonder(orb);
                     }
                     else if (col == PLAYER_COLOR)
