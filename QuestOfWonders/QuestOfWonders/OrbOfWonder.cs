@@ -12,8 +12,8 @@ namespace QuestOfWonders
     {
         Bitmap img;
         int x, y;
-        int width = 35;
-        int height = 35;
+        int width = 30;
+        int height = 30;
         public bool hasBeenHit = false;
 
         int breakIndex = 3; //Break on text frame 3
