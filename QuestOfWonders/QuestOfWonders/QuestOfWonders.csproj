@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animation.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="FinalSceneLauncher.cs" />
     <Compile Include="StaffOfWonder.cs" />
     <Compile Include="Door.cs" />
